@@ -8,7 +8,9 @@ Por el momento se usara la cuenta personal de Pablo Ernesto Baeza Lara, pero se 
 ## Diseño del modulo:
 A continuacion se definira formalmente los componentes que componen al modulo, no es un diagrama UML formalmente, pero servira para conocer la estructura interna de esta seccion.
 
-### AQUI VA LA IMAGEN
+![Diagrama](/Diagrama.jpeg)
+
+---
 
 ### Scrapper
 Es la superclase que engloba a Exploratorio y Formal, de tal manera que su llamada se define como Scrapper.Exploratorio y Scrapper.Formal.
