@@ -1,41 +1,48 @@
-# Bienvenidos a <nombre del proyecto>
+# Bienvenidos a Web Scraping
+Esta seccion se enfoca principalmente en la obtencion de los perfiles de linkedin de los alumnos egresados, asi como recuperar la finformacion pertinente de dichos usuarios.
 
-## Finalidad:
-Elaborar un artefacto de codigo que permita a traves del web scraping, obtener datos relevantes ( Puestos de trabajo, entre otros ) de los perfiles de linkedin de los alumnos egresados de la facultad de matematicas (UADY), 
-especificamente de la carrera Lic. en Ingenieria de Software, con dichas datos recabados se obtendran estadisticas pertinentes tales como:
+## Requisitos previos:
+Para el correcto funcionamiento de este modulo se requiere una cuenta de linkedin, preferentemente con muchos contactos populares ( osea con muchas personas conectadas ). 
+Por el momento se usara la cuenta personal de Pablo Ernesto Baeza Lara, pero se requerira una nueva al entrar en produccion.
 
-< Lista de todas las estadisticas que se desean obtener >
+## Diseño del modulo:
+A continuacion se definira formalmente los componentes que componen al modulo, no es un diagrama UML formalmente, pero servira para conocer la estructura interna de esta seccion.
 
-De igual manera, por medio del analisis del lenguaje natural, se analizaran las descripciones de los trabajos de los egresados. Finalmente los datos seran presentados por medio de 
-< Manera en que vamos a presentar los datos >
+### AQUI VA LA IMAGEN
 
-## Descripcion de los componentes del proyecto:
-### Importante: NO es una descripcion formal de clases, unicamente tiene el fin de segmentar las responsabilidaddes entre los integrantes del equipo.
+### Scrapper
+Es la superclase que engloba a Exploratorio y Formal, de tal manera que su llamada se define como Scrapper.Exploratorio y Scrapper.Formal.
 
-El proyecto en si se compone de varias bloques, en este apartado se explican unicamente las descripciones generales, para acceder a descripciones mas detalladas, lo invitamos a acceder a las ramas especificas de cada parte.
+### Exploratorio
+Es la clase con la unica y exclusiva finalidad de encontrar en linkedin a los egresados correspondientes, dicha clase devuelve como salida general en una tabla SQL un registro
+el cual contiene 2 campos, el primero consiste en el nombre de perfil de linkedin y el segundo corresponde al link asociado a dicho perfil.
 
-### Web scarping
-#### Responsable: Pablo Baeza
+### Busqueda
+Es el metodo directo de la clase exploratorio, dicha define los criterios de busqueda. ( Dicho modulo esta pensado en caso que se decida buscar a los alumnos egresados de x universidad, x facultad o de x carrera)
+Recurre a metodos de la clase criterios ( IsUADY?, IsFMAT?, IsLIS?, IsEgresado? )
 
-Este bloque sera el encargado de la obtencion de la busqueda y obtencion de los datos que se encuentren en los perfiles de github.
+### Lineal
+Dicho metodo consiste en un algoritmo que utiliza automatizacion computacional para asi "insertar" en la barra de busqueda de linkedin" cadenas como "software uady", "fmat lis", entre muchas otras cadenas que permitan obtener resultados de los alumnos. una vez que linkedin devuelva los usuarios correspondientes a la busqueda "iterara" entre cada usuario para ver si concuerda con los criterios previamente establecidos, si concuerda con la descripcion se insertara en la base de datos, sino se descartara. Dicho proceso se repetira hasta agotar todas las opciones posibles.
 
-### Base de datos
-#### Responsable: No definido
+### Por referencia:
+Este es el metodo mas complejo pero "potente" de busqueda, consiste en que dado una lista selecta de perfiles populares de linkedin ( Dr. Edgar Cambranes, Mtr. Luis Basto, etc )
+iterar entre todos sun contactos conocidos, ajustando los filtros para asi alcanzar el mayor numero de personas posibles. Dicho no garantiza encontrar todos los egresados, pero si ofrece una busqueda mas fina que el tipo de busqueda lineal
 
-Este bloque tiene la finalidad de subir los la informacion a una base de datos, asi como limpiarlos y prepararlos para la siguiente fase.
+### Consideraciones generales:
+- En tiempo de ejecucion se puede seleccionar cual metodo de busqueda deseea realizar, inclusive seleccionar ambos ( Lo cual seria lo idoneo ).
+- Aunque existe la suscripcion premium por el momento no se usara ya que aun nos encontramos en fase exploratoria.
+- El modulo esta diseñado para funcionar con o sin la suscripcion premium, sin embargo tal vez la segunda opcion ofrezca mejores resultados.
 
-### Analisis de datos 
-#### Responsable: No definido
+### Formal
+Dicho segmento es el que obtiene los datos de interes de cada egresado ( Empresa, Puesto , Descripcion, Duracion ).
+Requiere previamente el paso de exploratorio para funcionar correctamente. 
 
-Por medio de metodos estadisticos analizar los datos recabados, para obtener las conclusiones necesarias.
+### Busqueda experiencia:
+Es el scarping en bruto, con la base de datos previamente obtenida, el scrapter tomara cada uno de los links y buscara la seccion de experiencia, una vez ahi, obtendra todos los datos previamente mencionados y los enviara a la base de datos. ( Devolvera los n trabajos que ha tenido el egresado.
 
-### Analisis del lenguaje natural
-#### Responsable: No definido
+### Consideraciones importantes:
+- Cabe aclarar que la devolucion de datos a una base SQL es una clase por separado, con la finalidad de mantener el principio de responsabilidad unico.
+- Ademas de las clases SQL previamente mencionadasse contara con una clase adicional que sera la encargada de eliminar los registros duplicados.
 
-Por medio de metodos especificos de la area, analizar las descripciones de trabajo para obtener las conclusiones necesarios.
 
-### Salida de datos
-#### Responsable: No definido
-
-Una vez se han terminado los procesos anteriores, mostrar los datos al usuario de forma clara y amigable.
 
