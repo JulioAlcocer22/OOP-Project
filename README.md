@@ -35,6 +35,8 @@ iterar entre todos sun contactos conocidos, ajustando los filtros para asi alcan
 - Aunque existe la suscripcion premium por el momento no se usara ya que aun nos encontramos en fase exploratoria.
 - El modulo esta diseñado para funcionar con o sin la suscripcion premium, sin embargo tal vez la segunda opcion ofrezca mejores resultados.
 
+---
+
 ### Formal
 Dicho segmento es el que obtiene los datos de interes de cada egresado ( Empresa, Puesto , Descripcion, Duracion ).
 Requiere previamente el paso de exploratorio para funcionar correctamente. 
