@@ -1,3 +1,10 @@
+# ADVERTENCIA: **REDISEÑO URGENTE DEL MODULO**
+### Despues de muchas pruebas se comprobo que bs4 no funciona para web scarping en linkedin ya que devuelve un codigo de error 999 ( equivalente a 4** ). El mismo caso es posible para scrapy. Por lo tanto se tendra que rediseñar el modulo para selenium ( EN PROCESO ).
+
+## Documentar las version usadas del explorador, del web driver y de python.
+
+
+
 # Bienvenidos a Web Scraping
 Esta seccion se enfoca principalmente en la obtencion de los perfiles de linkedin de los alumnos egresados, asi como recuperar la finformacion pertinente de dichos usuarios.
 
