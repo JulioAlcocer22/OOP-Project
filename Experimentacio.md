@@ -42,31 +42,31 @@ https://www.linkedin.com/search/results/people/?keywords=software%20uady&origin=
 ![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/6c13ce72-7d05-4cbe-82db-9cd043bcbd60)
 Notese que el link esta contenido en la clase "app-aware-link" y el nombre y el link se encuentran dentro de class="entity-result__title-text t-16
 
-## Dado el link (https://www.linkedin.com/in/ecambranes/) y presionado el boton contactos:
+### Dado el link (https://www.linkedin.com/in/ecambranes/) y presionado el boton contactos:
 https://www.linkedin.com/search/results/people/?connectionOf=%5B%22ACoAAAOo4HoBWdu3t3FHNyv7vZy0g5XgHsU4z3k%22%5D&network=%5B%22F%22%2C%22S%22%5D&origin=MEMBER_PROFILE_CANNED_SEARCH&sid=%40T3
 
 https://www.linkedin.com/search/results/people/?connectionOf=%5B%22ACoAAAOo4HoBWdu3t3FHNyv7vZy0g5XgHsU4z3k%22%5D&network=%5B%22F%22%2C%22S%22%5D&origin=MEMBER_PROFILE_CANNED_SEARCH&sid=%40T3
 
 https://www.linkedin.com/search/results/people/?connectionOf=%5B%22ACoAAAOo4HoBWdu3t3FHNyv7vZy0g5XgHsU4z3k%22%5D&network=%5B%22F%22%2C%22S%22%5D&origin=MEMBER_PROFILE_CANNED_SEARCH&sid=NgX
-## Al eliminarse &sid=NgX la pagina no se inmuta
+### Al eliminarse &sid=NgX la pagina no se inmuta
 
-## Ingresado al perfil de cambranes, dado el boton contactos y modificado segun los filtros siguiente:
+### Ingresado al perfil de cambranes, dado el boton contactos y modificado segun los filtros siguiente:
 ![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/277bfe3b-08d4-44bc-a879-f9336f0db8ec)
 
 https://www.linkedin.com/search/results/people/?connectionOf=%5B%22ACoAAAOo4HoBWdu3t3FHNyv7vZy0g5XgHsU4z3k%22%5D&network=%5B%22F%22%2C%22S%22%2C%22O%22%5D&origin=FACETED_SEARCH&sid=-ZR
 
 https://www.linkedin.com/search/results/people/?connectionOf=%5B%22ACoAAAOo4HoBWdu3t3FHNyv7vZy0g5XgHsU4z3k%22%5D&network=%5B%22F%22%2C%22S%22%2C%22O%22%5D&origin=FACETED_SEARCH&sid=.Hh
 
-## Misma Url anterior, pero en la pagina 29.
+### Misma Url anterior, pero en la pagina 29.
 https://www.linkedin.com/search/results/people/?connectionOf=%5B%22ACoAAAOo4HoBWdu3t3FHNyv7vZy0g5XgHsU4z3k%22%5D&network=%5B%22F%22%2C%22S%22%2C%22O%22%5D&origin=FACETED_SEARCH&page=29&sid=)Qa
 
-## Misma Url anterior, pero en la pagina 29.
+### Misma Url anterior, pero en la pagina 29.
 https://www.linkedin.com/search/results/people/?connectionOf=%5B%22ACoAAAOo4HoBWdu3t3FHNyv7vZy0g5XgHsU4z3k%22%5D&network=%5B%22F%22%2C%22S%22%2C%22O%22%5D&origin=FACETED_SEARCH&page=5&sid=PXK
 
-## Misma Url anterior, pero en la pagina 29.
+### Misma Url anterior, pero en la pagina 29.
 https://www.linkedin.com/search/results/people/?connectionOf=%5B%22ACoAAAOo4HoBWdu3t3FHNyv7vZy0g5XgHsU4z3k%22%5D&network=%5B%22F%22%2C%22S%22%2C%22O%22%5D&origin=FACETED_SEARCH&page=1&sid=PXK
 
-## Importante a considerar:
+### Importante a considerar:
 ![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/8f23cfe8-c299-4749-abf4-7fa0bed1b47c)
 ![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/221b75ac-fd88-4bbe-908b-f4f835375641)
 ![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/2153a53d-ceaf-49e1-a521-701284036bd3)
@@ -80,9 +80,13 @@ Linkedin devuelve 10 perfiles por pagina de resultado.
 
 ### Ingresado Universidad Autónoma de Yucatán y dado click en personas devuelve 31000 resultados
 
-## Sea el seiguiente caso devuelve solo 14000 resultados:
+### Sea el seiguiente caso devuelve solo 14000 resultados:
 
 ![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/f18f2ff1-c696-4617-bcf4-3d110033304a)
+
+# Al parecer a fuerza requerimos Linkedin Premium:
+![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/ebb23d1f-f16b-4a21-8456-ca33e2d51f73)
+
 
 
 
