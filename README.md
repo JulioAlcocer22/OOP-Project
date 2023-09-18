@@ -1,8 +1,11 @@
-# ADVERTENCIA: **REDISEÑO URGENTE DEL MODULO**
-### Despues de muchas pruebas se comprobo que bs4 no funciona para web scarping en linkedin ya que devuelve un codigo de error 999 ( equivalente a 4** ). El mismo caso es posible para scrapy. Por lo tanto se tendra que rediseñar el modulo para selenium ( EN PROCESO ).
+# Diagrama de clase del modulo ( Aprobacion pendiente )
+![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/62c418a1-87f3-42ca-9d33-836a30ee9d24)
+![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/ea8dea31-1e25-4b19-96e0-767a64329174)
+
+
+### Despues de muchas pruebas se comprobo que bs4 no funciona para web scarping en linkedin ya que devuelve un codigo de error 999 ( equivalente a 4** ). El mismo caso es posible para scrapy. Por lo tanto se tendra usar selenium.
 
 ## Documentar las version usadas del explorador, del web driver y de python.
-
 
 
 # Bienvenidos a Web Scraping
@@ -13,7 +16,7 @@ Para el correcto funcionamiento de este modulo se requiere una cuenta de linkedi
 Por el momento se usara la cuenta personal de Pablo Ernesto Baeza Lara, pero se requerira una nueva al entrar en produccion.
 
 ## Diseño del modulo:
-A continuacion se definira formalmente los componentes que componen al modulo, no es un diagrama UML formalmente, pero servira para conocer la estructura interna de esta seccion.
+A continuacion se definira formalmente los componentes que componen al modulo, es mas que nada un diagrama de flujo, pero servira para conocer la estructura interna de esta seccion.
 
 ![Diagrama](/Diagrama.jpeg)
 
