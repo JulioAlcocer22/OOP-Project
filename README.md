@@ -1,62 +1,63 @@
-# Diagrama de clase del modulo ( Aprobacion pendiente )
-![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/62c418a1-87f3-42ca-9d33-836a30ee9d24)
-![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/ea8dea31-1e25-4b19-96e0-767a64329174)
-
-
-### Despues de muchas pruebas se comprobo que bs4 no funciona para web scarping en linkedin ya que devuelve un codigo de error 999 ( equivalente a 4** ). El mismo caso es posible para scrapy. Por lo tanto se tendra usar selenium.
-
-## Documentar las version usadas del explorador, del web driver y de python.
-
-
 # Bienvenidos a Web Scraping
-Esta seccion se enfoca principalmente en la obtencion de los perfiles de linkedin de los alumnos egresados, asi como recuperar la finformacion pertinente de dichos usuarios.
+Esta seccion se enfoca principalmente en la obtencion de los perfiles de linkedin de los alumnos egresados, asi como recuperar la informacion pertinente de dichos usuarios.
 
 ## Requisitos previos:
 Para el correcto funcionamiento de este modulo se requiere una cuenta de linkedin, preferentemente con muchos contactos populares ( osea con muchas personas conectadas ). 
 Por el momento se usara la cuenta personal de Pablo Ernesto Baeza Lara, pero se requerira una nueva al entrar en produccion.
 
+## Limitaciones Tecnicas:
+Despues de multiples pruebas se comprobo que BeutifulSoup4 no funciona para web scarping en LinkedIn ya que al intentar realizar el procedimiento devuelve un codigo de error http 999 
+( equivalente a 4** ). El mismo caso se da con el framework Scrapy. Por lo tanto debido a esta serie de limitaciones, el presente modulo usara Selenium.
+
 ## Diseño del modulo:
-A continuacion se definira formalmente los componentes que componen al modulo, es mas que nada un diagrama de flujo, pero servira para conocer la estructura interna de esta seccion.
 
-![Diagrama](/Diagrama.jpeg)
-
----
-
-### Scrapper
-Es la superclase que engloba a Exploratorio y Formal, de tal manera que su llamada se define como Scrapper.Exploratorio y Scrapper.Formal.
-
-### Exploratorio
-Es la clase con la unica y exclusiva finalidad de encontrar en linkedin a los egresados correspondientes, dicha clase devuelve como salida general en una tabla SQL un registro
-el cual contiene 2 campos, el primero consiste en el nombre de perfil de linkedin y el segundo corresponde al link asociado a dicho perfil.
-
-### Busqueda
-Es el metodo directo de la clase exploratorio, dicha define los criterios de busqueda. ( Dicho modulo esta pensado en caso que se decida buscar a los alumnos egresados de x universidad, x facultad o de x carrera)
-Recurre a metodos de la clase criterios ( IsUADY?, IsFMAT?, IsLIS?, IsEgresado? )
-
-### Lineal
-Dicho metodo consiste en un algoritmo que utiliza automatizacion computacional para asi "insertar" en la barra de busqueda de linkedin" cadenas como "software uady", "fmat lis", entre muchas otras cadenas que permitan obtener resultados de los alumnos. una vez que linkedin devuelva los usuarios correspondientes a la busqueda "iterara" entre cada usuario para ver si concuerda con los criterios previamente establecidos, si concuerda con la descripcion se insertara en la base de datos, sino se descartara. Dicho proceso se repetira hasta agotar todas las opciones posibles.
-
-### Por referencia:
-Este es el metodo mas complejo pero "potente" de busqueda, consiste en que dado una lista selecta de perfiles populares de linkedin ( Dr. Edgar Cambranes, Mtr. Luis Basto, etc )
-iterar entre todos sun contactos conocidos, ajustando los filtros para asi alcanzar el mayor numero de personas posibles. Dicho no garantiza encontrar todos los egresados, pero si ofrece una busqueda mas fina que el tipo de busqueda lineal
-
-### Consideraciones generales:
-- En tiempo de ejecucion se puede seleccionar cual metodo de busqueda deseea realizar, inclusive seleccionar ambos ( Lo cual seria lo idoneo ).
-- Aunque existe la suscripcion premium por el momento no se usara ya que aun nos encontramos en fase exploratoria.
-- El modulo esta diseñado para funcionar con o sin la suscripcion premium, sin embargo tal vez la segunda opcion ofrezca mejores resultados.
+### Diagramas de clase del modulo ( Aprobacion pendiente )
+![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/5a55e38e-ef17-4ac6-aca5-ac8fe89135f9)
+![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/99977586-25fb-486d-9f6b-fed54497df46)
+![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/c926d6f2-bc27-41bd-a39f-452cd1385382)
+![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/412cba1a-52c3-436f-bfba-3974e8042e2e)
 
 ---
 
-### Formal
-Dicho segmento es el que obtiene los datos de interes de cada egresado ( Empresa, Puesto , Descripcion, Duracion ).
-Requiere previamente el paso de exploratorio para funcionar correctamente. 
+## Descripcion de las clases:
+#### Se omitira la descripcion de las clases Verificador, Test, Configuarcion ya que son autodescriptivas en cuanto a sus metodos.
+#### La clase selenium se omitira ya que pertenece a una libreria, por lo que se desconoce su estructura interna.
 
-### Busqueda experiencia:
-Es el scarping en bruto, con la base de datos previamente obtenida, el scrapter tomara cada uno de los links y buscara la seccion de experiencia, una vez ahi, obtendra todos los datos previamente mencionados y los enviara a la base de datos. ( Devolvera los n trabajos que ha tenido el egresado.
+### Scraper
+Contiene 2 metodos:
+- Obtener_nombre_y_URL: Obtiene los datos antes mencionadas para posteriormente guardarlos en la tabla A ( Ver ultima imagen "Diagramas de clase del modulo" )
+- Experiencia_egresado: Obtiene los datos pertinentes del egresado para posteriormente guardarlos en la tabla B ( Ver ultima imagen "Diagramas de clase del modulo" )
 
-### Consideraciones importantes:
-- Cabe aclarar que la devolucion de datos a una base SQL es una clase por separado, con la finalidad de mantener el principio de responsabilidad unico.
-- Ademas de las clases SQL previamente mencionadasse contara con una clase adicional que sera la encargada de eliminar los registros duplicados.
+### Iterador
+Contiene 2 metodos:
+- entre_elementos_de_respuesta: Itera entre los resultados que devuelve una busqueda albitraria de LinkedIn
+- entre_paginas de respuesta: Manipula la URL de la actaul pagina para asi poderer interar para moverse entre paginas.
 
+### SQL_Scraper
+Contiene 6 metodos:
+- Limpiar_duplicado ( Tabla A ): Limpia los elementos duplicados presentes en la tabla A
+- Limpiar_Miembro_de_LinkedIn( Tabla A ): Limpia los elementos Miembro de LinkedIn ( Perfiles anonimos ) presentes en la tabla A
+- Set_datos ( Tabla A ): Mediante procedimientos SQL envia los datos correspondientes a la Tabla A 
+- Get_datos ( Tabla A ): Mediante procedimientos SQL obtiene los datos correspondientes a la Tabla A 
+- Set_datos ( Tabla B ): Mediante procedimientos SQL envia los datos correspondientes a la Tabla B
+- Agregar_Pivote: Agrega un elemento con la estructura de la Tabla A ( nombre, url ), a una tabla especial denominada Pivotes.
+- Eliminar_Pivote: Elimina un elemento con la estructura de la Tabla A ( nombre, url ), a una tabla especial Pivotes.
 
+#### ¿Que es un pivote?
+Un usuario pivote es un perfil de LinkedIn el cual poseen muchos "conectados" que pertenecen al grupo poblacional que estamos buscando. Al ser sus "amigos" en LinkedIn podemos acceder a todos sus "conectados", lo que facilita el proceso de busqueda de los egresados. 
 
+### Automata
+Contiene 3 metodos:
+- Ingresar_cadena_en_barra_de_busqueda: Inserta en el buscador de LinkedIn ciertas cadenas predefinidas como "fmat software", "lis yucatan", entre otras.
+- Ajustar_busqueda_mostrar_todo_UADY: Mediante la manipulacion de los filtros de LinkedIn, mostrara a todas aquellas personas que estudien en la UADY ( Estudios Superiores ).
+- Acceder_contactos_pivote_popular: Por medio de automatizacion se accederan a los contactos del perfil pivote
+
+### Busqueda_egresados
+Por medio del tipo de busqueda designado ( Alguno de los 3 metodos de automata ), buscara a los egresados que cumplan las caracteristicas pertinentes.
+
+#### ¿Que es un egresado?
+Es aquella persona fisica quien cumple con los siguientes caracteristicas:
+- Estudio en la Universidad Autonoma de Yucatan
+- Estudio en la Facultad de Matematicas
+- Finalizo sus estudios en la Lic. en Ingenieria de Software
+- Ha tenido un trabajo o mas, presente en el apartado de experiencia de LinkedIn.
