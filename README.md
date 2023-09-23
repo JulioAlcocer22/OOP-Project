@@ -61,3 +61,8 @@ Es aquella persona fisica quien cumple con los siguientes caracteristicas:
 - Estudio en la Facultad de Matematicas
 - Finalizo sus estudios en la Lic. en Ingenieria de Software
 - Ha tenido un trabajo o mas, presente en el apartado de experiencia de LinkedIn.
+
+#### Consideraciones generales
+- El modulo esta diseñado para funcionar con o sin la suscripcion premium, sin embargo tal vez la segunda opcion ofrezca mejores resultados.
+- Al momento de entregar el producto, la Tabla A ya se encontrara previamente cargado con datos de los egresados, para asi poder buscar su "nueva experiencia" la n cantidad de veces necesaria.
+- La tabla A se puede actualizar mediante el boton cuando se considere pertinente. (Ver imagenes anexo)
