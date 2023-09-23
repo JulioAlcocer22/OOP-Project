@@ -1,4 +1,6 @@
 # Experimentacion sobre las URLs al navegar por la pagina de linkedin:
+## A continuacion se expone una serie de experimentos con la finalidad de encontrar patrones en las cadenas para la optimizacion de peticiones realizadas en el scraper.
+
 ### URL despues de iniciar sesion:
 https://www.linkedin.com/feed/?trk=homepage-basic_sign-in-submit
 ### URL al presionar el boton de linkedin
@@ -84,7 +86,7 @@ Linkedin devuelve 10 perfiles por pagina de resultado.
 
 ![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/f18f2ff1-c696-4617-bcf4-3d110033304a)
 
-# Al parecer a fuerza requerimos Linkedin Premium:
+# Al parecer a fuerza requerimos Linkedin Premium ( Se agotaron el numero maximo de solicitudes mensaules ):
 ![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/ebb23d1f-f16b-4a21-8456-ca33e2d51f73)
 
 
