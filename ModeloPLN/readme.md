@@ -18,7 +18,9 @@ Se optó por utilizar un modelo pre entrenado del modelo BERT (Bidirectional Enc
 
 ## Clases
 
-![CargadorDeDatos](https://github.com/JulioAlcocer22/OOP-Project/blob/699a79d40473b64005d7ab0288f801ace602ac5f/ModeloPLN/img/imgClaseCargadorDeDatos.png)
+![DatosEmpleado](https://github.com/JulioAlcocer22/OOP-Project/blob/699a79d40473b64005d7ab0288f801ace602ac5f/ModeloPLN/img/imgClaseImplementadorModelo.png)
+
+![DatosReentreno](https://github.com/JulioAlcocer22/OOP-Project/blob/699a79d40473b64005d7ab0288f801ace602ac5f/ModeloPLN/img/imgClaseImplementadorModelo.png)
 
 ![DataCleaner](https://github.com/JulioAlcocer22/OOP-Project/blob/JulioAlcocerBranch/ModeloPLN/img/imgClaseDataCleaner.png)
 
@@ -32,11 +34,28 @@ Se optó por utilizar un modelo pre entrenado del modelo BERT (Bidirectional Enc
 
 ## Descripción de Clases
 
-**CargadorDeDatos**  
+**DatosEmpleado**
+Atrubutos: 
+- nombre: obtenido de la base de datos.
+- empresa: obtenido de la base de datos.
+- rol: este dato es el que se quiere conseguir con el modelo.
+- descripcion: obtenido de la base de datos.
 Métodos:
 - cargarDatos(): se encarga de obtener los datos en el formato requerido.
 
+
+**DatosReentreno**  
+Atributos:
+- descripcion: contiene la descripcion de trabajos previamente catalogados.
+- categoria: se asigna dependiendo el rol que indica el dataset.
+Metodos:
+- cargarDatos: obtiene los datos de una libreria de Kaggle.
+
 **DataCleaner**  
+Atributos:
+- rowData: de datos empleado tomamos unicamente la descripcion de los roles.
+- cleanData: datos limpios resultado de pasar por los métodos.
+
 Métodos:
 - eliminadorCaracteresEspeciales():deja unicamente letras.
 - convertidorMinusculas().
