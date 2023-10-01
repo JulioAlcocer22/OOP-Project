@@ -5,6 +5,8 @@ BusquedaEgresados --> Automata
 BusquedaEgresados --> Scrapper
 BusquedaEgresados --> Iterador
 BusquedaEgresados --> Verificador
+BusquedaEgresados --> Test
+BusquedaEgresados --> Configuracion
 Scrapper --> SQL_Scrapper
 Configuracion --> Selenium
 Automata --> Selenium
@@ -14,7 +16,17 @@ Iterador --> Selenium
 
 class Selenium{}
 
-class BusquedaEgresados{}
+class BusquedaEgresados{
+    - linkPagina
+    - nombreEgresado
+    - universidad
+    - nombreEmpresa
+    - description
+    - duracionEntreTrabajo
+    + insertarEnBarraBusqueda()
+    + buscarUADY()
+    + accederContactosDelPivote()
+}
 
 class Verificador{
     + esUADY()
@@ -23,9 +35,9 @@ class Verificador{
 }
 class Test{
     + hayInternet()
-    + conexcionEstable()
+    + conexionEstable()
     + edgeCaido()
-    + linkeinCaido()
+    + linkedinCaido()
 }
 
 class Configuracion{
@@ -41,11 +53,21 @@ class Iterador{
 }
 
 class Scrapper{
+    - linkPagina
+    - nombreEgresado
+    - universidad
+    - nombreEmpresa
+    - description
     + obtenerExpreienciaEgresado()
     + obtenerNombre_URL()
 }
 
 class SQL_Scrapper{
+    - linkPagina
+    - nombreEgresado
+    - universidad
+    - nombreEmpresa
+    - description
     + limpiarDuplicado()
     + limpiarMiembroDeLinkedIn()
     + setDatos()
