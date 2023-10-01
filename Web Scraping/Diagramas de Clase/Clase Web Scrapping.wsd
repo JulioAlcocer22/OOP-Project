@@ -1,0 +1,56 @@
+@startuml WebScrapping
+
+BusquedaEgresados --> Automata
+BusquedaEgresados --> Scrapper
+BusquedaEgresados --> Iterador
+BusquedaEgresados --> Verificador
+Scrapper --> SQL_Scrapper
+
+class BusquedaEgresados{}
+
+class Verificador{
+    + esUADY()
+    + esLIS()
+    + tieneExperiencia()
+}
+class Test{
+    + hayInternet()
+    + conexcionEstable()
+    + edgeCaido()
+    + linkeinCaido()
+}
+
+class Configuracion{
+    + paginaEnEspanol()
+    + buscarContrasenasAlmacenadas()
+    + iniciarSesion()
+    + cerrarSesion()
+}
+
+class Iterador{
+    + entreeElementosDeRespuesta()
+    + entrePaginasDeRespuesta()
+}
+
+class Scrapper{
+    + obtenerExpreienciaEgresado()
+    + obtenerNombre_URL()
+}
+
+class SQL_Scrapper{
+    + limpiarDuplicado()
+    + limpiarMiembroDeLinkedIn()
+    + setDatos()
+    + getDatos()
+    + setDatos()
+    + agregarPivote()
+    + eliminarPivote()
+}
+
+class Automata{
+    + insertarEnBarraBusqueda()
+    + buscarUADY()
+    + accederContactosDelPivote()
+}
+
+@enduml
