@@ -1,10 +1,18 @@
 @startuml WebScrapping
 
+Verificador --> Selenium
 BusquedaEgresados --> Automata
 BusquedaEgresados --> Scrapper
 BusquedaEgresados --> Iterador
 BusquedaEgresados --> Verificador
 Scrapper --> SQL_Scrapper
+Configuracion --> Selenium
+Automata --> Selenium
+Scrapper --> Selenium
+Iterador --> Selenium
+
+
+class Selenium{}
 
 class BusquedaEgresados{}
 
@@ -28,7 +36,7 @@ class Configuracion{
 }
 
 class Iterador{
-    + entreeElementosDeRespuesta()
+    + entreElementosDeRespuesta()
     + entrePaginasDeRespuesta()
 }
 

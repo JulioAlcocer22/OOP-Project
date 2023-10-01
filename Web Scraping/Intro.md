@@ -11,10 +11,8 @@ Después de múltiples pruebas se comprobó que BeutifulSoup4 no funciona para W
 
 ## Diseño del modulo:
 
-### Diagramas de clase del modulo ( Aprobacion pendiente )
-![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/5a55e38e-ef17-4ac6-aca5-ac8fe89135f9)
-![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/99977586-25fb-486d-9f6b-fed54497df46)
-![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/c926d6f2-bc27-41bd-a39f-452cd1385382)
+### Diagramas de clase del modulo ( Aprobacion pendiente)
+![image](/Web%20Scraping/Diagramas%20de%20Clase/Diagrama%20de%20Clase_Web%20Scrapping.jpg)
 ![image](https://github.com/JulioAlcocer22/OOP-Project/assets/75227439/412cba1a-52c3-436f-bfba-3974e8042e2e)
 
 ---
