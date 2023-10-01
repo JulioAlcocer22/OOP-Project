@@ -1,11 +1,11 @@
-## Apartado de Procesamiento de Lenguaje Natural
+# Apartado de Procesamiento de Lenguaje Natural
 Una de las problemáticas a la hora de recabar la información es que, en muchas de las ocasiones, en el aparado de experiencia únicamente ponen la empresa y la descripción del trabajo que realizan, o en su defecto, si ponen un "rol", pero la descricpión de dicho rol corresponde a otro. Es por estas razones que se optó por realizar un modelo para clasificar los roles de trabajo dependiendo de la descripción que estos tengan.
 
-# Descripción
+## Descripción
 
 Se optó por utilizar un modelo pre entrenado del modelo BERT (Bidirectional Encoder Representations from Transformers) que la comunidad de Hugging Face ya ha elaborado anteriormente y puesto en su plataforma para que otros miembros de la comunidad puedan utilizarlos. 
 
-# Etapas en el proceso de reentrenamiento de un modelo basado en BERT
+## Etapas en el proceso de reentrenamiento de un modelo basado en BERT
 1. **Preparación de datos**
     - En esta parte se recolecta, limpia y preprocesan los datos (descripciones de trabajo) para que estén en el formato adecuado para su uso posterior.
 2. **Reentrnamiento del modelo**
@@ -16,8 +16,21 @@ Se optó por utilizar un modelo pre entrenado del modelo BERT (Bidirectional Enc
 4. **Aplicacion y uso del modelo**
     - Implemetación del modelo para que realice la tarea específica para la que fue reentrenado. 
 
+## Clases
 
-# Descripción de Clases
+![CargadorDeDatos](https://github.com/JulioAlcocer22/OOP-Project/blob/699a79d40473b64005d7ab0288f801ace602ac5f/ModeloPLN/img/imgClaseCargadorDeDatos.png)
+
+![DataCleaner](https://github.com/JulioAlcocer22/OOP-Project/blob/JulioAlcocerBranch/ModeloPLN/img/imgClaseDataCleaner.png)
+
+![Tokenizador](https://github.com/JulioAlcocer22/OOP-Project/blob/699a79d40473b64005d7ab0288f801ace602ac5f/ModeloPLN/img/imgClaseTokenizazdor.png)
+
+![ReentrenadorModelo](https://github.com/JulioAlcocer22/OOP-Project/blob/699a79d40473b64005d7ab0288f801ace602ac5f/ModeloPLN/img/imgClaseReentrenadorModelo.png)
+
+![ImplementadorModelo](https://github.com/JulioAlcocer22/OOP-Project/blob/699a79d40473b64005d7ab0288f801ace602ac5f/ModeloPLN/img/imgClaseImplementadorModelo.png)
+
+
+
+## Descripción de Clases
 
 **CargadorDeDatos**  
 Métodos:
@@ -39,6 +52,6 @@ Métodos:
 - configurarModelo(): se encarga de hacer los ajustes necesarios para la problemática a trabajar.
 - entrenarModelo().
 
-**ImplementaciónModelo**  
+**ImplementadorModelo**  
 Métodos: 
 + clasificarDatos(): utiliza el modelo entrenado ingresando los datos (descripciones de los roles) que queremos clasificar.
