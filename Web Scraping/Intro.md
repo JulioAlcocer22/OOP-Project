@@ -12,11 +12,11 @@ Después de múltiples pruebas se comprobó que BeutifulSoup4 no funciona para W
 ## Diseño del modulo:
 
 ### Diagramas de clase del módulo
-![image](/Images/DiagramaDeClase_WebScrapping.jpg)
+![Imagen Diagrama de Clase](Images/DiagramaDeClase_WebScrapping.jpg)
 ### **_Tabla A_**
-![image](/Images/TablaA.jpg)
+![Imagen Tabla A](Images/TablaA.jpg)
 ### **_Tabla B_**
-![image](/Images/TablaB.jpg)
+![Imagen Tabla B](Images/TablaB.jpg)
 
 ---
 
