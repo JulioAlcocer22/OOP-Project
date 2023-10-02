@@ -4,10 +4,10 @@ class ConectionDatabase:
 
     def __init__ (self): 
         self.driver = "{ODBC Driver 17 for SQL Server}"
-        self.server = "tic-solutions.database.windows.net"
-        self.database = "tic-solutions" 
-        self.username = "POO_Admin"
-        self.pwd = "7G2czA6R5jADcnc"
+        self.server = "server"
+        self.database = "database" 
+        self.username = "username"
+        self.pwd = "pwd"
         
     def getConnection(self):
         connection = pyodbc.connect("DRIVER=" + self.driver
