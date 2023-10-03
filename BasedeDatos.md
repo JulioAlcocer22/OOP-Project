@@ -10,13 +10,13 @@ Se está usando la versión 2019 de SQL Server, con créditos de prueba en Azure
 ## Diseño del modulo:
 
 ### Diagrama de la Base de Datos
-![Imagen Diagrama de Clase](DiagramaDataBase.jpg)
+![Imagen Diagrama de Clase](DiagramaBasedeDatos.jpg)
 ### **_Tabla LinkEgresados_**
-![Imagen Tabla LinkEgresados](Images/TablaA.jpg)
+![Imagen Tabla LinkEgresados](LinkEgresados.jpg)
 ### **_Tabla EgresadosScraping_**
-![Imagen Tabla EgresadosScraping](Images/TablaB.jpg)
+![Imagen Tabla EgresadosScraping](EgresadosScraping.jpg)
 ### **_Tabla Egresados_**
-![Imagen Tabla Egresados](Images/TablaB.jpg)
+![Imagen Tabla Egresados](Egresados.jpg)
 
 ---
 
