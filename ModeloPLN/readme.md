@@ -16,40 +16,29 @@ Se optó por utilizar un modelo pre entrenado del modelo BERT (Bidirectional Enc
 4. **Aplicacion y uso del modelo**
     - Implemetación del modelo para que realice la tarea específica para la que fue reentrenado. 
 
-## Clases
-
-![DatosEmpleado](https://github.com/JulioAlcocer22/OOP-Project/blob/699a79d40473b64005d7ab0288f801ace602ac5f/ModeloPLN/img/imgClaseImplementadorModelo.png)
-
-![DatosReentreno](https://github.com/JulioAlcocer22/OOP-Project/blob/699a79d40473b64005d7ab0288f801ace602ac5f/ModeloPLN/img/imgClaseImplementadorModelo.png)
-
-![DataCleaner](https://github.com/JulioAlcocer22/OOP-Project/blob/JulioAlcocerBranch/ModeloPLN/img/imgClaseDataCleaner.png)
-
-![Tokenizador](https://github.com/JulioAlcocer22/OOP-Project/blob/699a79d40473b64005d7ab0288f801ace602ac5f/ModeloPLN/img/imgClaseTokenizazdor.png)
-
-![ReentrenadorModelo](https://github.com/JulioAlcocer22/OOP-Project/blob/699a79d40473b64005d7ab0288f801ace602ac5f/ModeloPLN/img/imgClaseReentrenadorModelo.png)
-
-![ImplementadorModelo](https://github.com/JulioAlcocer22/OOP-Project/blob/699a79d40473b64005d7ab0288f801ace602ac5f/ModeloPLN/img/imgClaseImplementadorModelo.png)
+## Clases y su descripción
 
 
-
-## Descripción de Clases
-
-**DatosEmpleado**
+**DatosEgresado**  
 Atrubutos: 
 - nombre: obtenido de la base de datos.
 - empresa: obtenido de la base de datos.
 - rol: este dato es el que se quiere conseguir con el modelo.
 - descripcion: obtenido de la base de datos.
-Métodos:
-- cargarDatos(): se encarga de obtener los datos en el formato requerido.
+
+**SQL_ROL**  
+Metodos:
+- obtenerDatos(): se encarga de obtener los datos necesarios para hacer la predicción.
+- subirDatos(): se encarga de subir al servidor los datos completos (incluyendo el rol) en formato de tabla.
 
 
 **DatosReentreno**  
 Atributos:
 - descripcion: contiene la descripcion de trabajos previamente catalogados.
-- categoria: se asigna dependiendo el rol que indica el dataset.
+- categoria: se asigna dependiendo el rol que indica el dataset.  
+
 Metodos:
-- cargarDatos: obtiene los datos de una libreria de Kaggle.
+- cargarDatos(): obtiene los datos de una libreria de Kaggle.
 
 **DataCleaner**  
 Atributos:
