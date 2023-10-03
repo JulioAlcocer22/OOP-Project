@@ -1,0 +1,21 @@
+@startuml DiagramaDeCasosDeCasosDeUso
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+left to right direction
+:Usuario:
+:Desarrollador:
+
+rectangle Interfaz{
+    Usuario -- (Apretar Botón)
+    Usuario -- (Aplicar Filtros)
+    Usuario -- (Visualización de Gráficas)
+    Desarrollador -- (Visualización de Gráficas)
+}
+
+rectangle Proceso_Recolección_de_Datos{
+    Desarrollador -- (Web Scrapping)
+    Desarrollador -- (Base de Datos)
+    Desarrollador -- (Modelo PLN)
+    Desarrollador -- (Análisis de Datos)
+}
+@enduml
