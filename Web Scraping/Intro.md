@@ -11,8 +11,7 @@ Después de múltiples pruebas se comprobó que BeutifulSoup4 no funciona para W
 
 ## Diseño del modulo:
 
-### Diagramas de clase del módulo
-![Imagen Diagrama de Clase](Images/DiagramaDeClase_WebScrapping.jpg)
+
 ### **_Tabla A_**
 ![Imagen Tabla A](Images/TablaA.jpg)
 ### **_Tabla B_**
@@ -24,7 +23,7 @@ Después de múltiples pruebas se comprobó que BeutifulSoup4 no funciona para W
 #### **_La clase Selenium se omitirá ya que pertenece a una librería, por lo que se desconoce su estructura interna_**
 
 ### BusquedaEgresados
-Por medio del tipo de búsqueda designado (alguno de los 3 métodos de la clase Automata), buscará a los egresados que cumplan las caracteristicas pertinentes. Puede considerarse el *main* del módulo de Web Scrapping.
+La clase `BusquedaEgresados` se encarga de buscar a los egresados que cumplan con ciertas características utilizando uno de los 3 métodos de la clase `Automata`. Puede considerarse como el punto de entrada o "main" del módulo de Web Scraping.
 
 #### **_¿Qué es un egresado?_**
 Para este proyecto, consideramos un perfil/persona **_egresado_** como aquella que cumpla con todas las siguientes características:
@@ -33,51 +32,90 @@ Para este proyecto, consideramos un perfil/persona **_egresado_** como aquella q
 - Finalizó sus estudios en la Licenciatura en Ingenieria de Software.
 - Ha tenido al menos trabajo y está presente en el apartado de experiencia de LinkedIn.
 
-### Iterador
-Contiene 2 métodos que permitirá el moverse dentro de LinkedIn:
-- entre_elementos_de_respuesta: Itera entre los resultados que devuelve una búsqueda arbitraria de LinkedIn.
-- entre_paginas de respuesta: Manipula la URL de la actual página para así poder iterar para moverse entre páginas.
+### Métodos de la Clase BusquedaEgresados
 
-### Verificador
-Contiene 3 métodos que validan que el perfil nos pueda servir como muestra, es decir, que cuente con las características de un *_egresado*:
-- esUADY: Valida que el perfil corresponda a un egresado de la UADY.
-- esLIS: Valida que el prefil sea de un egresado UADY de la carrera de la Licenciatura en Ingeniería de Software
-- tieneExperiencia: Valida que el perfil tenga información en el apartado de *Experiencia* de LinkedIn.
+- `insertarEnBarraBusqueda`: Este método es llamado a través del Front-end y permite la búsqueda de los enlaces de los egresados mediante búsquedas predefinidas en la barra de búsqueda.
+- `buscarUADY`: Este método es llamado a través del Front-end y permite la búsqueda de los enlaces de los egresados buscando a todas aquellas personas que pertenezcan a la UADY.
+- `AccederContactosDePivote`: Este método es llamado a través del Front-end y permite la búsqueda de los enlaces de los egresados por medio de ciertos contactos populares con los que se ha conectado previamente.
 
-### Configuracion
-Contiene 4 métodos que permiten configurar la página a la forma que esperamos que tenga:
-- paginaEnEspanol: Configura el navegador para que la página esté en español.
-- buscarContrasenasAlmacenadas: 
-- iniciarSesion: Inicia sesión en LinkedIn.
-- cerrarSesion: Cierra sesión de LinkedIn.
+## Clase Iterador
 
-### Automata
-Contiene 3 métodos:
-- Ingresar_cadena_en_barra_de_busqueda: Inserta en el buscador de LinkedIn ciertas cadenas predefinidas como "fmat software", "lis yucatan", entre otras.
-- Ajustar_busqueda_mostrar_todo_UADY: Mediante la manipulación de los filtros de LinkedIn, mostrará a todas aquellas personas que estudien en la UADY (Estudios Superiores).
-- Acceder_contactos_pivote_popular: Por medio de automatización se accederán a los contactos del perfil pivote.
+La clase `Iterador` se encarga de moverse dentro de LinkedIn y contiene 2 métodos:
 
-### Test
-Contiene 4 métodos en caso de que ocurra un error al momento de hacer el Web Scrapping:
-- hayInternet: Valida que el dispositivo esté conectado a internet.
-- conexionEstable: Valida que exista una conexión estable.
-- edgeCaido: Valida que el navegador Microsoft Edge no esté caído.
-- linkedinCaido: Valida que la aplicación web de LinkedIn no esté caída.
+- `entre_elementos_de_respuesta`: Itera entre los resultados que devuelve una búsqueda arbitraria de LinkedIn.
+- `entre_paginas_de_respuesta`: Manipula la URL de la página actual para así poder iterar y moverse entre páginas.
 
-### Scraper
-Contiene 2 métodos que servirán para obtener los datos necesarios:
-- Obtener_nombre_y_URL: Obtiene los datos antes mencionados para posteriormente guardarlos en la tabla A. (Ver última imagen "Diagramas de clase del módulo")
-- Experiencia_egresado: Obtiene los datos pertinentes del egresado para posteriormente guardarlos en la tabla B. (Ver última imagen "Diagramas de clase del módulo")
+## Clase Verificador
 
-### SQL_Scraper
-Contiene 6 metodos:
-- Limpiar_duplicado (Tabla A): Limpia los elementos duplicados presentes en la tabla A.
-- Limpiar_Miembro_de_LinkedIn(Tabla A): Limpia los elementos Miembro de LinkedIn (Perfiles anónimos) presentes en la tabla A
-- Set_datos (Tabla A): Mediante procedimientos SQL envía los datos correspondientes a la Tabla A.
-- Get_datos (Tabla A): Mediante procedimientos SQL obtiene los datos correspondientes a la Tabla A. 
-- Set_datos (Tabla B): Mediante procedimientos SQL envía los datos correspondientes a la Tabla B.
-- Agregar_Pivote: Agrega un elemento con la estructura de la Tabla A (nombre, url), a una tabla especial denominada *Pivotes*.
-- Eliminar_Pivote: Elimina un elemento con la estructura de la Tabla A (nombre, url), a una tabla especial *Pivotes*.
+La clase `Verificador` contiene 3 métodos que validan que el perfil cumpla con las características de un egresado:
+
+- `esUADY`: Valida que el perfil corresponda a un egresado de la UADY.
+- `esLIS`: Valida que el perfil sea de un egresado UADY de la carrera de la Licenciatura en Ingeniería de Software.
+- `tieneExperiencia`: Valida que el perfil tenga información en el apartado de Experiencia de LinkedIn (al menos una experiencia laboral).
+
+## Clase Configuracion
+
+La clase `Configuracion` contiene 4 métodos que permiten configurar la página de LinkedIn según las necesidades:
+
+- `paginaEnEspanol`: Configura el navegador para que la página esté en español.
+- `buscarContrasenasAlmacenadas`: Toma la contraseña almacenada de las variables de entorno.
+- `iniciarSesion`: Inicia sesión en LinkedIn.
+- `cerrarSesion`: Cierra la sesión de LinkedIn.
+
+## Clase Automata
+
+La clase `Automata` contiene 3 métodos:
+
+- `Ingresar_cadena_en_barra_de_busqueda`: Inserta en el buscador de LinkedIn ciertas cadenas predefinidas como "fmat software", "lis yucatan", entre otras.
+- `Ajustar_busqueda_mostrar_todo_UADY`: Mediante la manipulación de los filtros de LinkedIn, muestra a todas aquellas personas que estudian en la UADY (Estudios Superiores).
+- `Acceder_contactos_pivote_popular`: Por medio de automatización, se accede a los contactos del perfil pivote.
+
+## Clase Test
+
+La clase `Test` contiene 4 métodos para manejar errores que puedan ocurrir durante el Web Scraping:
+
+- `hayInternet`: Valida que el dispositivo esté conectado a Internet.
+- `conexionEstable`: Valida que exista una conexión estable.
+- `edgeCaido`: Valida que el navegador Microsoft Edge no esté caído.
+- `linkedInnCaido`: Valida que la aplicación web de LinkedIn no esté caída.
+
+## Clase Scraper
+
+La clase `Scraper` contiene 1 método y un atributo para obtener los datos necesarios:
+
+- `Obtener_nombre_y_URL`: Obtiene los datos antes mencionados para posteriormente guardarlos en la tabla A.
+- `linkPagina`: Es una variable privada de tipo cadena que guarda los respectivos enlaces de LinkedIn.
+
+## Clase SQL_Links
+
+La clase `SQL_Links` contiene 2 métodos:
+
+- `subirLinks`: Se encarga de la "subida" de datos a su respectiva tabla en la base de datos.
+- `subirLinks`: Se encarga de la "subida" de datos a su respectiva tabla en la base de datos.
+
+## Clase EgresadosScrapingSQL
+
+La clase `EgresadosScrapingSQL` contiene 7 atributos que corresponden a los campos de la base de datos:
+
+- `link`: Variable privada de tipo cadena que contiene el enlace del respectivo egresado.
+- `nombre`: Variable privada de tipo cadena que contiene el nombre del respectivo egresado.
+- `empresa`: Variable privada de tipo cadena que contiene la empresa donde labora el respectivo egresado.
+- `universidad`: Variable privada de tipo cadena que contiene la universidad donde egresó el respectivo egresado.
+- `carrera`: Variable privada de tipo cadena que contiene la carrera del respectivo egresado.
+- `descripción`: Variable de tipo cadena que contiene la descripción del puesto del respectivo egresado.
+- `duración`: Variable privada de tipo cadena que contiene la duración de los empleos del respectivo egresado.
+
+## Clase SQL_Scraper
+
+La clase `SQL_Scraper` contiene 6 métodos:
+
+- `Limpiar_duplicado (Tabla A)`: Limpia los elementos duplicados presentes en la tabla A.
+- `Limpiar_Miembro_de_LinkedIn(Tabla A)`: Limpia los elementos Miembro de LinkedIn (Perfiles anónimos) presentes en la tabla A.
+- `Set_datos (Tabla A)`: Mediante procedimientos SQL, envía los datos correspondientes a la Tabla A.
+- `Get_datos (Tabla A)`: Mediante procedimientos SQL, obtiene los datos correspondientes a la Tabla A.
+- `Set_datos (Tabla B)`: Mediante procedimientos SQL, envía los datos correspondientes a la Tabla B.
+- `Agregar_Pivote`: Agrega un elemento con la estructura de la Tabla A (nombre, URL), a una tabla especial denominada Pivotes.
+- `Eliminar_Pivote`: Elimina un elemento con la estructura de la Tabla A (nombre, URL), a una tabla especial Pivotes.
 
 #### **_¿Qué es un pivote?_**
 Un usuario pivote es un perfil de LinkedIn el cual posee muchos "conectados" que pertenecen al grupo poblacional que estamos buscando. Al ser sus "amigos" en LinkedIn podemos acceder a todos sus "conectados", lo que facilita el proceso de búsqueda de los egresados. 
