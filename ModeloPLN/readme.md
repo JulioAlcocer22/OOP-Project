@@ -1,5 +1,5 @@
 # Apartado de Procesamiento de Lenguaje Natural
-Una de las problemáticas a la hora de recabar la información es que, en muchas de las ocasiones, en el aparado de experiencia únicamente ponen la empresa y la descripción del trabajo que realizan, o en su defecto, si ponen un "rol", pero la descricpión de dicho rol corresponde a otro. Es por estas razones que se optó por realizar un modelo para clasificar los roles de trabajo dependiendo de la descripción que estos tengan.
+Una de las problemáticas a la hora de recabar la información es que, en muchas de las ocasiones, en el aparado de experiencia únicamente ponen la empresa y la descripción del trabajo que realizan, o en su defecto, se añade un "rol", pero en su descricpión se hace referencia a otro. Es por ello que se optó por realizar un modelo para clasificar los roles de trabajo dependiendo de la descripción que estos tengan.
 
 ## Descripción
 
@@ -8,9 +8,9 @@ Se optó por utilizar un modelo pre entrenado del modelo BERT (Bidirectional Enc
 ## Etapas en el proceso de reentrenamiento de un modelo basado en BERT
 1. **Preparación de datos**
     - En esta parte se recolecta, limpia y preprocesan los datos (descripciones de trabajo) para que estén en el formato adecuado para su uso posterior.
-2. **Reentrnamiento del modelo**
-    - Se cargará un modelo, en este caso desde Hugging Face, y se ajustará para que sea afín al objetivo del trabajo.
-    - Se definen los parámetros para el entrenamiento, al igual que el entrenamiento en si mismo.
+2. **Reentrenamiento del modelo**
+    - Se cargará un modelo, en este caso de la libreria Hugging Face, y se ajustará para que sea afín al objetivo del proyecto.
+    - Se definen los parámetros para el entrenamiento, al igual que realiza dicho proceso.
 3. **Validacion y optimización**
     - Una vez entrenado, hay que verificar que cumple con la tarea que debe, de no ser así se vuelve a la etapa anterior a hacer los ajustes pertinentes.
 4. **Aplicacion y uso del modelo**
