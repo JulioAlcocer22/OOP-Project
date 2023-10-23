@@ -3,7 +3,12 @@ Una de las problemáticas a la hora de recabar la información es que, en muchas
 
 ## Descripción
 
-Se optó por utilizar un modelo pre entrenado del modelo BERT (Bidirectional Encoder Representations from Transformers) que la comunidad de Hugging Face ya ha elaborado anteriormente y puesto en su plataforma para que otros miembros de la comunidad puedan utilizarlos. 
+Se optó por utilizar un modelo pre entrenado del modelo BERT (Bidirectional Encoder Representations from Transformers) que la comunidad de Hugging Face ya ha elaborado anteriormente y puesto en su plataforma para que otros miembros de la comunidad puedan utilizarlos. Dicho modelo es BERT - cased, el cual tiene varias funciones, como son:
+ - Clasificación de texto (el caso de este proyecto)
+ - Extracción de Entidades Nombradas 
+ - Preguntas y Respuestas (QA) 
+ - Resumen Automático
+ - Entre otras
 
 ## Etapas en el proceso de reentrenamiento de un modelo basado en BERT
 1. **Preparación de datos**
@@ -47,8 +52,7 @@ Atributos:
 
 Métodos:
 - eliminadorCaracteresEspeciales():deja unicamente letras.
-- convertidorMinusculas().
-- eliminadorStopWords(): se encarga de elminar palabras como *que*, *de*.
+- separadorOraciones(): se encarga de dividir las descripciones en oraciones individuales
 
 **Tokenizador**  
 Métodos:
