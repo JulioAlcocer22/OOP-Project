@@ -48,11 +48,12 @@ Metodos:
 **DataCleaner**  
 Atributos:
 - rowData: de datos empleado tomamos unicamente la descripcion de los roles.
-- cleanData: datos limpios resultado de pasar por los métodos.
+- etiquetasRow: valores de las etiquetas de cada descripción de acuerdo con el rol.
 
 Métodos:
-- eliminadorCaracteresEspeciales():deja unicamente letras.
-- separadorOraciones(): se encarga de dividir las descripciones en oraciones individuales
+- eliminarCaracteresEspeciales():deja unicamente letras, puntos y comas.
+- dividirOraciones(): se encarga de dividir las descripciones en oraciones individuales
+- crearDatasetsNuevos: se encarga de crear los datasets con las oraciones separadas y con las etiquetas correspondientes para cada oracion.
 
 **Tokenizador**  
 Métodos:
