@@ -1,7 +1,7 @@
-import database
-import pyodbc
+import Database
 
-connection = database.ConectionDatabase()
+
+connection = Database.ConectionDatabase()
 connection.getConnection()
 cursor = connection.connection.cursor()
 
@@ -11,8 +11,3 @@ cursor.execute("INSERT INTO dbo.LinkEgresados VALUES (?)", link)
 
 cursor.commit()
 connection.closeConnection()
-
-
-    
-    
-    
