@@ -24,7 +24,7 @@ class Iterador:
                     arregloDefinitivo.append(url)
 
         arreglo_final = Limpieza.duplicadosArreglo(arregloDefinitivo)
-        Limpieza.test(arreglo_final)
+        #Limpieza.test(arreglo_final)
 
         return (arreglo_final)
 
