@@ -1,4 +1,5 @@
 import time
+from selenium.webdriver.common.by import By
 
 
 class Busqueda:
@@ -30,21 +31,27 @@ class Busqueda:
         self.driver.get(cadena)
         time.sleep(5)
 
-        botonContactosPersona = self.driver.find_element_by_xpath(
+        botonContactosPersona = self.driver.find_element(By.XPATH, 
             '/html/body/div[5]/div[3]/div/div/div[2]/div/div/main/section[1]/div[2]/ul/li/a/span')
         botonContactosPersona.click()
         time.sleep(5)
 
-        botonContactosDesplegable = self.driver.find_element_by_xpath(
-            '/html/body/div[5]/div[3]/div[2]/section/div/nav/div/ul/li[3]/div/span/button')
-        botonContactosDesplegable.click()
-        time.sleep(5)
+        urlActual = self.driver.current_url
 
-        botonContactosTercer = self.driver.find_element_by_xpath(
-            '/html/body/div[5]/div[3]/div[2]/section/div/nav/div/ul/li[3]/div/div/div/div[1]/div/form/fieldset/div[1]/ul/li[3]/label/p/span[1]')
-        botonContactosTercer.click()
-        time.sleep(5)
+        urlActual = urlActual.replace("%22%5D&network=%5B%22F%22%2C%22S%22%5D&origin=MEMBER_PROFILE_CANNED_SEARCH&sid=","%22%5D&network=%5B%22F%22%2C%22S%22%2C%22O%22%5D&origin=FACETED_SEARCH&sid=")
+        #botonContactosDesplegable = self.driver.find_element(By.XPATH, 
+            #'/html/body/div[5]/div[3]/div[2]/section/div/nav/div/ul/li[3]/div/span/button')
+        #botonContactosDesplegable.click()
+        #time.sleep(5)
 
-        botonContactosTercerAceptar = self.driver.find_element_by_xpath(
-            '/html/body/div[5]/div[3]/div[2]/section/div/nav/div/ul/li[3]/div/div/div/div[1]/div/form/fieldset/div[2]/button[2]')
-        botonContactosTercerAceptar.click()
+        #botonContactosTercer = self.driver.find_element(By.XPATH, 
+            #'/html/body/div[5]/div[3]/div[2]/section/div/nav/div/ul/li[3]/div/div/div/div[1]/div/form/fieldset/div[1]/ul/li[3]/label/p/span[1]')
+        #botonContactosTercer.click()
+        #time.sleep(5)
+
+        #botonContactosTercerAceptar = self.driver.find_element(By.XPATH, 
+            #'/html/body/div[5]/div[3]/div[2]/section/div/nav/div/ul/li[3]/div/div/div/div[1]/div/form/fieldset/div[2]/button[2]')
+        #botonContactosTercerAceptar.click()
+        return urlActual
+
+        

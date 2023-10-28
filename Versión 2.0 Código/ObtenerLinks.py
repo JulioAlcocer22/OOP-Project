@@ -11,8 +11,7 @@ class ObtenerLinks:
         self.driver = driver
 
     def porURL(self, varOriginal):
-        varOriginal = varOriginal.replace(
-            "SWITCH_SEARCH_VERTICAL&", "SWITCH_SEARCH_VERTICAL&page=XXXXX")
+        varOriginal = varOriginal.replace("SWITCH_SEARCH_VERTICAL&", "SWITCH_SEARCH_VERTICAL&page=XXXXX&")
         config = Configuracion(self.driver)
         config.iniciarSesion()
 
@@ -22,18 +21,21 @@ class ObtenerLinks:
         arregloUnificado = []
 
         var = varOriginal.replace("XXXXX", "1")
+        print(var)
         self.driver.get(var)
         time.sleep(5)
         arregloUnificado = arregloUnificado + iterador.obtener_links()
         # print(iterador.es_ultima_pagina())
 
         var = varOriginal.replace("XXXXX", "2")
+        print(var)
         self.driver.get(var)
         time.sleep(5)
         arregloUnificado = arregloUnificado + iterador.obtener_links()
         # print(iterador.es_ultima_pagina())
 
         var = varOriginal.replace("XXXXX", "3")
+        print(var)
         self.driver.get(var)
         time.sleep(5)
         arregloUnificado = arregloUnificado + iterador.obtener_links()
@@ -93,9 +95,8 @@ class ObtenerLinks:
 		return arregloUnificado
 		"""
 
-    def sinContexto(self, varOriginal):
-        varOriginal = varOriginal.replace(
-            "SWITCH_SEARCH_VERTICAL&", "SWITCH_SEARCH_VERTICAL&page=XXXXX")
+    def porURL2(self, varOriginal):
+        varOriginal = varOriginal.replace("FACETED_SEARCH&", "FACETED_SEARCH&page=XXXXX&")
 
         time.sleep(5)
 
@@ -103,18 +104,21 @@ class ObtenerLinks:
         arregloUnificado = []
 
         var = varOriginal.replace("XXXXX", "1")
+        print(var)
         self.driver.get(var)
         time.sleep(5)
         arregloUnificado = arregloUnificado + iterador.obtener_links()
         # print(iterador.es_ultima_pagina())
 
         var = varOriginal.replace("XXXXX", "2")
+        print(var)
         self.driver.get(var)
         time.sleep(5)
         arregloUnificado = arregloUnificado + iterador.obtener_links()
         # print(iterador.es_ultima_pagina())
 
         var = varOriginal.replace("XXXXX", "3")
+        print(var)
         self.driver.get(var)
         time.sleep(5)
         arregloUnificado = arregloUnificado + iterador.obtener_links()

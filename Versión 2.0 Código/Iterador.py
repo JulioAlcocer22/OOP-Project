@@ -1,5 +1,10 @@
 import time
 from Limpieza import Limpieza
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
+from selenium import *
+from selenium.webdriver.common.by import By
 
 
 class Iterador:
@@ -10,12 +15,14 @@ class Iterador:
     def obtener_links(self):
 
         time.sleep(10)
-        # enlaces = self.driver.find_elements_by_css_selector('a.app-aware-link')
-        enlaces = self.driver.find_elements_by_tag_name("a")
+        #enlaces = self.driver.find_element(By.CSS_SELECTOR,'a.app-aware-link')
+        enlaces = self.driver.find_elements(By.TAG_NAME,"a")
+  
 
         arregloDefinitivo = []
 
         for enlace in enlaces:
+
             url = enlace.get_attribute('href')
             if url.__contains__("https://www.linkedin.com/in/"):
                 primer_char = url[28]
@@ -27,12 +34,36 @@ class Iterador:
         Limpieza.test(arreglo_final)
 
         return (arreglo_final)
+    
+    def obtener_links2(self):
+
+        time.sleep(10)
+        enlaces = self.driver.find_elements(By.CSS_SELECTOR,'a.app-aware-link')
+        #enlaces = self.driver.find_elements(By.TAG_NAME,"a")
+  
+
+        arregloDefinitivo = []
+
+        for enlace in enlaces:
+
+            url = enlace.get_attribute('href')
+            if url.__contains__("https://www.linkedin.com/in/"):
+                primer_char = url[28]
+
+                if primer_char.islower():
+                    arregloDefinitivo.append(url)
+
+        arreglo_final = Limpieza.duplicadosArreglo(arregloDefinitivo)
+        #Limpieza.test(arreglo_final)
+
+        return (arreglo_final)
+
 
 
     def es_ultima_pagina(self):
 
         time.sleep(5)
-        elementos_h2 = self.driver.find_elements_by_tag_name('h2')
+        elementos_h2 = self.driver.find_element(By.TAG_NAME,'h2')
         time.sleep(5)
         # Verifica si el elemento fue encontrado
         for elemento in elementos_h2:

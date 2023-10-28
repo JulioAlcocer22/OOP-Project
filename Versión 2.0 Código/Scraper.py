@@ -1,7 +1,8 @@
 import re
 from selenium import webdriver
 from Limpieza import Limpieza
-# VERSION ACTUALIZADA PROXIMAMENTE
+from selenium.webdriver.common.by import By
+
 class Scraper:
 
     def __init__(self, driver):
@@ -28,7 +29,7 @@ class Scraper:
     def obtenerExperiencia(self):
 
         
-        arregloDeEducacion = self.driver.find_elements_by_class_name("experience__list")
+        arregloDeEducacion = self.driver.find_elements(By.CLASS_NAME, "experience__list")
         elemento_estandarizado = Limpieza.estadandarizarCadenas(arregloDeEducacion[0].text)
 
         lineas = elemento_estandarizado.split('\n')

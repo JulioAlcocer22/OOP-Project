@@ -11,6 +11,8 @@ from Iterador import Iterador
 from ObtenerLinks import ObtenerLinks
 from Experiencia import Experiencia
 from Scraper import Scraper
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 
 
@@ -24,7 +26,9 @@ class AccionesBoton:
         result = simpledialog.askstring(
             "Entrada de texto", "Ingrese la cadena que desea buscar:")
         if result:
-            driver = webdriver.Edge(r"msedgedriver.exe")
+
+            # Crear una instancia del controlador de Edge
+            driver = webdriver.Edge()
             obtenerdor = ObtenerLinks(driver)
             obtenerdor.conCadena(result)
             # Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
@@ -36,7 +40,7 @@ class AccionesBoton:
         result = simpledialog.askstring(
             "Entrada de texto", "Ingrese la URL que desea buscar:")
         if result:
-            driver = webdriver.Edge(r"msedgedriver.exe")
+            driver = webdriver.Edge()
             obtenerdor = ObtenerLinks(driver)
             obtenerdor.porURL(result)
             # Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
@@ -49,7 +53,7 @@ class AccionesBoton:
         response = messagebox.askquestion(
             "Pregunta", "¿Estás seguro de que deseas continuar?, El proceso no se puede detener.")
         if response == "yes":
-            driver = webdriver.Edge(r"msedgedriver.exe")
+            driver = webdriver.Edge()
             config = Configuracion(driver)
             config.iniciarSesion()
             driver.get(
@@ -68,13 +72,16 @@ class AccionesBoton:
         if response == "yes":
             # Supongamos que recibio uno por uno los links de mis pivotes de la db
             # Por cuestiones practicas usaremos el link de cambranes como prueba
-            driver = webdriver.Edge(r"msedgedriver.exe")
+            driver = webdriver.Edge()
             config = Configuracion(driver)
             config.iniciarSesion()
+
+            time.sleep(20)
             buscador = Busqueda(driver)
-            buscador.porPivote("https://www.linkedin.com/in/ecambranes/")
+            var = buscador.porPivote("https://www.linkedin.com/in/ecambranes/")
+
             obtenerdor = ObtenerLinks(driver)
-            obtenerdor.sinContexto(driver.current_url)
+            obtenerdor.porURL2(var)
             # Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
 
 
@@ -84,7 +91,7 @@ class AccionesBoton:
         if response == "yes":
             # Supongamos que recibio uno por uno los links de la db
             # Por cuestiones practicas usaremos el link de viviana como prueba
-            driver = webdriver.Edge(r"msedgedriver.exe")
+            driver = webdriver.Edge()
             driver.delete_all_cookies()
             #exp = Experiencia(driver)
             #driver.get("https://mx.linkedin.com/in/viviana-guadalupe-azcorra-novelo-351706231?trk=public_profile_browsemap")
