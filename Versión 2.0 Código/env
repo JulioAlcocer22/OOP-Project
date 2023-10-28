@@ -1,0 +1,8 @@
+USER=scrappeo.correo.cuenta@gmail.com
+PSW=code.wizards.lis
+
+DRIVER={ODBC Driver 17 for SQL Server}
+SERVER=tic-solutions.database.windows.net
+DATABASE=tic-solutions
+USERNAME=POO_Admin
+PSWDB=7G2czA6R5jADcncSaP18
