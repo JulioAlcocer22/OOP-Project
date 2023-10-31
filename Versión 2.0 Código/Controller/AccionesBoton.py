@@ -3,14 +3,11 @@ from tkinter import messagebox
 from tkinter import simpledialog
 import tkinter as tk
 
-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 from Controller.Configuracion import Configuracion
-from Model.BusquedaDeURLs import BusquedaDeURLs
-from Model.ScrappearLinks import ScrappearLinks
-from Model.IteradorDeURLs import IteradorDeURLs
+from Model.ScrapperPerfiles import ScrapperPerfiles
 from Model.Limpieza import Limpieza
 from Model.Scraper import Scraper
 
@@ -22,40 +19,40 @@ class AccionesBoton:
 
     
     def metodoCadena(self):
-        result = simpledialog.askstring(
+        entradaCadena = simpledialog.askstring(
             "Entrada de texto", "Ingrese la cadena que desea buscar:")
-        if result:
+        if entradaCadena:
 
             driver = webdriver.Edge(r"msedgedriver.exe")
 
             config = Configuracion(driver)
             config.iniciarSesion()
 
-            busqueda = BusquedaDeURLs(driver)
-            UrlOriginal = busqueda.porCadena(result)
-            
-            iterar = IteradorDeURLs(driver)
-            resultado = iterar.porURL(UrlOriginal)
 
-            Limpieza.test(resultado)
+            scraper = ScrapperPerfiles(driver)
+
+            resultadoBusqueda = scraper.busquedaUrl.porCadena(entradaCadena)
+            resultaddoIteracion = scraper.iteradorUrls.iniciarIteracion(resultadoBusqueda)
+
+            Limpieza.test(resultaddoIteracion)
             # Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
             driver.close()
 
 
 
     def metodoUrl(self):
-        result = simpledialog.askstring(
+        entradaURL = simpledialog.askstring(
             "Entrada de texto", "Ingrese la URL que desea buscar:")
-        if result:
+        if entradaURL:
             driver = webdriver.Edge(r"msedgedriver.exe")
             
             config = Configuracion(driver)
             config.iniciarSesion()
 
-            iterar = IteradorDeURLs(driver)
-            resultado = iterar.porURL(result)
+            scraper = ScrapperPerfiles(driver)
+            resultaddoIteracion = scraper.iteradorUrls.iniciarIteracion(entradaURL)
 
-            Limpieza.test(resultado)
+            Limpieza.test(resultaddoIteracion)
             # Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
             driver.close()
 
@@ -72,12 +69,11 @@ class AccionesBoton:
             config.iniciarSesion()
 
             driver.get("https://www.linkedin.com/mynetwork/invite-connect/connections/")
-            time.sleep(10)
 
-            screppear = ScrappearLinks(driver)
-            resultado = screppear.obtener_links()
+            scraper = ScrapperPerfiles(driver)
+            resultaddoIteracion = scraper.scrappearLinks.obtener_links()
 
-            Limpieza.test(resultado)
+            Limpieza.test(resultaddoIteracion)
             # Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
             driver.close()
 
@@ -93,14 +89,14 @@ class AccionesBoton:
             config = Configuracion(driver)
             config.iniciarSesion()
 
-            buscador = BusquedaDeURLs(driver)
-            linkPreparado = buscador.porPivote("https://www.linkedin.com/in/ecambranes/")
+            scraper = ScrapperPerfiles(driver)
 
-            obtenerdor = IteradorDeURLs(driver)
-            resultado = obtenerdor.porURL(linkPreparado)
+            resultadoBusqueda = scraper.busquedaUrl.porPivote("https://www.linkedin.com/in/ecambranes/")
+            resultaddoIteracion = scraper.iteradorUrls.iniciarIteracion(resultadoBusqueda)
 
-            Limpieza.test(resultado)
-            # Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
+
+            Limpieza.test(resultaddoIteracion)
+            # resultaddoIteracion - Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
             driver.close()
 
     def extraccionDeExperiencia(self):
@@ -108,9 +104,9 @@ class AccionesBoton:
             "Pregunta", "¿Estás seguro de que deseas continuar?, El proceso no se puede detener.")
         if response == "yes":
             # Supongamos que recibio uno por uno los links de la db
-            # Por cuestiones practicas usaremos el link de viviana como prueba
+            # Por cuestiones practicas usaremos el link de luis basto como prueba
             driver = webdriver.Edge(r"msedgedriver.exe")
-            #driver.delete_all_cookies()
+
             #exp = Experiencia(driver)
             #driver.get("https://mx.linkedin.com/in/viviana-guadalupe-azcorra-novelo-351706231?trk=public_profile_browsemap")
             #print(exp.verificarRequisitos("https://mx.linkedin.com/in/viviana-guadalupe-azcorra-novelo-351706231?trk=public_profile_browsemap",
