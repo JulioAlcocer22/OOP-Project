@@ -8,9 +8,9 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 from Controller.Configuracion import Configuracion
-from Model.Busqueda import Busqueda
-from Model.Iterador import Iterador
-from Model.ObtenerLinks import ObtenerLinks
+from Model.BusquedaDeURLs import BusquedaDeURLs
+from Model.ScrappearLinks import ScrappearLinks
+from Model.IteradorDeURLs import IteradorDeURLs
 from Model.Limpieza import Limpieza
 from Model.Scraper import Scraper
 
@@ -31,11 +31,11 @@ class AccionesBoton:
             config = Configuracion(driver)
             config.iniciarSesion()
 
-            busqueda = Busqueda(driver)
-            varOriginal = busqueda.conCadena(result)
+            busqueda = BusquedaDeURLs(driver)
+            UrlOriginal = busqueda.porCadena(result)
             
-            obtenerdor = ObtenerLinks(driver)
-            resultado = obtenerdor.porURL(varOriginal)
+            iterar = IteradorDeURLs(driver)
+            resultado = iterar.porURL(UrlOriginal)
 
             Limpieza.test(resultado)
             # Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
@@ -52,8 +52,8 @@ class AccionesBoton:
             config = Configuracion(driver)
             config.iniciarSesion()
 
-            obtenerdor = ObtenerLinks(driver)
-            resultado = obtenerdor.porURL(result)
+            iterar = IteradorDeURLs(driver)
+            resultado = iterar.porURL(result)
 
             Limpieza.test(resultado)
             # Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
@@ -74,8 +74,8 @@ class AccionesBoton:
             driver.get("https://www.linkedin.com/mynetwork/invite-connect/connections/")
             time.sleep(10)
 
-            iterador = Iterador(driver)
-            resultado = iterador.obtener_links()
+            screppear = ScrappearLinks(driver)
+            resultado = screppear.obtener_links()
 
             Limpieza.test(resultado)
             # Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
@@ -93,11 +93,11 @@ class AccionesBoton:
             config = Configuracion(driver)
             config.iniciarSesion()
 
-            buscador = Busqueda(driver)
-            var = buscador.porPivote("https://www.linkedin.com/in/ecambranes/")
+            buscador = BusquedaDeURLs(driver)
+            linkPreparado = buscador.porPivote("https://www.linkedin.com/in/ecambranes/")
 
-            obtenerdor = ObtenerLinks(driver)
-            resultado = obtenerdor.porURL(var)
+            obtenerdor = IteradorDeURLs(driver)
+            resultado = obtenerdor.porURL(linkPreparado)
 
             Limpieza.test(resultado)
             # Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
