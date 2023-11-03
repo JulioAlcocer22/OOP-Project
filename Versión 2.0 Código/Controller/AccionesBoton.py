@@ -152,28 +152,28 @@ class AccionesBoton:
 
             #scrap = Scraper(driver)
             #scrap.obtenerExperiencia()
-            
+                
+            """#ok
             education_list = driver.find_elements(By.CLASS_NAME, 'experience__list')
             for element in education_list:
                 h3_elements = element.find_elements(By.TAG_NAME, 'h3')
-                for h3 in h3_elements:
-                    print(h3.text)
-                    
-            print("------------------------")
-            education_list = driver.find_elements(By.CLASS_NAME, 'experience__list')
-            for element in education_list:
                 h4_elements = element.find_elements(By.TAG_NAME, 'h4')
-                for h4 in h4_elements:
-                    print(h4.text)
+                for elemento1, elemento2 in zip(h3_elements, h4_elements):
+                    print(elemento1.text + "-----"  + elemento2.text)
+            """
+               
             
-            print("------------------------")        
-            education_list = driver.find_elements(By.CLASS_NAME, 'experience__list')
-            for element in education_list:
-                duration_elements = element.find_elements(By.TAG_NAME, 'p')
-                for duration in duration_elements:
-                    print(duration.text)
-            print("------------------------")
-        
+            # Encuentra el elemento "Yucatán, México" dentro del div "profile-section-card__meta"
+            css_selector = '.experience__list .profile-section-card__contents .profile-section-card__meta .experience-item__location.experience-item__meta-item'
+            element = driver.find_elements(By.CSS_SELECTOR, css_selector)
+
+            # Accede al texto del elemento y muestra su contenido
+            for elemento in element:
+                print(elemento.text)
+                
+            
+                        
+            
 
             driver.close()
             # Si es true obtiene la experiencia, sino continua con el siguiente
