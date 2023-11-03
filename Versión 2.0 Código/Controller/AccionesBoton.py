@@ -10,7 +10,8 @@ from Controller.Configuracion import Configuracion
 from Model.ScrapperPerfiles import ScrapperPerfiles
 from Model.Limpieza import Limpieza
 from Model.Scraper import Scraper
-
+import requests
+from selenium.webdriver.common.by import By
 
 class AccionesBoton:
 
@@ -22,8 +23,15 @@ class AccionesBoton:
         entradaCadena = simpledialog.askstring(
             "Entrada de texto", "Ingrese la cadena que desea buscar:")
         if entradaCadena:
-
-            driver = webdriver.Edge(r"msedgedriver.exe")
+            
+            try:
+                driver = webdriver.Edge()
+            except:
+                try:
+                    driver = webdriver.Edge(r"msedgedriver.exe")
+                except:
+                    pass
+                    
 
             config = Configuracion(driver)
             config.iniciarSesion()
@@ -44,7 +52,13 @@ class AccionesBoton:
         entradaURL = simpledialog.askstring(
             "Entrada de texto", "Ingrese la URL que desea buscar:")
         if entradaURL:
-            driver = webdriver.Edge(r"msedgedriver.exe")
+            try:
+                driver = webdriver.Edge()
+            except:
+                try:
+                    driver = webdriver.Edge(r"msedgedriver.exe")
+                except:
+                    pass
             
             config = Configuracion(driver)
             config.iniciarSesion()
@@ -63,7 +77,13 @@ class AccionesBoton:
         response = messagebox.askquestion(
             "Pregunta", "¿Estás seguro de que deseas continuar?, El proceso no se puede detener.")
         if response == "yes":
-            driver = webdriver.Edge(r"msedgedriver.exe")
+            try:
+                driver = webdriver.Edge()
+            except:
+                try:
+                    driver = webdriver.Edge(r"msedgedriver.exe")
+                except:
+                    pass
 
             config = Configuracion(driver)
             config.iniciarSesion()
@@ -84,7 +104,13 @@ class AccionesBoton:
         if response == "yes":
             # Supongamos que recibio uno por uno los links de mis pivotes de la db
             # Por cuestiones practicas usaremos el link de cambranes como prueba
-            driver = webdriver.Edge(r"msedgedriver.exe")
+            try:
+                driver = webdriver.Edge()
+            except:
+                try:
+                    driver = webdriver.Edge(r"msedgedriver.exe")
+                except:
+                    pass
 
             config = Configuracion(driver)
             config.iniciarSesion()
@@ -105,20 +131,49 @@ class AccionesBoton:
         if response == "yes":
             # Supongamos que recibio uno por uno los links de la db
             # Por cuestiones practicas usaremos el link de luis basto como prueba
-            driver = webdriver.Edge(r"msedgedriver.exe")
+            try:
+                driver = webdriver.Edge()
+            except:
+                try:
+                    driver = webdriver.Edge(r"msedgedriver.exe")
+                except:
+                    pass
 
             #exp = Experiencia(driver)
             #driver.get("https://mx.linkedin.com/in/viviana-guadalupe-azcorra-novelo-351706231?trk=public_profile_browsemap")
             #print(exp.verificarRequisitos("https://mx.linkedin.com/in/viviana-guadalupe-azcorra-novelo-351706231?trk=public_profile_browsemap",
                 #"UNIVERSIDAD AUTONOMA DE YUCATAN", 'LICENCIADA EN ENSEÑANZA DE LAS MATEMATICAS'))
 
-
+            driver.delete_all_cookies()
             driver.get("https://www.linkedin.com/in/luis-basto-diaz-41136396/")
+            driver.delete_all_cookies()
             config = Configuracion(driver)
             config.saltarModal()
 
-            scrap = Scraper(driver)
-            scrap.obtenerExperiencia()
+            #scrap = Scraper(driver)
+            #scrap.obtenerExperiencia()
+            
+            education_list = driver.find_elements(By.CLASS_NAME, 'experience__list')
+            for element in education_list:
+                h3_elements = element.find_elements(By.TAG_NAME, 'h3')
+                for h3 in h3_elements:
+                    print(h3.text)
+                    
+            print("------------------------")
+            education_list = driver.find_elements(By.CLASS_NAME, 'experience__list')
+            for element in education_list:
+                h4_elements = element.find_elements(By.TAG_NAME, 'h4')
+                for h4 in h4_elements:
+                    print(h4.text)
+            
+            print("------------------------")        
+            education_list = driver.find_elements(By.CLASS_NAME, 'experience__list')
+            for element in education_list:
+                duration_elements = element.find_elements(By.TAG_NAME, 'p')
+                for duration in duration_elements:
+                    print(duration.text)
+            print("------------------------")
+        
 
             driver.close()
             # Si es true obtiene la experiencia, sino continua con el siguiente
