@@ -144,49 +144,24 @@ class AccionesBoton:
             #print(exp.verificarRequisitos("https://mx.linkedin.com/in/viviana-guadalupe-azcorra-novelo-351706231?trk=public_profile_browsemap",
                 #"UNIVERSIDAD AUTONOMA DE YUCATAN", 'LICENCIADA EN ENSEÑANZA DE LAS MATEMATICAS'))
 
-            driver.delete_all_cookies()
-
+            
+            #https://mx.linkedin.com/in/viviana-guadalupe-azcorra-novelo-351706231
+            #https://www.linkedin.com/in/luis-basto-diaz-41136396/
+            #https://mx.linkedin.com/in/edgar-cambranes
             driver.get("https://www.linkedin.com/in/luis-basto-diaz-41136396/")
-
+            
             config = Configuracion(driver)
+            config.iniciarSesion()
+            time.sleep(5)
+            
+            driver.get("https://www.linkedin.com/in/luis-basto-diaz-41136396/")
+            driver.delete_all_cookies()
+            config = Configuracion(driver)
+            time.sleep(10)
             config.saltarModal()
-
-            #scrap = Scraper(driver)
-            #scrap.obtenerExperiencia()
-                
-            """#ok
-            education_list = driver.find_elements(By.CLASS_NAME, 'experience__list')
-            for element in education_list:
-                h3_elements = element.find_elements(By.TAG_NAME, 'h3')
-                h4_elements = element.find_elements(By.TAG_NAME, 'h4')
-                for elemento1, elemento2 in zip(h3_elements, h4_elements):
-                    print(elemento1.text + "-----"  + elemento2.text)
-            """
-               
             
-            # Encuentra el elemento "Yucatán, México" dentro del div "profile-section-card__meta"
-            #css_selector = '.experience__list .profile-section-card__contents .profile-section-card__meta .experience-item__location.experience-item__meta-item'
-            #element = driver.find_elements(By.CSS_SELECTOR, css_selector)
-
-            # Accede al texto del elemento y muestra su contenido
-            #for elemento in element:
-                #print(elemento.text)
-                
+            #Web Scraping
             
-            
-
-            # Accede al texto del elemento y muestra su contenido
-            #for elemento2 in element2:
-                #print(elemento2.text)
-                
-            
-            #--------------------------------NO TOCAR   
-            
-
-            # Accede al texto del elemento y muestra su contenido
-            #for elemento3 in element3:
-                #print(elemento3.text)
-                
             education_list = driver.find_elements(By.CLASS_NAME, 'experience__list')
             for element in education_list:
                 h3_elements = element.find_elements(By.TAG_NAME, 'h3')
@@ -195,13 +170,18 @@ class AccionesBoton:
                 css_selector2 = '.experience__list .profile-section-card__contents .profile-section-card__meta .experience-item__duration.experience-item__meta-item'
                 element2 = driver.find_elements(By.CSS_SELECTOR, css_selector2)
                 
-                css_selector3 = '.experience__list .profile-section-card__contents .profile-section-card__meta .experience-item__description.experience-item__meta-item'
-                element3 = driver.find_elements(By.CSS_SELECTOR, css_selector3)
                 
-                for elemento1, elemento2, elemento3, elemento4 in zip(h3_elements, h4_elements, element2, element3):
-                    print(elemento1.text + "-----"  + elemento2.text + "-----"  + elemento3.text + "-----"  + elemento4.text)
-                        
-            
+                     
+                for elemento1, elemento2, elemento3 in zip(h3_elements, h4_elements, element2):
+                    print(elemento1.text + "-----"  + elemento2.text + "-----"  + elemento3.text)
+                    print("---------------------------------")
+                   
+            #Obtencion descripciones    
+            css_selector3 = '.experience__list .profile-section-card__contents .profile-section-card__meta .experience-item__description.experience-item__meta-item'
+            element3 = driver.find_elements(By.CSS_SELECTOR, css_selector3)
+            for elements in element3:
+                print(elements.text)
+           
 
             driver.close()
             # Si es true obtiene la experiencia, sino continua con el siguiente
