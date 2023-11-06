@@ -133,9 +133,11 @@ class AccionesBoton:
             # Supongamos que recibio uno por uno los links de la db
             # Por cuestiones practicas usaremos el link de luis basto como prueba
             try:
+                print("ya entre")
                 driver = webdriver.Edge()
             except:
                 try:
+                    print("ya entre 2")
                     driver = webdriver.Edge(r"msedgedriver.exe")
                 except:
                     pass
@@ -149,25 +151,52 @@ class AccionesBoton:
             #https://mx.linkedin.com/in/viviana-guadalupe-azcorra-novelo-351706231
             #https://www.linkedin.com/in/luis-basto-diaz-41136396/
             #https://mx.linkedin.com/in/edgar-cambranes
-            driver.get("https://www.linkedin.com/in/luis-basto-diaz-41136396/")
+            driver.get("https://mx.linkedin.com/in/edgar-cambranes")
             """
             config = Configuracion(driver)
             config.iniciarSesion()
             time.sleep(5)
             
-            driver.get("https://www.linkedin.com/in/luis-basto-diaz-41136396/")
+            driver.get("https://mx.linkedin.com/in/edgar-cambranes")
             driver.delete_all_cookies()
             """
             config = Configuracion(driver)
             
-            time.sleep(15)
+            time.sleep(20)
             config.saltarModal()
 
+          
+
+            elementsf = driver.find_elements(By.CSS_SELECTOR, "a.experience-group-header__url")
+
+            # Itera a través de los elementos y obtén el contenido
+            for elementf in elementsf:
+                elemento = elementf.text
+
+                lineas = elemento.split('\n')
+                nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
+
+                empresa = nuevoArreglo[0]
+    
+
+                print(empresa)
 
 
 
+            #OBTENER DATOS CASO MULTIPLES
+            elements = driver.find_elements(By.CSS_SELECTOR, "li.profile-section-card.experience-group-position")
+            for element in elements:
+                elemento = element.text
+                lineas = elemento.split('\n')
+                nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
 
-            
+                puesto = nuevoArreglo[0]
+                duracion = nuevoArreglo[1]
+
+                print(puesto + "---" + duracion)
+
+
+
             
             #OBTENER DATOS CASO BASTO
             experience_items = driver.find_elements(By.CSS_SELECTOR, ".profile-section-card.experience-item")
@@ -184,12 +213,8 @@ class AccionesBoton:
                 #print(item.text)
 
 
-
-
                
-                
-               
-            #OBTENER DESCRIPCIONES
+            #OBTENER DESCRIPCIONES CASO BASTO
             css_selector3 = '.experience__list .profile-section-card__contents .profile-section-card__meta .experience-item__description.experience-item__meta-item'
             element3 = driver.find_elements(By.CSS_SELECTOR, css_selector3)
             for elements in element3:
