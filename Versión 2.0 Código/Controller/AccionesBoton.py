@@ -167,33 +167,35 @@ class AccionesBoton:
 
           
 
-            elementsf = driver.find_elements(By.CSS_SELECTOR, "a.experience-group-header__url")
+            
 
             # Itera a través de los elementos y obtén el contenido
+            elementsf = driver.find_elements(By.CSS_SELECTOR, "a.experience-group-header__url")
             for elementf in elementsf:
                 elemento = elementf.text
-
                 lineas = elemento.split('\n')
                 nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
-
                 empresa = nuevoArreglo[0]
-    
+                #print(empresa)
 
-                print(empresa)
+                #OBTENER DATOS CASO MULTIPLES
+                elements = driver.find_elements(By.CSS_SELECTOR, "li.profile-section-card.experience-group-position")
+                for element in elements:
+                    elemento = element.text
+                    lineas = elemento.split('\n')
+                    nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
+
+                    puesto = nuevoArreglo[0]
+                    duracion = nuevoArreglo[1]
+
+                    print(puesto + "---" + empresa + "---" + duracion)
 
 
 
-            #OBTENER DATOS CASO MULTIPLES
-            elements = driver.find_elements(By.CSS_SELECTOR, "li.profile-section-card.experience-group-position")
-            for element in elements:
-                elemento = element.text
-                lineas = elemento.split('\n')
-                nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
 
-                puesto = nuevoArreglo[0]
-                duracion = nuevoArreglo[1]
 
-                print(puesto + "---" + duracion)
+
+            
 
 
 
@@ -214,16 +216,18 @@ class AccionesBoton:
 
 
                
-            #OBTENER DESCRIPCIONES CASO BASTO
-            css_selector3 = '.experience__list .profile-section-card__contents .profile-section-card__meta .experience-item__description.experience-item__meta-item'
-            element3 = driver.find_elements(By.CSS_SELECTOR, css_selector3)
-            for elements in element3:
-                print(elements.text)
-                 
+            #OBTENER DESCRIPCIONES CASO MULTIPLE
+            elementsg = driver.find_elements(By.CSS_SELECTOR, "li.profile-section-card.experience-group-position")
+            for elementg in elementsg:
+               
+                descriptiong = elementg.find_element(By.CSS_SELECTOR, "div.show-more-less-text__text--less").text
+                print("Descripción:", descriptiong)
+
+                            
 
  
            
-
+ 
             driver.close()
             # Si es true obtiene la experiencia, sino continua con el siguiente
             # La funcion para obtener la experiencia sigue en desarrollo
