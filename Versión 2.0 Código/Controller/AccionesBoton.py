@@ -10,8 +10,9 @@ from Controller.Configuracion import Configuracion
 from Model.ScrapperPerfiles import ScrapperPerfiles
 from Model.Limpieza import Limpieza
 from Model.Scraper import Scraper
-import requests
+
 from selenium.webdriver.common.by import By
+
 
 class AccionesBoton:
 
@@ -148,46 +149,54 @@ class AccionesBoton:
             #https://mx.linkedin.com/in/viviana-guadalupe-azcorra-novelo-351706231
             #https://www.linkedin.com/in/luis-basto-diaz-41136396/
             #https://mx.linkedin.com/in/edgar-cambranes
-            driver.get("https://mx.linkedin.com/in/viviana-guadalupe-azcorra-novelo-351706231")
+            driver.get("https://www.linkedin.com/in/luis-basto-diaz-41136396/")
             """
             config = Configuracion(driver)
             config.iniciarSesion()
             time.sleep(5)
             
-            driver.get("https://mx.linkedin.com/in/viviana-guadalupe-azcorra-novelo-351706231")
+            driver.get("https://www.linkedin.com/in/luis-basto-diaz-41136396/")
             driver.delete_all_cookies()
             """
             config = Configuracion(driver)
             
-            time.sleep(10)
+            time.sleep(15)
             config.saltarModal()
+
+
+
+
+
             
-            #OBTENER DATOS
+            
+            #OBTENER DATOS CASO BASTO
             experience_items = driver.find_elements(By.CSS_SELECTOR, ".profile-section-card.experience-item")
             for item in experience_items:
-                print(item.text)
-                title = item.find_elements(By.CSS_SELECTOR, ".profile-section-card__title")
-                location = item.find_elements(By.CSS_SELECTOR, ".profile-section-card__subtitle")
-                #location_elements = item.find_elements(By.CSS_SELECTOR, ".profile-section-card__meta .experience-item__location.experience-item__meta-item")
-                date_range = item.find_elements(By.CSS_SELECTOR, "span.date-range")
-                
+                elemento = item.text
+                lineas = elemento.split('\n')
+                nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
 
-                for elemento1, elemento2, elemento3 in zip(title, location, date_range):
-                    print(elemento1.text + "-----"  + elemento2.text + "-----"  + elemento3.text)
-                    print("---------------------------------")
+                empresa = nuevoArreglo[0]
+                puesto = nuevoArreglo[1]
+                duracion = nuevoArreglo[2]
+
+                print( empresa + "---" + puesto + "---" + duracion)
+                #print(item.text)
+
+
+
+
+               
                 
-            """    
+               
             #OBTENER DESCRIPCIONES
-            experience_items = driver.find_elements(By.CSS_SELECTOR, ".profile-section-card.experience-item")
-            for item in experience_items:
-                for description_element in description_elements:
-                    description = description_element.text.strip()
-                    if description:
-                        print(f"Description: {description}")
-                        print("---------------------------------")
-            """     
+            css_selector3 = '.experience__list .profile-section-card__contents .profile-section-card__meta .experience-item__description.experience-item__meta-item'
+            element3 = driver.find_elements(By.CSS_SELECTOR, css_selector3)
+            for elements in element3:
+                print(elements.text)
+                 
 
-            # Imprimir la información
+ 
            
 
             driver.close()
