@@ -215,13 +215,16 @@ class AccionesBoton:
                 #print(item.text)
 
 
-               
-            #OBTENER DESCRIPCIONES CASO MULTIPLE
-            elementsg = driver.find_elements(By.CSS_SELECTOR, "li.profile-section-card.experience-group-position")
-            for elementg in elementsg:
-               
-                descriptiong = elementg.find_element(By.CSS_SELECTOR, "div.show-more-less-text__text--less").text
-                print("Descripción:", descriptiong)
+            time.sleep(3)   
+            description_elements = driver.find_elements(By.CSS_SELECTOR,".show-more-less-text__text--less")
+
+            # Itera a través de los elementos y obtén el texto de cada uno
+            descriptions = [element.text for element in description_elements]
+
+            # Imprime las descripciones
+            for i, description in enumerate(descriptions, start=1):
+                print(f"Descripción {i}:", description)
+            print("ya quedo")
 
                             
 
