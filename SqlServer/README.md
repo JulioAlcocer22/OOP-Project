@@ -19,7 +19,8 @@ Se está usando la versión 2019 de SQL Server, con créditos de prueba en Azure
 ![Imagen Tabla Experiencia](Images/Experiencia.jpg)
 ### **_Tabla Egresados_**
 ![Imagen Tabla Egresados](Images/Egresados.jpg)
-
+### **_Vista Final Tabla Egresados_**
+![Imagen Vista_Tabla Egresados](Images/EgresadosVista.jpg)
 ---
 
 ## Descripción de las tablas
