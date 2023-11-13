@@ -52,12 +52,19 @@ class InterfazUsuario:
                                       command=lambda: accionesBoton.extraccionDeExperiencia(), width=22, height=1)
             botonExtraer.place(x=300, y=90)
 
-            etiqueta3 = Label(window, font="Forte 17", text="Test", width=20)
+            etiqueta3 = Label(window, font="Forte 17", text="Filtrar Links", width=20)
             etiqueta3.place(x=300, y=160)
-
-            botonTest = tk.Button(window, text="Probar conexion", font="Georgia 12 ",
-                                   command=lambda: accionesBoton.testConexiones(), width=22, height=1)
+            
+            botonTest = tk.Button(window, text="Filtrar LIS", font="Georgia 12 ",
+                                   command=lambda: accionesBoton.filtrarLIS(), width=22, height=1)
             botonTest.place(x=300, y=230)
+            
+            botonTest = tk.Button(window, text="Filtrar LCC", font="Georgia 12 ",
+                                   command=lambda: accionesBoton.filtrarLCC(), width=22, height=1)
+            botonTest.place(x=300, y=300)
+            
+            
+            
 
             window.mainloop()
         else:

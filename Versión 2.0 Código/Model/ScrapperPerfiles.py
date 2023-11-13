@@ -1,5 +1,5 @@
 import time
-from Model.Limpieza import Limpieza
+from Model.Utilidades import Utilidades
 from selenium import *
 from selenium.webdriver.common.by import By
 
@@ -74,7 +74,7 @@ class ScrapperPerfiles:
 
         def es_ultima_pagina(self):
             time.sleep(5)
-            elementos_h2 = self.driver.find_element(By.TAG_NAME, 'h2')
+            elementos_h2 = self.driver.find_elements(By.TAG_NAME, 'h2')
             time.sleep(5)
             for elemento in elementos_h2:
                 fin = False
@@ -103,7 +103,7 @@ class ScrapperPerfiles:
                     if primer_char.islower():
                         arregloDefinitivo.append(url)
 
-            arreglo_final = Limpieza.duplicadosArreglo(arregloDefinitivo)
+            arreglo_final = Utilidades.duplicadosArreglo(arregloDefinitivo)
             # Limpieza.test(arreglo_final)
 
             return arreglo_final

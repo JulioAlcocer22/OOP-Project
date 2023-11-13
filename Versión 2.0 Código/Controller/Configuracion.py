@@ -56,11 +56,10 @@ class Configuracion:
         except (socket.gaierror, socket.timeout):
             s.close()
             return False
-            
+
         else:
             s.close()
             return True
-            
 
     @staticmethod
     def comprobarSubida():
