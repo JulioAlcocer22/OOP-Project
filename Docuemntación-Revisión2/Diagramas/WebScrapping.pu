@@ -1,0 +1,73 @@
+@startuml DiagramaClases
+rectangle View{
+    class InterfazUsuario{
+    }
+}
+
+rectangle Model{
+    class Utilidades{
+    }
+
+    class ScraperDatos{
+    }
+
+    class ScraperPerfiles{
+    }
+
+    class LinkVM{
+
+    }
+
+    class EgresadoInfoVM{
+
+    }
+
+    class ExperienciaVM{
+
+    }
+}
+
+rectangle Controller{
+    class Configuracion{
+    }
+
+    class AccionesBoton{
+    }
+
+}
+
+rectangle DataBase{
+    rectangle ModelDB{
+        class Queries{}
+        rectangle Mapping{
+            class Link{}
+            class EgresadoInfo{}
+            class Experiencia{}           
+            class Egresados{}
+        }
+    }
+
+    rectangle ControllerDB{
+        class DatabaseController{}
+    }
+
+    rectangle Connection{
+        class Conexion{}
+    }
+
+    
+}
+
+
+
+View --> Controller
+Controller --> Model
+Model --> Controller
+ControllerDB --> ModelDB
+Queries --> Mapping
+ControllerDB --> Model
+ModelDB --> Connection
+
+
+
+@enduml

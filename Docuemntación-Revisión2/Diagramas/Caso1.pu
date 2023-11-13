@@ -1,0 +1,39 @@
+@startuml Caso1
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+left to right direction
+:Usuario:
+
+rectangle "Vista1" as UI1{
+    Usuario --> (Filtrar Universidad) : aprieta botón
+    Usuario --> (Filtrar Carrera) : aprieta botón
+    Usuario --> (Ver Resultados) : aprieta botón
+}
+
+rectangle "Vista2" as UI2{
+    (Ver Resultados) --> (Mostrar Resultados) : redirecciona a otra página
+}
+
+rectangle "Controlador" as UC1{
+    (Filtrar Universidad) --> (Desplegar Opciones) : llama al controlador
+    (Filtrar Carrera) --> (Desplegar Opciones) : llama al controlador
+    (Desplegar Opciones) --> (Filtrar Universidad) : devuelve las universidades
+    (Desplegar Opciones) --> (Filtrar Carrera) : devuelve las carreras
+    (Mostrar Resultados) --> (Desplegar Estadísticas) : llama al controlador
+    (Desplegar Estadísticas) --> (Mostrar Resultados) : devuelve las estadísticas
+}
+
+rectangle "Modelo" as E1{
+    (Desplegar Opciones) --> (Conectar a la Base de Datos) : llama al modelo
+    (Ejecutar Procesos) --> (Desplegar Opciones) : devuelve valores
+    (Ejecutar Procesos) --> (Desplegar Estadísticas) : devuelve valores
+    (Desplegar Estadísticas) --> (Conectar a la Base de Datos) : llama al modelo
+}
+
+rectangle "Base de Datos" as UI3{
+   (Conectar a la Base de Datos) --> (Enviar Datos): se conecta a la base de datos
+   (Enviar Datos) --> (Ejecutar Procesos): envía datos
+}
+
+
+@enduml

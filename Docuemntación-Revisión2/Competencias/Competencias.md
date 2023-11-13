@@ -1,0 +1,5 @@
+# Competencias Genéricas
+Las competencias genéricas se promueven colaborativamente, presencial y remotamente, con los compañeros de equipo, intercambiando opiniones basadas en los conocimientos adquiridos durante el curso escolar, para resolver una problemática mediante software aplicando el paradigma orientado a objetos, con fechas delimitadas para culminar las fases del proyecto. 
+
+# Competencias Específicas
+Las competencias genéricas se promueven al desarrollan un proyecto que resuelve una problemática aplicando sistemas que facilitan el manteamiento y el desarrollo del mismo utilizando las ventajas del paradigma orientado a objetos para así evitar la repetición de código realizando el proceso de abstracción correspondiente. De igual manera, durante el proceso se fueron identificando las posibles fallas que podrían darse, haciendo validaciones para evitar el colapso del programa.
