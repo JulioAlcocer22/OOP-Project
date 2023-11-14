@@ -86,7 +86,7 @@ class AccionesBoton:
             "Pregunta", "¿Estás seguro de que deseas continuar?, El proceso no se puede detener.")
         if response == "yes":
 
-            egresado = "https://www.linkedin.com/in/luis-basto-diaz-41136396/"
+            egresado = "https://mx.linkedin.com/in/edwin-fajardo"
             driver = Utilidades.forzarIngresoAPaginaSinSesionIniciada(egresado)
 
             scraper = ScraperDatos(driver)
@@ -125,5 +125,5 @@ class AccionesBoton:
         driver = Utilidades.forzarIngresoAPaginaSinSesionIniciada(egresado)
         scraper = ScraperDatos(driver)
 
-        if scraper.verificarUniversidad_Carrera_Egresado("Universidad Autónoma de Yucatán", "Ciencias Computacionales") and scraper.verificarExperiencia():
+        if scraper.verificarUniversidad_Carrera_Egresado("Universidad Autónoma de Yucatán", "UADY" "Ciencias Computacionales") and scraper.verificarExperiencia():
             print("Cumple las condiciones, metiendo a base de datos")

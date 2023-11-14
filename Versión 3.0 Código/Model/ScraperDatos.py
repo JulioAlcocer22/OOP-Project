@@ -11,18 +11,26 @@ class ScraperDatos:
     def CampoSimple(self):
 
         experience_items = self.driver.find_elements(By.CSS_SELECTOR, ".profile-section-card.experience-item")
+        
         for item in experience_items:
+            try:
+                description_elements = item.find_element(By.CSS_SELECTOR, ".experience__list .show-more-less-text__text--less").text
+            except :
+                description_elements = "NOPE"
+            
+            
             elemento = item.text
             lineas = elemento.split('\n')
             nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
 
-            empresa = nuevoArreglo[0]
-            puesto = nuevoArreglo[1]
+            puesto = nuevoArreglo[0]
+            empresa = nuevoArreglo[1]
             fechas = nuevoArreglo[2]
 
             inicio, fin, duracion = Utilidades.separarDuracion(fechas)
 
-            print(puesto + "---" + empresa + "---" + inicio + "---" + fin + "---" + duracion)
+            print(empresa + "---" + puesto + "---" + inicio + "---" + fin + "---" + duracion + "---" + description_elements)
+            print("")
 
         return 0  # Aqui se devolveria el objeto deseado
 
@@ -39,6 +47,11 @@ class ScraperDatos:
             # OBTENER DATOS CASO MULTIPLES
             elements = self.driver.find_elements(By.CSS_SELECTOR, "li.profile-section-card.experience-group-position")
             for element in elements:
+                try:
+                    description_elements = element.find_element(By.CSS_SELECTOR, ".experience__list .show-more-less-text__text--less").text
+                except :
+                    description_elements = "NOPE"
+                
                 elemento = element.text
                 lineas = elemento.split('\n')
                 nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
@@ -48,7 +61,7 @@ class ScraperDatos:
 
                 inicio, fin, duracion = Utilidades.separarDuracion(fechas)
 
-                print(puesto + "---" + empresa + "---" + inicio + "---" + fin + "---" + duracion)
+                print(puesto + "---" + empresa + "---" + inicio + "---" + fin + "---" + duracion + "---" + description_elements)
 
         return 0  # Aqui se devolveria el objeto deseado
 

@@ -8,6 +8,8 @@ import socket
 import speedtest
 from ping3 import ping
 import locale
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class Configuracion:
@@ -24,9 +26,10 @@ class Configuracion:
         self.driver.get('https://www.linkedin.com/home')
         self.driver.implicitly_wait(delay)  # Espera hasta que la página cargue
 
-        inputUser = self.driver.find_element(By.NAME, "session_key")
+
+        inputUser = self.driver.find_element(By.ID, "session_key")
         inputUser.send_keys(email)
-        inputPassword = self.driver.find_element(By.NAME, "session_password")
+        inputPassword = self.driver.find_element(By.ID, "session_password")
         inputPassword.send_keys(password)
 
         self.driver.implicitly_wait(delay)

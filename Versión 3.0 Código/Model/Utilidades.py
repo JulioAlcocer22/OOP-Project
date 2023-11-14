@@ -42,13 +42,7 @@ class Utilidades:
 
     @staticmethod
     def forzarIngresoAPaginaSinSesionIniciada(egresado):
-        try:
-            driver = webdriver.Edge()
-        except:
-            try:
-                driver = webdriver.Edge(r"msedgedriver.exe")
-            except:
-                raise Exception("No se encontro el Web Driver")
+        driver = webdriver.Edge(executable_path=r'C:\Users\a19201679\Desktop\POOOOO\OOP-Project\Versión 3.0 Código\msedgedriver.exe')
 
         fin = False
         while not fin:
@@ -74,7 +68,7 @@ class Utilidades:
             try:
                 driver = webdriver.Edge(r"msedgedriver.exe")
             except:
-                raise Exception("No se encontro el Web Driver")
+                driver = webdriver.Edge(executable_path=r'C:\Users\a19201679\Desktop\POOOOO\OOP-Project\Versión 3.0 Código\msedgedriver.exe')
 
         config = Configuracion(driver)
         config.iniciarSesion()

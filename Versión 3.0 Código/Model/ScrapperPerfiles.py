@@ -46,29 +46,22 @@ class ScrapperPerfiles:
 
     class IteradorDeURLs:
 
-        def __init__(self, driver, scrappearLinksInstancia):
+        def __init__(self, driver, scrappearLinksInstancia, iteradorDeURLsInstancia):
             self.driver = driver
             self.scrappearLinksInstancia = scrappearLinksInstancia
+            self.iteradorDeURLsInstancia = iteradorDeURLsInstancia
+            
 
         def iniciarIteracion(self, varOriginal):
             varOriginal = varOriginal.replace("SWITCH_SEARCH_VERTICAL&", "SWITCH_SEARCH_VERTICAL&page=XXXXX&")
 
             arregloUnificado = []
-
-            var = varOriginal.replace("XXXXX", "1")
-            self.driver.get(var)
-            time.sleep(5)
-            arregloUnificado = arregloUnificado + self.scrappearLinksInstancia.obtener_links()
-
-            var = varOriginal.replace("XXXXX", "2")
-            self.driver.get(var)
-            time.sleep(5)
-            arregloUnificado = arregloUnificado + self.scrappearLinksInstancia.obtener_links()
-
-            var = varOriginal.replace("XXXXX", "3")
-            self.driver.get(var)
-            time.sleep(5)
-            arregloUnificado = arregloUnificado + self.scrappearLinksInstancia.obtener_links()
+            esUltimaPagina = self.iteradorDeURLsInstancia.es_ultima_pagina()
+            while not esUltimaPagina:
+                var = varOriginal.replace("XXXXX", "1")
+                self.driver.get(var)
+                time.sleep(5)
+                arregloUnificado = arregloUnificado + self.scrappearLinksInstancia.obtener_links()
 
             return arregloUnificado
 

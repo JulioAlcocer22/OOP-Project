@@ -9,7 +9,8 @@ import re
 import subprocess
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from webdriver_manager.chrome import ChromeDriverManager
-from msedge.selenium_tools import Edge, EdgeOptions
+
+
 class Utilidades:
 
     def __init__(self):
@@ -47,45 +48,29 @@ class Utilidades:
 
     @staticmethod
     def forzarIngresoAPaginaSinSesionIniciada(egresado):
-      
-        # Configuración del proxy
-        proxy_address = "172.67.181.41:80"
 
-        # Configuración de opciones del navegador Edge
-        edge_options = EdgeOptions()
-        edge_options.use_chromium = True
-        #edge_options.add_argument('--proxy-server=http://%s' % proxy_address)
+        edge_driver_path = r'Versión 2.0 Código\msedgedriver.exe'
 
-        # Ruta al controlador de Microsoft Edge
-        edge_driver_path = r'C:\Users\a19201679\Desktop\POO PROYECT\OOP-Project\Versión 2.0 Código\msedgedriver.exe'
-
-        # Crear una instancia del navegador con las opciones configuradas
-        driver = Edge(executable_path=edge_driver_path, options=edge_options)
+        driver = webdriver.Edge(executable_path=edge_driver_path)
         
         #LA BUENA
         #driver = webdriver.Edge(executable_path=r'C:\Users\a19201679\Desktop\POO PROYECT\OOP-Project\Versión 2.0 Código\msedgedriver.exe')
        
-  
-  
-
-      
-
-
         fin = False
         while not fin:
             driver.get(egresado)
             time.sleep(1)
-            elementos_h1 = driver.find_elements(By.TAG_NAME, 'h1')
-            for elemento in elementos_h1:
-                cadena = elemento.text
-                if cadena.__contains__("verifica"):
-                        print("esperando")
-                        time.sleep(8)
+            #elementos_h1 = driver.find_elements(By.TAG_NAME, 'h1')
+            #for elemento in elementos_h1:
+               # cadena = elemento.text
+                #if cadena.__contains__("verifica"):
+                       # print("esperando")
+                       # time.sleep(8)
             
             elementos_h2 = driver.find_elements(By.TAG_NAME, 'h2')
             for elemento in elementos_h2:
                 cadena = elemento.text
-                
+                driver.delete_all_cookies()
                 if cadena.__contains__("Iniciar sesión para ver el perfil completo de"):
                     fin = True
 
@@ -138,12 +123,42 @@ class Utilidades:
             return "dic. "
 
     @staticmethod
-    def separarDuracion(fechas):
+    def separarDuracionSimple(fechas):
         cadena = fechas
         # caso 1
         cadena = cadena.replace("actualidad", "actualidad -")
         # caso 2
-        posicion_insercion = 22
+        posicion_insercion = 22    #22    #23 cmbranes
+
+        cadena = cadena[:posicion_insercion] + \
+            " - " + cadena[posicion_insercion:]
+
+        lineas = cadena.split('-')
+        nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
+        fechaInicio = nuevoArreglo[0]  # ok
+
+        fechaFin = nuevoArreglo[1]
+        if fechaFin.__contains__("actualidad"):
+            fecha_actual = datetime.datetime.now()
+            año_actual = fecha_actual.year
+            mes_actual = fecha_actual.month
+
+            mesFormateada = Utilidades.transformarNumeroEnMes(mes_actual)
+
+            fechaFin = mesFormateada + str(año_actual)
+
+        duracion = nuevoArreglo[2]
+        duracionMeses = Utilidades.transformarDuracionEnMeses(duracion)
+
+        return fechaInicio, fechaFin, duracionMeses
+    
+    @staticmethod
+    def separarDuracionCompuesta(fechas):
+        cadena = fechas
+        # caso 1
+        cadena = cadena.replace("actualidad", "actualidad -")
+        # caso 2
+        posicion_insercion = 23    #22    #23 cmbranes
 
         cadena = cadena[:posicion_insercion] + \
             " - " + cadena[posicion_insercion:]
@@ -188,7 +203,6 @@ class Utilidades:
                 duracionMeses = int(nuevoArreglo[0]) * 12
 
             else:
-                duracionMeses = int(
-                    nuevoArreglo[0]) * 12 + int(nuevoArreglo[1])
+                duracionMeses = int(nuevoArreglo[0]) * 12 + int(nuevoArreglo[1])
 
         return str(duracionMeses)

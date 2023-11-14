@@ -27,7 +27,7 @@ class ScraperDatos:
             empresa = nuevoArreglo[1]
             fechas = nuevoArreglo[2]
 
-            inicio, fin, duracion = Utilidades.separarDuracion(fechas)
+            inicio, fin, duracion = Utilidades.separarDuracionSimple(fechas)
 
             print(empresa + "---" + puesto + "---" + inicio + "---" + fin + "---" + duracion + "---" + description_elements)
             print("")
@@ -50,13 +50,19 @@ class ScraperDatos:
                 elemento = element.text
                 lineas = elemento.split('\n')
                 nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
+                
+                try:
+                    description_elements = element.find_element(By.CSS_SELECTOR, ".experience__list .show-more-less-text__text--less").text
+                except :
+                    description_elements = "NOPE"
 
                 empresa = nuevoArreglo[0]
                 fechas = nuevoArreglo[1]
 
-                inicio, fin, duracion = Utilidades.separarDuracion(fechas)
+                inicio, fin, duracion = Utilidades.separarDuracionCompuesta(fechas)
 
-                print(puesto  + "---" + empresa + "---" + inicio + "---" + fin + "---" + duracion)
+
+                print(puesto  + "---" + empresa + "---" + inicio + "---" + fin + "---" + duracion + "---" + description_elements)
                 print("")
 
         return 0  # Aqui se devolveria el objeto deseado
@@ -87,6 +93,14 @@ class ScraperDatos:
         universidad = Utilidades.estadandarizarCadenas(universidad)
         carrera = Utilidades.estadandarizarCadenas(carrera)
         acronimoUniversidad = Utilidades.estadandarizarCadenas(acronimoUniversidad)
+        
+        
+        nombreEgresado = self.driver.find_elements(By.TAG_NAME, 'h1')
+        for campos in nombreEgresado:
+            elemento = campos.text
+            print (elemento)
+            
+            
 
         experience_items = self.driver.find_elements(By.CSS_SELECTOR, ".profile-section-card.education__list-item")
         for item in experience_items:
@@ -99,6 +113,8 @@ class ScraperDatos:
                 nuevoArreglo[0] = Utilidades.estadandarizarCadenas(nuevoArreglo[0])
                 nuevoArreglo[1] = Utilidades.estadandarizarCadenas(nuevoArreglo[1])
 
+                
                 if nuevoArreglo[0].__contains__(universidad) or nuevoArreglo[0].__contains__(acronimoUniversidad) and nuevoArreglo[1].__contains__(carrera) and anioEgreso <= anioActual:
+                    print (universidad + "---" + carrera)
                     verdad = True
         return verdad
