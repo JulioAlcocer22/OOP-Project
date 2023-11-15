@@ -3,10 +3,15 @@ from selenium.webdriver.common.by import By
 from Model.Utilidades import Utilidades
 
 
+
+
+
 class ScraperDatos:
 
     def __init__(self, driver):
         self.driver = driver
+        self.PADDINGSIMPLE = 22
+        self.PADDINGCOMPUESTO = 23
 
     def CampoSimple(self):
 
@@ -27,7 +32,7 @@ class ScraperDatos:
             empresa = nuevoArreglo[1]
             fechas = nuevoArreglo[2]
 
-            inicio, fin, duracion = Utilidades.separarDuracionSimple(fechas)
+            inicio, fin, duracion = Utilidades.separarDuracion(fechas, self.PADDINGSIMPLE)
 
             print(empresa + "---" + puesto + "---" + inicio + "---" + fin + "---" + duracion + "---" + description_elements)
             print("")
@@ -59,7 +64,7 @@ class ScraperDatos:
                 empresa = nuevoArreglo[0]
                 fechas = nuevoArreglo[1]
 
-                inicio, fin, duracion = Utilidades.separarDuracionCompuesta(fechas)
+                inicio, fin, duracion = Utilidades.separarDuracion(fechas, self.PADDINGCOMPUESTO)
 
 
                 print(puesto  + "---" + empresa + "---" + inicio + "---" + fin + "---" + duracion + "---" + description_elements)
@@ -95,10 +100,9 @@ class ScraperDatos:
         acronimoUniversidad = Utilidades.estadandarizarCadenas(acronimoUniversidad)
         
         
-        nombreEgresado = self.driver.find_elements(By.TAG_NAME, 'h1')
-        for campos in nombreEgresado:
-            elemento = campos.text
-            print (elemento)
+        arregloNombreEgresado = self.driver.find_elements(By.TAG_NAME, 'h1')
+        nombreEgresado = arregloNombreEgresado[0].text
+
             
             
 
@@ -115,6 +119,6 @@ class ScraperDatos:
 
                 
                 if nuevoArreglo[0].__contains__(universidad) or nuevoArreglo[0].__contains__(acronimoUniversidad) and nuevoArreglo[1].__contains__(carrera) and anioEgreso <= anioActual:
-                    print (universidad + "---" + carrera)
+                    print (nombreEgresado + "---" + universidad + "---" + carrera)
                     verdad = True
         return verdad

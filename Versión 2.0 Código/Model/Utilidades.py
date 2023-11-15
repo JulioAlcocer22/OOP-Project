@@ -3,12 +3,9 @@ import time
 from Controller.Configuracion import Configuracion
 from selenium.webdriver.common.by import By
 import datetime
-import os
-from selenium.webdriver.edge.service import Service
-import re
-import subprocess
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.edge.service import Service as EdgeService
+
 
 
 class Utilidades:
@@ -49,23 +46,23 @@ class Utilidades:
     @staticmethod
     def forzarIngresoAPaginaSinSesionIniciada(egresado):
 
-        edge_driver_path = r'Versión 2.0 Código\msedgedriver.exe'
 
-        driver = webdriver.Edge(executable_path=edge_driver_path)
+
+        driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
+        driver.delete_all_cookies #MAYBE
+        driver.delete_network_conditions #MAYBE
         
-        #LA BUENA
-        #driver = webdriver.Edge(executable_path=r'C:\Users\a19201679\Desktop\POO PROYECT\OOP-Project\Versión 2.0 Código\msedgedriver.exe')
        
         fin = False
         while not fin:
             driver.get(egresado)
             time.sleep(1)
-            #elementos_h1 = driver.find_elements(By.TAG_NAME, 'h1')
-            #for elemento in elementos_h1:
-               # cadena = elemento.text
-                #if cadena.__contains__("verifica"):
-                       # print("esperando")
-                       # time.sleep(8)
+            elementos_h1 = driver.find_elements(By.TAG_NAME, 'h1')
+            for elemento in elementos_h1:
+                cadena = elemento.text
+                if cadena.__contains__("verifica"):
+                        print("esperando")
+                        time.sleep(25)
             
             elementos_h2 = driver.find_elements(By.TAG_NAME, 'h2')
             for elemento in elementos_h2:
@@ -123,65 +120,64 @@ class Utilidades:
             return "dic. "
 
     @staticmethod
-    def separarDuracionSimple(fechas):
-        cadena = fechas
-        # caso 1
-        cadena = cadena.replace("actualidad", "actualidad -")
-        # caso 2
-        posicion_insercion = 22    #22    #23 cmbranes
+    def mesANumero(fechaInicio):
+        cadena = fechaInicio
+        #dia - mes
+        cadena = cadena.replace("ene.", "01/01/")
+        cadena = cadena.replace("feb.", "01/02/")
+        cadena = cadena.replace("mar.", "01/03/")
+        cadena = cadena.replace("abr.", "01/04/")
+        cadena = cadena.replace("may.", "01/05/")
+        cadena = cadena.replace("jun.", "01/06/")
+        cadena = cadena.replace("jul.", "01/07/")
+        cadena = cadena.replace("ago.", "01/08/")
+        cadena = cadena.replace("sept.", "01/09/")
+        cadena = cadena.replace("oct.", "01/10/")
+        cadena = cadena.replace("nov.", "01/11/")
+        cadena = cadena.replace("dic.", "01/12/")
+        cadena = cadena.replace(" ", "")
+        return cadena
 
-        cadena = cadena[:posicion_insercion] + \
-            " - " + cadena[posicion_insercion:]
 
-        lineas = cadena.split('-')
-        nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
-        fechaInicio = nuevoArreglo[0]  # ok
 
-        fechaFin = nuevoArreglo[1]
-        if fechaFin.__contains__("actualidad"):
-            fecha_actual = datetime.datetime.now()
-            año_actual = fecha_actual.year
-            mes_actual = fecha_actual.month
 
-            mesFormateada = Utilidades.transformarNumeroEnMes(mes_actual)
 
-            fechaFin = mesFormateada + str(año_actual)
 
-        duracion = nuevoArreglo[2]
-        duracionMeses = Utilidades.transformarDuracionEnMeses(duracion)
-
-        return fechaInicio, fechaFin, duracionMeses
-    
     @staticmethod
-    def separarDuracionCompuesta(fechas):
+    def separarDuracion(fechas, posicion_insercion):
         cadena = fechas
         # caso 1
         cadena = cadena.replace("actualidad", "actualidad -")
         # caso 2
-        posicion_insercion = 23    #22    #23 cmbranes
+        #posicion_insercion = 22    #22    #23 cmbranes
 
         cadena = cadena[:posicion_insercion] + \
             " - " + cadena[posicion_insercion:]
 
         lineas = cadena.split('-')
         nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
-        fechaInicio = nuevoArreglo[0]  # ok
+        #fechaInicio = nuevoArreglo[0]  # ok
+        fechaInicioFormateada = Utilidades.mesANumero(nuevoArreglo[0])
 
         fechaFin = nuevoArreglo[1]
+        fechaFinFormateada = Utilidades.mesANumero(nuevoArreglo[1])
         if fechaFin.__contains__("actualidad"):
             fecha_actual = datetime.datetime.now()
             año_actual = fecha_actual.year
             mes_actual = fecha_actual.month
 
-            mesFormateada = Utilidades.transformarNumeroEnMes(mes_actual)
+            fechaFinFormateada = "01/" + str(mes_actual) + "/" + str(año_actual)
 
-            fechaFin = mesFormateada + str(año_actual)
+            #mesFormateada = Utilidades.transformarNumeroEnMes(mes_actual)
+
+            #fechaFin = mesFormateada + str(año_actual)
 
         duracion = nuevoArreglo[2]
         duracionMeses = Utilidades.transformarDuracionEnMeses(duracion)
 
-        return fechaInicio, fechaFin, duracionMeses
-
+        return str(fechaInicioFormateada), str(fechaFinFormateada), str(duracionMeses)
+    
+    
     @staticmethod
     def transformarDuracionEnMeses(duracion):
         duracionMeses = 0

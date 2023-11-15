@@ -11,6 +11,7 @@ class ScrapperPerfiles:
         self.scrappearLinks = self.ScrappearLinks(self.driver)
         self.iteradorUrls = self.IteradorDeURLs(self.driver, self.scrappearLinks)
 
+
     class BusquedaDeURLs:
 
         def __init__(self, driver):
@@ -32,35 +33,34 @@ class ScrapperPerfiles:
         def porPivote(self, cadena):
             self.driver.get(cadena)
             time.sleep(5)
-            botonContactosPersona = self.driver.find_element(By.XPATH,
-                '/html/body/div[5]/div[3]/div/div/div[2]/div/div/main/section[1]/div[2]/ul/li/a/span')
+            botonContactosPersona = self.driver.find_element(By.XPATH,'/html/body/div[5]/div[*]/div/div/div[2]/div/div/main/section[1]/div[2]/ul/li/a/span')
+  
             botonContactosPersona.click()
             time.sleep(5)
 
             urlActual = self.driver.current_url
-            urlActual = urlActual.replace(
-                "%22%5D&network=%5B%22F%22%2C%22S%22%5D&origin=MEMBER_PROFILE_CANNED_SEARCH&sid=",
-                "%22%5D&network=%5B%22F%22%2C%22S%22%2C%22O%22%5D&origin=FACETED_SEARCH&page=XXXXX&sid=")
+            urlActual = urlActual.replace("%22%5D&network=%5B%22F%22%2C%22S%22%5D&origin=MEMBER_PROFILE_CANNED_SEARCH&sid=","%22%5D&network=%5B%22F%22%2C%22S%22%2C%22O%22%5D&origin=FACETED_SEARCH&page=XXXXX&sid=")
 
             return urlActual
 
     class IteradorDeURLs:
 
-        def __init__(self, driver, scrappearLinksInstancia, iteradorDeURLsInstancia):
+        def __init__(self, driver, scrappearLinksInstancia):
             self.driver = driver
             self.scrappearLinksInstancia = scrappearLinksInstancia
-            self.iteradorDeURLsInstancia = iteradorDeURLsInstancia
+
 
         def iniciarIteracion(self, varOriginal):
             varOriginal = varOriginal.replace("SWITCH_SEARCH_VERTICAL&", "SWITCH_SEARCH_VERTICAL&page=XXXXX&")
 
             arregloUnificado = []
-            esUltimaPagina = self.iteradorDeURLsInstancia.es_ultima_pagina()
+            esUltimaPagina = ScrapperPerfiles.IteradorDeURLs.es_ultima_pagina(self)
             
             paginaVisitar = 1
             while not esUltimaPagina:
                 var = varOriginal.replace("XXXXX", str(paginaVisitar))
                 self.driver.get(var)
+                esUltimaPagina = ScrapperPerfiles.IteradorDeURLs.es_ultima_pagina(self)
                 time.sleep(5)
                 arregloUnificado = arregloUnificado + self.scrappearLinksInstancia.obtener_links()
                 paginaVisitar = paginaVisitar + 1 

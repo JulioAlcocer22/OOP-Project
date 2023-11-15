@@ -16,7 +16,7 @@ class InterfazUsuario:
         if Configuracion.lenguajeSOEsEspañol():
             window = tk.Tk()
             window.title("LinkedIn Scraper")
-            window.geometry("600x350")
+            window.geometry("900x350")
             window.configure(bg="white")
             window.resizable(width=False, height=False)
             accionesBoton = AccionesBoton()
@@ -62,6 +62,20 @@ class InterfazUsuario:
             botonTest = tk.Button(window, text="Filtrar LCC", font="Georgia 12 ",
                                    command=lambda: accionesBoton.filtrarLCC(), width=22, height=1)
             botonTest.place(x=300, y=300)
+
+            # -----------------------------------------------------------
+
+            etiqueta4 = Label(window, font="Forte 17", text="Limpiar DB", width=20)
+            etiqueta4.place(x=600, y=30)
+            
+            botonLimpiar = tk.Button(window, text="Borrar marca A", font="Georgia 12 ",
+                                   command=lambda: accionesBoton.limpiezaA(), width=22, height=1)
+            botonLimpiar.place(x=600, y=90)
+            
+            botonLimpiar = tk.Button(window, text="Borrar marca B", font="Georgia 12 ",
+                                   command=lambda: accionesBoton.limpiezaB(), width=22, height=1)
+            botonLimpiar.place(x=600, y=160)
+
             
             
             

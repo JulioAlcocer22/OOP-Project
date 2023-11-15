@@ -25,10 +25,10 @@ class AccionesBoton:
             scraper = ScrapperPerfiles(driver)
 
             resultadoBusqueda = scraper.busquedaUrl.porCadena(entradaCadena)
-            resultaddoIteracion = scraper.iteradorUrls.iniciarIteracion(
-                resultadoBusqueda)
+            resultaddoIteracion = scraper.iteradorUrls.iniciarIteracion(resultadoBusqueda)
 
             Utilidades.test(resultaddoIteracion)
+
             # Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
             driver.close()
 
@@ -51,15 +51,15 @@ class AccionesBoton:
         response = messagebox.askquestion(
             "Pregunta", "¿Estás seguro de que deseas continuar?, El proceso no se puede detener.")
         if response == "yes":
-            driver = Utilidades.ingresoAPaginaConSesionIniciada()()
+            driver = Utilidades.ingresoAPaginaConSesionIniciada()
 
-            driver.get(
-                "https://www.linkedin.com/mynetwork/invite-connect/connections/")
+            driver.get("https://www.linkedin.com/mynetwork/invite-connect/connections/")
 
             scraper = ScrapperPerfiles(driver)
             resultaddoIteracion = scraper.scrappearLinks.obtener_links()
 
             Utilidades.test(resultaddoIteracion)
+            print("fin")
             # Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
             driver.close()
 
@@ -73,9 +73,8 @@ class AccionesBoton:
 
             scraper = ScrapperPerfiles(driver)
 
-            resultadoBusqueda = scraper.busquedaUrl.porPivote("https://www.linkedin.com/in/ecambranes/")
-            resultaddoIteracion = scraper.iteradorUrls.iniciarIteracion(
-                resultadoBusqueda)
+            resultadoBusqueda = scraper.busquedaUrl.porPivote("https://www.linkedin.com/in/pablo-baeza/")
+            resultaddoIteracion = scraper.iteradorUrls.iniciarIteracion(resultadoBusqueda)
 
             Utilidades.test(resultaddoIteracion)
             # resultaddoIteracion - Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
@@ -86,7 +85,7 @@ class AccionesBoton:
             "Pregunta", "¿Estás seguro de que deseas continuar?, El proceso no se puede detener.")
         if response == "yes":
 
-            egresado = "https://mx.linkedin.com/in/edgar-cambranes"
+            egresado = "https://www.linkedin.com/in/ecambranes/"
             driver = Utilidades.forzarIngresoAPaginaSinSesionIniciada(egresado)
 
             scraper = ScraperDatos(driver)
@@ -113,7 +112,7 @@ class AccionesBoton:
 
     def filtrarLIS(self):
 
-        egresado = "https://mx.linkedin.com/in/edwin-fajardo"
+        egresado = "https://mx.linkedin.com/in/eduardocanchevazquez"
         driver = Utilidades.forzarIngresoAPaginaSinSesionIniciada(egresado)
         scraper = ScraperDatos(driver)
 
@@ -128,3 +127,11 @@ class AccionesBoton:
 
         if scraper.verificarUniversidad_Carrera_Egresado("Universidad Autónoma de Yucatán",  "UADY", "Ciencias Computacionales") and scraper.verificarExperiencia():
             print("Cumple las condiciones, metiendo a base de datos")
+
+    def limpiezaA(self):
+
+        print("Se ejecuto la limpieza A")
+
+    def limpiezaB(self):
+
+        print("Se ejecuto la limpieza B")
