@@ -125,9 +125,13 @@ class ScraperDatos:
                 nuevoArreglo[1] = Utilidades.estadandarizarCadenas(nuevoArreglo[1])
 
                 print (nombreEgresado + "---" + nuevoArreglo[0] + "---" + nuevoArreglo[1] + "---" + str(anioEgreso) )
-                if nuevoArreglo[0].__contains__(universidad) and nuevoArreglo[1].__contains__(carrera) and anioEgreso < 2023:
+                if nuevoArreglo[0].__contains__(universidad) and nuevoArreglo[1].__contains__(carrera) and anioEgreso <= 2023:
                     verdad = True
-                #if nuevoArreglo[0].__contains__(acronimoUniversidad) and nuevoArreglo[1].__contains__(carrera) and anioEgreso <= 2023:
-                    #print (nombreEgresado + "---" + universidad + "---" + carrera + "---" + str(anioEgreso) )
-                    #verdad = True
+                if nuevoArreglo[0].__contains__(universidad) and nuevoArreglo[1].__contains__("SOFTWARE ENGINEERING") and anioEgreso <= 2023:
+                    verdad = True
+                if nuevoArreglo[0].__contains__("UADY") and nuevoArreglo[1].__contains__(carrera) and anioEgreso <= 2023:
+                    verdad = True
+                if nuevoArreglo[0].__contains__("UADY") and nuevoArreglo[1].__contains__("SOFTWARE ENGINEERING") and anioEgreso <= 2023:
+                    verdad = True
+                
         return verdad
