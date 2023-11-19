@@ -1,7 +1,8 @@
 import datetime
 from selenium.webdriver.common.by import By
 from Model.Utilidades import Utilidades
-
+import time
+import datetime
 
 
 
@@ -105,20 +106,28 @@ class ScraperDatos:
 
             
             
-
+                                                                          # .profile-section-card.education__list-item
         experience_items = self.driver.find_elements(By.CSS_SELECTOR, ".profile-section-card.education__list-item")
         for item in experience_items:
             elemento = item.text
+            #print(elemento)
             lineas = elemento.split('\n')
             nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
             if len(nuevoArreglo) >= 3:
 
-                anioEgreso = int(nuevoArreglo[2].split("-")[1].strip())
+                try:
+                    anioEgreso = int(nuevoArreglo[2].split("-")[1].strip())
+                except:
+                    fecha_actual = datetime.datetime.now()
+                    anioEgreso = fecha_actual.year
+
                 nuevoArreglo[0] = Utilidades.estadandarizarCadenas(nuevoArreglo[0])
                 nuevoArreglo[1] = Utilidades.estadandarizarCadenas(nuevoArreglo[1])
 
-                
-                if nuevoArreglo[0].__contains__(universidad) or nuevoArreglo[0].__contains__(acronimoUniversidad) and nuevoArreglo[1].__contains__(carrera) and anioEgreso <= anioActual:
-                    print (nombreEgresado + "---" + universidad + "---" + carrera)
+                print (nombreEgresado + "---" + nuevoArreglo[0] + "---" + nuevoArreglo[1] + "---" + str(anioEgreso) )
+                if nuevoArreglo[0].__contains__(universidad) and nuevoArreglo[1].__contains__(carrera) and anioEgreso < 2023:
                     verdad = True
+                #if nuevoArreglo[0].__contains__(acronimoUniversidad) and nuevoArreglo[1].__contains__(carrera) and anioEgreso <= 2023:
+                    #print (nombreEgresado + "---" + universidad + "---" + carrera + "---" + str(anioEgreso) )
+                    #verdad = True
         return verdad

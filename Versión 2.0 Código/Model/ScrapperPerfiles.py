@@ -65,16 +65,20 @@ class ScrapperPerfiles:
                 arregloUnificado = arregloUnificado + self.scrappearLinksInstancia.obtener_links()
                 paginaVisitar = paginaVisitar + 1 
 
+                print("------------------------------")
+                print(arregloUnificado)
+
 
             return arregloUnificado
 
 
         def es_ultima_pagina(self):
+            fin = False
+
             time.sleep(5)
             elementos_h2 = self.driver.find_elements(By.TAG_NAME, 'h2')
             time.sleep(5)
             for elemento in elementos_h2:
-                fin = False
                 cadena = elemento.text
                 if cadena.__contains__("Ningún resultado encontrado"):
                     fin = True

@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 import datetime
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.edge.service import Service as EdgeService
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 
 
@@ -48,21 +49,21 @@ class Utilidades:
 
 
 
-        driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
+        driver = webdriver.Edge(EdgeChromiumDriverManager().install())
         driver.delete_all_cookies #MAYBE
-        driver.delete_network_conditions #MAYBE
+
         
        
         fin = False
         while not fin:
             driver.get(egresado)
-            time.sleep(1)
-            elementos_h1 = driver.find_elements(By.TAG_NAME, 'h1')
-            for elemento in elementos_h1:
-                cadena = elemento.text
-                if cadena.__contains__("verifica"):
-                        print("esperando")
-                        time.sleep(25)
+            #time.sleep(1)
+            #elementos_h1 = driver.find_elements(By.TAG_NAME, 'h1')
+            #for elemento in elementos_h1:
+                #cadena = elemento.text
+                #if cadena.__contains__("verifica"):
+                        #print("esperando")
+                        #time.sleep(25)
             
             elementos_h2 = driver.find_elements(By.TAG_NAME, 'h2')
             for elemento in elementos_h2:
@@ -79,13 +80,8 @@ class Utilidades:
 
     @staticmethod
     def ingresoAPaginaConSesionIniciada():
-        try:
-            driver = webdriver.Edge()
-        except:
-            try:
-                driver = webdriver.Edge(r"msedgedriver.exe")
-            except:
-                raise Exception("No se encontro el Web Driver")
+        driver = webdriver.Edge(EdgeChromiumDriverManager().install())
+        #driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
 
         config = Configuracion(driver)
         config.iniciarSesion()

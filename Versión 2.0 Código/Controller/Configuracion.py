@@ -45,7 +45,6 @@ class Configuracion:
         actions.send_keys(Keys.TAB)
         actions.send_keys(Keys.ENTER)
         actions.perform()
-        time.sleep(5)
 
     @staticmethod
     def sitioWebDisponible(url):
