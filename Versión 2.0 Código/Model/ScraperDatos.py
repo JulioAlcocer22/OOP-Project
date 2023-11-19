@@ -15,6 +15,9 @@ class ScraperDatos:
         self.PADDINGCOMPUESTO = 23
 
     def CampoSimple(self):
+        matrizCampoSimple = []
+        arregloNombreEgresado = self.driver.find_elements(By.TAG_NAME, 'h1')
+        nombreEgresado = arregloNombreEgresado[0].text
 
         experience_items = self.driver.find_elements(By.CSS_SELECTOR, ".profile-section-card.experience-item")
         
@@ -35,12 +38,18 @@ class ScraperDatos:
 
             inicio, fin, duracion = Utilidades.separarDuracion(fechas, self.PADDINGSIMPLE)
 
-            print(empresa + "---" + puesto + "---" + inicio + "---" + fin + "---" + duracion + "---" + description_elements)
-            print("")
+            matrizCampoSimple.append([nombreEgresado, empresa, puesto, inicio, fin, duracion, description_elements])
 
-        return 0  # Aqui se devolveria el objeto deseado
+            print(nombreEgresado + "---" + empresa + "---" + puesto + "---" + inicio + "---" + fin + "---" + duracion + "---" + description_elements)
+
+
+        return matrizCampoSimple  # Aqui se devolveria el objeto deseado
 
     def CampoCompuesto(self):
+        matrizCampoCompuesto = []
+        arregloNombreEgresado = self.driver.find_elements(By.TAG_NAME, 'h1')
+        nombreEgresado = arregloNombreEgresado[0].text
+
         # Itera a través de los elementos y obtén el contenido
         elementsf = self.driver.find_elements(
             By.CSS_SELECTOR, "a.experience-group-header__url")
@@ -67,11 +76,11 @@ class ScraperDatos:
 
                 inicio, fin, duracion = Utilidades.separarDuracion(fechas, self.PADDINGCOMPUESTO)
 
-
+                matrizCampoCompuesto.append([nombreEgresado, empresa, puesto, inicio, fin, duracion, description_elements])
                 print(puesto  + "---" + empresa + "---" + inicio + "---" + fin + "---" + duracion + "---" + description_elements)
-                print("")
 
-        return 0  # Aqui se devolveria el objeto deseado
+
+        return matrizCampoCompuesto  # Aqui se devolveria el objeto deseado
 
     def unicamenteDescripciones(self):
 

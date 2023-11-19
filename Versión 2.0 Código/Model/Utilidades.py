@@ -167,9 +167,15 @@ class Utilidades:
             #mesFormateada = Utilidades.transformarNumeroEnMes(mes_actual)
 
             #fechaFin = mesFormateada + str(año_actual)
-
-        duracion = nuevoArreglo[2]
-        duracionMeses = Utilidades.transformarDuracionEnMeses(duracion)
+        try:
+            duracion = nuevoArreglo[2]
+        except:
+            duracion = 0
+        try:
+            duracionMeses = Utilidades.transformarDuracionEnMeses(duracion)
+        except:
+            duracionMeses = 0
+        
 
         return str(fechaInicioFormateada), str(fechaFinFormateada), str(duracionMeses)
     

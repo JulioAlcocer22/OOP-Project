@@ -29,6 +29,7 @@ class AccionesBoton:
             resultaddoIteracion = scraper.iteradorUrls.iniciarIteracion(resultadoBusqueda)
 
             print("===========================")
+
             Utilidades.test(resultaddoIteracion)
 
             # Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
@@ -87,19 +88,27 @@ class AccionesBoton:
             "Pregunta", "¿Estás seguro de que deseas continuar?, El proceso no se puede detener.")
         if response == "yes":
 
-            egresado = "https://www.linkedin.com/in/ecambranes/"
-            driver = Utilidades.forzarIngresoAPaginaSinSesionIniciada(egresado)
+            matrizResultado = []
 
-            scraper = ScraperDatos(driver)
-            scraper.CampoSimple()
-            scraper.CampoCompuesto()
-            
+            arregloDefinitivo = [['Daniel F. Baas', 'https://www.linkedin.com/in/danielbaas03'], ['Genny Andrea Centeno Metri', 'https://www.linkedin.com/in/gennycenteno'], ['José Antonio Maldonado Roig', 'https://www.linkedin.com/in/jos%C3%A9-antonio-maldonado-roig-b09269106'], ['Rafael Rodriguez', 'https://www.linkedin.com/in/rafaelroguz']]
+            for egresadoLink in arregloDefinitivo:
+                segundo_elemento = egresadoLink[1]
 
-            driver.close()
-            # https://mx.linkedin.com/in/viviana-guadalupe-azcorra-novelo-351706231
-            # https://www.linkedin.com/in/luis-basto-diaz-41136396/
-            # https://mx.linkedin.com/in/edgar-cambranes
-            #https://mx.linkedin.com/in/edwin-fajardo
+                #egresado = "https://www.linkedin.com/in/ecambranes/"
+                driver = Utilidades.forzarIngresoAPaginaSinSesionIniciada(segundo_elemento)
+
+                scraper = ScraperDatos(driver)
+                matrizCampoSimple = scraper.CampoSimple()
+                matrizCampoCompuesto = scraper.CampoCompuesto()
+                matrizResultado = matrizResultado + matrizCampoSimple + matrizCampoCompuesto
+                print("======================================")
+                print(matrizResultado)
+                
+
+                driver.close()
+            print("$$$$$$$$$$$$$$")
+            print(matrizResultado)
+            print("FIN")
 
     def testConexiones(self):
         response = messagebox.askquestion(
