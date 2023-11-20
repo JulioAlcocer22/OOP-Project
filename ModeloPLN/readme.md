@@ -1,4 +1,4 @@
-# Apartado de Procesamiento de Lenguaje Natural
+,# Apartado de Procesamiento de Lenguaje Natural
 Una de las problemáticas a la hora de recabar la información es que, en muchas de las ocasiones, en el aparado de experiencia únicamente ponen la empresa y la descripción del trabajo que realizan, o en su defecto, se añade un "rol", pero en su descricpión se hace referencia a otro. Es por ello que se optó por realizar un modelo para clasificar los roles de trabajo dependiendo de la descripción que estos tengan.
 
 ## Descripción

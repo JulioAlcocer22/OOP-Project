@@ -1,6 +1,6 @@
 from transformers import BertTokenizer
 
-class Tokenizador:
+class TokenizadorDatos:
 
     def __init__(self, sentences):
         self.sentences = sentences
@@ -32,6 +32,8 @@ class Tokenizador:
             # Agrega la representación tokenizada a la lista
             tokenized_sentences.append(tokens)
 
+        return tokenized_sentences
+    
         # Ahora, tokenized_sentences contiene las representaciones tokenizadas de todas las oraciones en tu arreglo.
         print("Proceso finalizado")
 
