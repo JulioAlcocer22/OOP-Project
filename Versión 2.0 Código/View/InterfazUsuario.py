@@ -5,8 +5,6 @@ from tkinter import messagebox
 from Controller.Configuracion import Configuracion
 from Controller.AccionesBoton import AccionesBoton
 
-
-
 class InterfazUsuario:
 
     def __init__(self):
@@ -59,8 +57,8 @@ class InterfazUsuario:
                                    command=lambda: accionesBoton.filtrarLIS(), width=22, height=1)
             botonTest.place(x=300, y=230)
             
-            botonTest = tk.Button(window, text="Filtrar LCC", font="Georgia 12 ",
-                                   command=lambda: accionesBoton.filtrarLCC(), width=22, height=1)
+            botonTest = tk.Button(window, text="Probar Conexiones", font="Georgia 12 ",
+                                   command=lambda: accionesBoton.probarConexiones(), width=22, height=1)
             botonTest.place(x=300, y=300)
 
             # -----------------------------------------------------------
@@ -75,10 +73,6 @@ class InterfazUsuario:
             botonLimpiar = tk.Button(window, text="Borrar marca B", font="Georgia 12 ",
                                    command=lambda: accionesBoton.limpiezaB(), width=22, height=1)
             botonLimpiar.place(x=600, y=160)
-
-            
-            
-            
 
             window.mainloop()
         else:

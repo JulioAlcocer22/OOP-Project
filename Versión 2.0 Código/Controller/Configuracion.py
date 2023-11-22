@@ -20,9 +20,8 @@ class Configuracion:
         email = os.getenv('USER')
         password = os.getenv('PSW')
 
-        # Se dirige a la página principal de LinkedIn
         self.driver.get('https://www.linkedin.com/home')
-        self.driver.implicitly_wait(delay)  # Espera hasta que la página cargue
+        self.driver.implicitly_wait(delay)
 
         inputUser = self.driver.find_element(By.NAME, "session_key")
         inputUser.send_keys(email)
@@ -32,6 +31,7 @@ class Configuracion:
         self.driver.implicitly_wait(delay)
         inputPassword.send_keys(Keys.ENTER)
 
+    # NO USADA
     def cerrarSesion(self):
         delay = 5
         self.driver.implicitly_wait(delay)
@@ -55,7 +55,6 @@ class Configuracion:
         except (socket.gaierror, socket.timeout):
             s.close()
             return False
-
         else:
             s.close()
             return True
@@ -65,7 +64,6 @@ class Configuracion:
         s = speedtest.Speedtest()
         subida = round((round(s.upload()) / 1048576), 2)
         return subida
-        # print(f"time: {time}, downspeed: {downspeed} Mb/s, upspeed: {upspeed} Mb/s")
 
     @staticmethod
     def comprobarBajada():
@@ -78,10 +76,8 @@ class Configuracion:
         st = speedtest.Speedtest()
         ping_time = ping(host)
         if ping_time is not None:
-            # print(f"Tiempo de ping a {host}: {ping_time} ms")
             return ping_time
         else:
-            # print(f"No se pudo realizar el ping a {host}")
             return 9999
 
     @staticmethod
@@ -102,20 +98,17 @@ class Configuracion:
         else:
             return False
 
+    # NO USADA
     def lenguajeNavegadorEsEspañol(self):
         language = self.driver.execute_script("return navigator.language")
         if "es" in language:
-            # print("El navegador está configurado en español.")
             return True
         else:
-            # print(f"El idioma del navegador es {language}.")
             return False
 
     @staticmethod
     def lenguajeSOEsEspañol():
         idioma_sistema = locale.getdefaultlocale()
-
-        # print(f"El idioma del sistema operativo es: {idioma_sistema[0]}")
 
         if idioma_sistema[0].__contains__("es"):
             return True

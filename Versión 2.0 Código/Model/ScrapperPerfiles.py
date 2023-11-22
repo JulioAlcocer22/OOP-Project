@@ -58,16 +58,13 @@ class ScrapperPerfiles:
             
             paginaVisitar = 1
             while not esUltimaPagina:
+
                 var = varOriginal.replace("XXXXX", str(paginaVisitar))
                 self.driver.get(var)
                 esUltimaPagina = ScrapperPerfiles.IteradorDeURLs.es_ultima_pagina(self)
                 time.sleep(5)
                 arregloUnificado = arregloUnificado + self.scrappearLinksInstancia.obtener_links()
                 paginaVisitar = paginaVisitar + 1 
-
-                print("------------------------------")
-                print(arregloUnificado)
-
 
             return arregloUnificado
 
@@ -82,7 +79,7 @@ class ScrapperPerfiles:
                 cadena = elemento.text
                 if cadena.__contains__("Ningún resultado encontrado"):
                     fin = True
-                    # print("Ya no hay mas resultados")
+
             return fin
 
     class ScrappearLinks:
@@ -105,6 +102,5 @@ class ScrapperPerfiles:
                         arregloDefinitivo.append(url)
 
             arreglo_final = Utilidades.duplicadosArreglo(arregloDefinitivo)
-            # Limpieza.test(arreglo_final)
 
             return arreglo_final

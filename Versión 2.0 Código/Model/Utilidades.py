@@ -47,23 +47,12 @@ class Utilidades:
     @staticmethod
     def forzarIngresoAPaginaSinSesionIniciada(egresado):
 
-
-
         driver = webdriver.Edge(EdgeChromiumDriverManager().install())
-        driver.delete_all_cookies #MAYBE
+        driver.delete_all_cookies 
 
-        
-       
         fin = False
         while not fin:
             driver.get(egresado)
-            #time.sleep(1)
-            #elementos_h1 = driver.find_elements(By.TAG_NAME, 'h1')
-            #for elemento in elementos_h1:
-                #cadena = elemento.text
-                #if cadena.__contains__("verifica"):
-                        #print("esperando")
-                        #time.sleep(25)
             
             elementos_h2 = driver.find_elements(By.TAG_NAME, 'h2')
             for elemento in elementos_h2:
@@ -81,8 +70,7 @@ class Utilidades:
     @staticmethod
     def ingresoAPaginaConSesionIniciada():
         driver = webdriver.Edge(EdgeChromiumDriverManager().install())
-        #driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
-
+       
         config = Configuracion(driver)
         config.iniciarSesion()
 
@@ -118,7 +106,7 @@ class Utilidades:
     @staticmethod
     def mesANumero(fechaInicio):
         cadena = fechaInicio
-        #dia - mes
+
         cadena = cadena.replace("ene.", "01/01/")
         cadena = cadena.replace("feb.", "01/02/")
         cadena = cadena.replace("mar.", "01/03/")
@@ -132,27 +120,20 @@ class Utilidades:
         cadena = cadena.replace("nov.", "01/11/")
         cadena = cadena.replace("dic.", "01/12/")
         cadena = cadena.replace(" ", "")
+
         return cadena
-
-
-
-
 
 
     @staticmethod
     def separarDuracion(fechas, posicion_insercion):
         cadena = fechas
-        # caso 1
-        cadena = cadena.replace("actualidad", "actualidad -")
-        # caso 2
-        #posicion_insercion = 22    #22    #23 cmbranes
 
-        cadena = cadena[:posicion_insercion] + \
-            " - " + cadena[posicion_insercion:]
+        cadena = cadena.replace("actualidad", "actualidad -")
+
+        cadena = cadena[:posicion_insercion] + " - " + cadena[posicion_insercion:]
 
         lineas = cadena.split('-')
         nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
-        #fechaInicio = nuevoArreglo[0]  # ok
         fechaInicioFormateada = Utilidades.mesANumero(nuevoArreglo[0])
 
         fechaFin = nuevoArreglo[1]
@@ -164,17 +145,15 @@ class Utilidades:
 
             fechaFinFormateada = "01/" + str(mes_actual) + "/" + str(año_actual)
 
-            #mesFormateada = Utilidades.transformarNumeroEnMes(mes_actual)
-
-            #fechaFin = mesFormateada + str(año_actual)
         try:
             duracion = nuevoArreglo[2]
         except:
-            duracion = 0
+            duracion = 0 #Error (Caso extraordinario)
+
         try:
             duracionMeses = Utilidades.transformarDuracionEnMeses(duracion)
         except:
-            duracionMeses = 0
+            duracionMeses = 0 #Error (Caso extraordinario)
         
 
         return str(fechaInicioFormateada), str(fechaFinFormateada), str(duracionMeses)
@@ -190,16 +169,14 @@ class Utilidades:
         cadena = cadena.replace("año", " - ")
 
         if len(cadena) <= 2:
-
             duracionMeses = int(cadena)
-
         else:
             lineas = cadena.split('-')
             nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
             numeroDeElementos = len(nuevoArreglo)
+            
             if numeroDeElementos == 1:
                 duracionMeses = int(nuevoArreglo[0]) * 12
-
             else:
                 duracionMeses = int(nuevoArreglo[0]) * 12 + int(nuevoArreglo[1])
 

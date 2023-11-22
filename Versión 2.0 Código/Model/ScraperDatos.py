@@ -1,11 +1,7 @@
 import datetime
 from selenium.webdriver.common.by import By
 from Model.Utilidades import Utilidades
-import time
 import datetime
-
-
-
 
 class ScraperDatos:
 
@@ -25,8 +21,7 @@ class ScraperDatos:
             try:
                 description_elements = item.find_element(By.CSS_SELECTOR, ".experience__list .show-more-less-text__text--less").text
             except :
-                description_elements = "NOPE"
-            
+                description_elements = "NOPE" 
             
             elemento = item.text
             lineas = elemento.split('\n')
@@ -40,26 +35,20 @@ class ScraperDatos:
 
             matrizCampoSimple.append([nombreEgresado, empresa, puesto, inicio, fin, duracion, description_elements])
 
-            print(nombreEgresado + "---" + empresa + "---" + puesto + "---" + inicio + "---" + fin + "---" + duracion + "---" + description_elements)
-
-
-        return matrizCampoSimple  # Aqui se devolveria el objeto deseado
+        return matrizCampoSimple
 
     def CampoCompuesto(self):
         matrizCampoCompuesto = []
         arregloNombreEgresado = self.driver.find_elements(By.TAG_NAME, 'h1')
         nombreEgresado = arregloNombreEgresado[0].text
 
-        # Itera a través de los elementos y obtén el contenido
-        elementsf = self.driver.find_elements(
-            By.CSS_SELECTOR, "a.experience-group-header__url")
+        elementsf = self.driver.find_elements(By.CSS_SELECTOR, "a.experience-group-header__url")
         for elementf in elementsf:
             elemento = elementf.text
             lineas = elemento.split('\n')
             nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
             puesto = nuevoArreglo[0]
 
-            # OBTENER DATOS CASO MULTIPLES
             elements = self.driver.find_elements(By.CSS_SELECTOR, "li.profile-section-card.experience-group-position")
             for element in elements:
                 elemento = element.text
@@ -77,11 +66,11 @@ class ScraperDatos:
                 inicio, fin, duracion = Utilidades.separarDuracion(fechas, self.PADDINGCOMPUESTO)
 
                 matrizCampoCompuesto.append([nombreEgresado, empresa, puesto, inicio, fin, duracion, description_elements])
-                print(puesto  + "---" + empresa + "---" + inicio + "---" + fin + "---" + duracion + "---" + description_elements)
 
 
-        return matrizCampoCompuesto  # Aqui se devolveria el objeto deseado
+        return matrizCampoCompuesto
 
+    #NO USADO
     def unicamenteDescripciones(self):
 
         description_elements = self.driver.find_elements(By.CSS_SELECTOR, ".experience__list .show-more-less-text__text--less")
@@ -90,7 +79,7 @@ class ScraperDatos:
         for description in descriptions:
             print(description)
 
-        return 0  # Aqui se devolveria el objeto deseado
+        return 0
 
     def verificarExperiencia(self):
         verdad = False
@@ -102,24 +91,17 @@ class ScraperDatos:
 
         return verdad
 
-    def verificarUniversidad_Carrera_Egresado(self, universidad, acronimoUniversidad,  carrera):
+    def verificarUniversidad_Carrera_Egresado(self, universidad, acronimoUniversidad,  nombreCarrera, nombreCarreraAlternativo):
         verdad = False
         anioActual = datetime.datetime.now().year
         universidad = Utilidades.estadandarizarCadenas(universidad)
-        carrera = Utilidades.estadandarizarCadenas(carrera)
+        nombreCarrera = Utilidades.estadandarizarCadenas(nombreCarrera)
         acronimoUniversidad = Utilidades.estadandarizarCadenas(acronimoUniversidad)
         
-        
-        arregloNombreEgresado = self.driver.find_elements(By.TAG_NAME, 'h1')
-        nombreEgresado = arregloNombreEgresado[0].text
-
-            
-            
-                                                                          # .profile-section-card.education__list-item
         experience_items = self.driver.find_elements(By.CSS_SELECTOR, ".profile-section-card.education__list-item")
+        
         for item in experience_items:
             elemento = item.text
-            #print(elemento)
             lineas = elemento.split('\n')
             nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
             if len(nuevoArreglo) >= 3:
@@ -133,14 +115,10 @@ class ScraperDatos:
                 nuevoArreglo[0] = Utilidades.estadandarizarCadenas(nuevoArreglo[0])
                 nuevoArreglo[1] = Utilidades.estadandarizarCadenas(nuevoArreglo[1])
 
-                print (nombreEgresado + "---" + nuevoArreglo[0] + "---" + nuevoArreglo[1] + "---" + str(anioEgreso) )
-                if nuevoArreglo[0].__contains__(universidad) and nuevoArreglo[1].__contains__(carrera) and anioEgreso <= 2023:
-                    verdad = True
-                if nuevoArreglo[0].__contains__(universidad) and nuevoArreglo[1].__contains__("SOFTWARE ENGINEERING") and anioEgreso <= 2023:
-                    verdad = True
-                if nuevoArreglo[0].__contains__("UADY") and nuevoArreglo[1].__contains__(carrera) and anioEgreso <= 2023:
-                    verdad = True
-                if nuevoArreglo[0].__contains__("UADY") and nuevoArreglo[1].__contains__("SOFTWARE ENGINEERING") and anioEgreso <= 2023:
-                    verdad = True
-                
+
+                if nuevoArreglo[0].__contains__(universidad) or nuevoArreglo[0].__contains__(acronimoUniversidad):
+                    if nuevoArreglo[1].__contains__(nombreCarrera) or nuevoArreglo[1].__contains__(nombreCarreraAlternativo):
+                        if anioEgreso <= anioActual:
+                            verdad = True
+
         return verdad
