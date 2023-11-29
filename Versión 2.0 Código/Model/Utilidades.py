@@ -46,6 +46,8 @@ class Utilidades:
 
     @staticmethod
     def forzarIngresoAPaginaSinSesionIniciada(egresado):
+        intentosDeEntrada = 0
+        honeyPoot = False
 
         driver = webdriver.Edge(EdgeChromiumDriverManager().install())
         driver.delete_all_cookies 
@@ -53,19 +55,25 @@ class Utilidades:
         fin = False
         while not fin:
             driver.get(egresado)
+
+            if intentosDeEntrada > 10:
+                honeyPoot = True
+                return None, intentosDeEntrada
             
             elementos_h2 = driver.find_elements(By.TAG_NAME, 'h2')
             for elemento in elementos_h2:
                 cadena = elemento.text
                 driver.delete_all_cookies()
+
                 if cadena.__contains__("Iniciar sesión para ver el perfil completo de"):
+                    intentosDeEntrada = intentosDeEntrada + 1
                     fin = True
 
         time.sleep(3)
         config = Configuracion(driver)
         config.saltarModal()
 
-        return driver
+        return driver, intentosDeEntrada
 
     @staticmethod
     def ingresoAPaginaConSesionIniciada():

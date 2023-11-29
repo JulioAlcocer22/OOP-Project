@@ -10,10 +10,9 @@ class ScraperDatos:
         self.PADDINGSIMPLE = 22
         self.PADDINGCOMPUESTO = 23
 
-    def CampoSimple(self):
+    def CampoSimple(self, linkEgresado):
         matrizCampoSimple = []
-        arregloNombreEgresado = self.driver.find_elements(By.TAG_NAME, 'h1')
-        nombreEgresado = arregloNombreEgresado[0].text
+
 
         experience_items = self.driver.find_elements(By.CSS_SELECTOR, ".profile-section-card.experience-item")
         
@@ -21,7 +20,7 @@ class ScraperDatos:
             try:
                 description_elements = item.find_element(By.CSS_SELECTOR, ".experience__list .show-more-less-text__text--less").text
             except :
-                description_elements = "NOPE" 
+                description_elements = "" 
             
             elemento = item.text
             lineas = elemento.split('\n')
@@ -29,18 +28,22 @@ class ScraperDatos:
 
             puesto = nuevoArreglo[0]
             empresa = nuevoArreglo[1]
-            fechas = nuevoArreglo[2]
+            
+            try:
+                fechas = nuevoArreglo[2]
+            except :
+                fechas = 0
 
-            inicio, fin, duracion = Utilidades.separarDuracion(fechas, self.PADDINGSIMPLE)
+            if fecha != 0:
+                inicio, fin, duracion = Utilidades.separarDuracion(fechas, self.PADDINGSIMPLE)
 
-            matrizCampoSimple.append([nombreEgresado, empresa, puesto, inicio, fin, duracion, description_elements])
+                matrizCampoSimple.append([linkEgresado, empresa, puesto, inicio, fin, duracion, description_elements])
 
         return matrizCampoSimple
 
-    def CampoCompuesto(self):
+    def CampoCompuesto(self, linkEgresado):
         matrizCampoCompuesto = []
-        arregloNombreEgresado = self.driver.find_elements(By.TAG_NAME, 'h1')
-        nombreEgresado = arregloNombreEgresado[0].text
+
 
         elementsf = self.driver.find_elements(By.CSS_SELECTOR, "a.experience-group-header__url")
         for elementf in elementsf:
@@ -58,14 +61,19 @@ class ScraperDatos:
                 try:
                     description_elements = element.find_element(By.CSS_SELECTOR, ".experience__list .show-more-less-text__text--less").text
                 except :
-                    description_elements = "NOPE"
+                    description_elements = ""
 
                 empresa = nuevoArreglo[0]
-                fechas = nuevoArreglo[1]
 
-                inicio, fin, duracion = Utilidades.separarDuracion(fechas, self.PADDINGCOMPUESTO)
+                try:
+                    fechas = nuevoArreglo[1]
+                except:
+                    fechas = 0
 
-                matrizCampoCompuesto.append([nombreEgresado, empresa, puesto, inicio, fin, duracion, description_elements])
+                if fecha != 0:
+                    inicio, fin, duracion = Utilidades.separarDuracion(fechas, self.PADDINGCOMPUESTO)
+
+                    matrizCampoCompuesto.append([linkEgresado, empresa, puesto, inicio, fin, duracion, description_elements])
 
 
         return matrizCampoCompuesto

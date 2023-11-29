@@ -88,13 +88,15 @@ class AccionesBoton:
             #aQUI VA EL ARREGLO DE 6 EN 6 QUE VIENE DE LA BASE DE DATOS
             arregloDefinitivo = [['Daniel F. Baas', 'https://www.linkedin.com/in/danielbaas03'], ['Genny Andrea Centeno Metri', 'https://www.linkedin.com/in/gennycenteno'], ['José Antonio Maldonado Roig', 'https://www.linkedin.com/in/jos%C3%A9-antonio-maldonado-roig-b09269106'], ['Rafael Rodriguez', 'https://www.linkedin.com/in/rafaelroguz']]
             for egresadoLink in arregloDefinitivo:
-                segundo_elemento = egresadoLink[1]
+                linkEgresado = egresadoLink[1]
 
-                driver = Utilidades.forzarIngresoAPaginaSinSesionIniciada(segundo_elemento)
+                driver, error = Utilidades.forzarIngresoAPaginaSinSesionIniciada(linkEgresado)
+                if error is not False:
+                    continue
 
                 scraper = ScraperDatos(driver)
-                matrizCampoSimple = scraper.CampoSimple()
-                matrizCampoCompuesto = scraper.CampoCompuesto()
+                matrizCampoSimple = scraper.CampoSimple(linkEgresado)
+                matrizCampoCompuesto = scraper.CampoCompuesto(linkEgresado)
                 matrizResultado = matrizResultado + matrizCampoSimple + matrizCampoCompuesto
 
                 driver.close()
@@ -123,7 +125,10 @@ class AccionesBoton:
 
         for egresadoLink in arregloDefinitivo:
 
-            driver = Utilidades.forzarIngresoAPaginaSinSesionIniciada(egresadoLink)
+            driver, error = Utilidades.forzarIngresoAPaginaSinSesionIniciada(linkEgresado)
+            if error is not False:
+                continue
+
             scraper = ScraperDatos(driver)
 
             arregloNombreEgresado = driver.find_elements(By.TAG_NAME, 'h1')
@@ -146,7 +151,10 @@ class AccionesBoton:
 
         for egresadoLink in arregloDefinitivo:
 
-            driver = Utilidades.forzarIngresoAPaginaSinSesionIniciada(egresadoLink)
+            driver, error = Utilidades.forzarIngresoAPaginaSinSesionIniciada(linkEgresado)
+            if error is not False:
+                continue
+                
             scraper = ScraperDatos(driver)
 
             arregloNombreEgresado = driver.find_elements(By.TAG_NAME, 'h1')
