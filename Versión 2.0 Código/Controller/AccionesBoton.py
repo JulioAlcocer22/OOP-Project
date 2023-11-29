@@ -1,4 +1,4 @@
-from curses import window
+
 from tkinter import *
 from tkinter import messagebox
 from tkinter import simpledialog
@@ -154,7 +154,7 @@ class AccionesBoton:
             driver, error = Utilidades.forzarIngresoAPaginaSinSesionIniciada(linkEgresado)
             if error is not False:
                 continue
-                
+
             scraper = ScraperDatos(driver)
 
             arregloNombreEgresado = driver.find_elements(By.TAG_NAME, 'h1')
