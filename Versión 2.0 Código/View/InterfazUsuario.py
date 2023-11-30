@@ -14,7 +14,7 @@ class InterfazUsuario:
         if Configuracion.lenguajeSOEsEspañol():
             window = tk.Tk()
             window.title("LinkedIn Scraper")
-            window.geometry("900x350")
+            window.geometry("900x450")
             window.configure(bg="white")
             window.resizable(width=False, height=False)
             accionesBoton = AccionesBoton()
@@ -37,8 +37,12 @@ class InterfazUsuario:
             botonActualizarPivotes.place(x=20, y=230)
 
             botonTodosPivotes = tk.Button(
-                window, text="Por pivotes", font="Georgia 12", command=lambda: accionesBoton.metodoPivotes(), width=22, height=1)
+                window, text="Por pivotes ( Premium )", font="Georgia 12", command=lambda: accionesBoton.metodoPivotes(), width=22, height=1)
             botonTodosPivotes.place(x=20, y=300)
+
+            botonPivoteUnico = tk.Button(
+                window, text="Pivote Unico", font="Georgia 12", command=lambda: accionesBoton.metodoPivotesUnico(), width=22, height=1)
+            botonPivoteUnico.place(x=20, y=370)
 
             # -----------------------------------------------------------
 
@@ -56,10 +60,14 @@ class InterfazUsuario:
             botonTest = tk.Button(window, text="Filtrar LIS", font="Georgia 12 ",
                                    command=lambda: accionesBoton.filtrarLIS(), width=22, height=1)
             botonTest.place(x=300, y=230)
+
+            botonTest = tk.Button(window, text="Filtrar LCC", font="Georgia 12 ",
+                                   command=lambda: accionesBoton.filtrarLCC(), width=22, height=1)
+            botonTest.place(x=300, y=300)
             
             botonTest = tk.Button(window, text="Probar Conexiones", font="Georgia 12 ",
                                    command=lambda: accionesBoton.probarConexiones(), width=22, height=1)
-            botonTest.place(x=300, y=300)
+            botonTest.place(x=300, y=370)
 
             # -----------------------------------------------------------
 

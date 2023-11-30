@@ -13,7 +13,6 @@ class ScraperDatos:
     def CampoSimple(self, linkEgresado):
         matrizCampoSimple = []
 
-
         experience_items = self.driver.find_elements(By.CSS_SELECTOR, ".profile-section-card.experience-item")
         
         for item in experience_items:
@@ -28,22 +27,23 @@ class ScraperDatos:
 
             puesto = nuevoArreglo[0]
             empresa = nuevoArreglo[1]
-            
-            try:
-                fechas = nuevoArreglo[2]
-            except :
-                fechas = 0
+            fechas = nuevoArreglo[2]
 
-            if fecha != 0:
+            try :
                 inicio, fin, duracion = Utilidades.separarDuracion(fechas, self.PADDINGSIMPLE)
+            except:
+                inicio = 0
+                fin = 0
+                duracion = 0
+            
 
+            if duracion != str(0):
                 matrizCampoSimple.append([linkEgresado, empresa, puesto, inicio, fin, duracion, description_elements])
 
         return matrizCampoSimple
 
     def CampoCompuesto(self, linkEgresado):
         matrizCampoCompuesto = []
-
 
         elementsf = self.driver.find_elements(By.CSS_SELECTOR, "a.experience-group-header__url")
         for elementf in elementsf:
@@ -64,15 +64,16 @@ class ScraperDatos:
                     description_elements = ""
 
                 empresa = nuevoArreglo[0]
+                fechas = nuevoArreglo[1]
 
-                try:
-                    fechas = nuevoArreglo[1]
+                try :
+                    inicio, fin, duracion = Utilidades.separarDuracion(fechas, self.PADDINGSIMPLE)
                 except:
-                    fechas = 0
+                    inicio = 0
+                    fin = 0
+                    duracion = 0
 
-                if fecha != 0:
-                    inicio, fin, duracion = Utilidades.separarDuracion(fechas, self.PADDINGCOMPUESTO)
-
+                if duracion != str(0):
                     matrizCampoCompuesto.append([linkEgresado, empresa, puesto, inicio, fin, duracion, description_elements])
 
 
@@ -105,6 +106,7 @@ class ScraperDatos:
         universidad = Utilidades.estadandarizarCadenas(universidad)
         nombreCarrera = Utilidades.estadandarizarCadenas(nombreCarrera)
         acronimoUniversidad = Utilidades.estadandarizarCadenas(acronimoUniversidad)
+        nombreCarreraAlternativo = Utilidades.estadandarizarCadenas(nombreCarreraAlternativo)
         
         experience_items = self.driver.find_elements(By.CSS_SELECTOR, ".profile-section-card.education__list-item")
         

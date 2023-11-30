@@ -48,17 +48,20 @@ class Utilidades:
     def forzarIngresoAPaginaSinSesionIniciada(egresado):
         intentosDeEntrada = 0
         honeyPoot = False
+        try:
+            driver = webdriver.Edge(EdgeChromiumDriverManager().install())
+        except:
+            driver = webdriver.Edge()
 
-        driver = webdriver.Edge(EdgeChromiumDriverManager().install())
         driver.delete_all_cookies 
 
         fin = False
         while not fin:
             driver.get(egresado)
 
-            if intentosDeEntrada > 10:
+            if intentosDeEntrada >= 20:
                 honeyPoot = True
-                return None, intentosDeEntrada
+                return None, honeyPoot
             
             elementos_h2 = driver.find_elements(By.TAG_NAME, 'h2')
             for elemento in elementos_h2:
@@ -66,18 +69,23 @@ class Utilidades:
                 driver.delete_all_cookies()
 
                 if cadena.__contains__("Iniciar sesión para ver el perfil completo de"):
-                    intentosDeEntrada = intentosDeEntrada + 1
+                    
                     fin = True
+                    
+            intentosDeEntrada = intentosDeEntrada + 1
 
         time.sleep(3)
         config = Configuracion(driver)
         config.saltarModal()
 
-        return driver, intentosDeEntrada
+        return driver, honeyPoot
 
     @staticmethod
     def ingresoAPaginaConSesionIniciada():
-        driver = webdriver.Edge(EdgeChromiumDriverManager().install())
+        try:
+            driver = webdriver.Edge(EdgeChromiumDriverManager().install())
+        except:
+            driver = webdriver.Edge()
        
         config = Configuracion(driver)
         config.iniciarSesion()
@@ -134,13 +142,12 @@ class Utilidades:
 
     @staticmethod
     def separarDuracion(fechas, posicion_insercion):
+
         cadena = fechas
-
         cadena = cadena.replace("actualidad", "actualidad -")
-
         cadena = cadena[:posicion_insercion] + " - " + cadena[posicion_insercion:]
-
         lineas = cadena.split('-')
+        
         nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
         fechaInicioFormateada = Utilidades.mesANumero(nuevoArreglo[0])
 
