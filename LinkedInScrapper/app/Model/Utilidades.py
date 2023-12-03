@@ -1,6 +1,7 @@
 from selenium import webdriver
 import time
-from Controller.Configuracion import Configuracion
+from app import *
+from app.Controller.Configuracion import Configuracion
 from selenium.webdriver.common.by import By
 import datetime
 from webdriver_manager.microsoft import EdgeChromiumDriverManager

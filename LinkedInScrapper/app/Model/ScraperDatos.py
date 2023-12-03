@@ -1,6 +1,7 @@
 import datetime
 from selenium.webdriver.common.by import By
-from Model.Utilidades import Utilidades
+from app import *
+from app.Model.Utilidades import Utilidades
 import datetime
 
 class ScraperDatos:

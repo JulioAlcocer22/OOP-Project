@@ -2,8 +2,9 @@ from tkinter import *
 import tkinter as tk
 from tkinter import messagebox
 
-from Controller.Configuracion import Configuracion
-from Controller.AccionesBoton import AccionesBoton
+from app import *
+from app.Controller.Configuracion import Configuracion
+from app.Controller.AccionesBoton import AccionesBoton
 
 class InterfazUsuario:
 

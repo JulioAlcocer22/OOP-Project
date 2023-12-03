@@ -1,5 +1,6 @@
 import time
-from Model.Utilidades import Utilidades
+from app import *
+from app.Model.Utilidades import Utilidades
 from selenium import *
 from selenium.webdriver.common.by import By
 

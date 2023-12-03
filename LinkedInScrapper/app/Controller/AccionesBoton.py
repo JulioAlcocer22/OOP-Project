@@ -6,10 +6,11 @@ import tkinter as tk
 import sys
 
 from selenium.webdriver.common.by import By
-from Controller.Configuracion import Configuracion
-from Model.ScrapperPerfiles import ScrapperPerfiles
-from Model.Utilidades import Utilidades
-from Model.ScraperDatos import ScraperDatos
+from app import *
+from app.Controller.Configuracion import Configuracion
+from app.Model.ScrapperPerfiles import ScrapperPerfiles
+from app.Model.Utilidades import Utilidades
+from app.Model.ScraperDatos import ScraperDatos
 
 
 class AccionesBoton:
@@ -231,8 +232,8 @@ class AccionesBoton:
     def insertPivote(self, link):
         self.querys.insertLink(link, 1)
     
-    def recuperarTodosLink(self):
-        return self.querys.recuperarTodosLink()
+    def recuperarTodosLink(self, limite):
+        return self.querys.recuperarTodosLink(limite)
     
     def linkVisitado(self, link):
         self.querys.linkRevisado(link)
