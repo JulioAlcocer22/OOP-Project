@@ -26,10 +26,10 @@ class Querys():
         else:
             print("Sin conexion a la base de datos")
         
-    def recuperarTodosLink(self):
+    def recuperarTodosLink(self, limite):
         if self.session != None:
             try:
-                link = self.session.query(LinkEgresados.link).all()
+                link = self.session.query(LinkEgresados.link).limit(limite).all()
                 return link
             except SQLAlchemyError as e:
                 print(e)
@@ -68,6 +68,20 @@ class Querys():
         else:
             print("Sin conexion a la base de datos")
             return []
+        
+    def linkRevisado(self, link):
+        if self.session != None:
+            try:
+                link = self.session.query(LinkEgresados).filter(LinkEgresados.link == link).first()
+                link.revisado = 1
+                self.session.commit()
+            except SQLAlchemyError as e:
+                self.session.rollback()
+                print(e)
+            finally:
+                self.session.close()
+        else:
+            print("Sin conexion a la base de datos")    
     
     def insertEgresadoInfo(self, idLink, nombre, universidad, carrera):
         if self.session != None:
@@ -116,7 +130,7 @@ class Querys():
     def recuperarEgresadoInfoEstudios(self, universidad, carrera):
         if self.session != None:
             try:
-                stmt = select(LinkEgresados.link, EgresadoInfo.nombre, EgresadoInfo.universidad, EgresadoInfo.carrera).where(and_(EgresadoInfo.universidad == universidad, EgresadoInfo.carrera == carrera)).join(EgresadoInfo)
+                stmt = select(LinkEgresados.link).where(and_(EgresadoInfo.universidad == universidad, EgresadoInfo.carrera == carrera)).join(EgresadoInfo)
                 egresadoInfo = self.session.execute(stmt).fetchall()
                 return egresadoInfo
             except SQLAlchemyError as e:
