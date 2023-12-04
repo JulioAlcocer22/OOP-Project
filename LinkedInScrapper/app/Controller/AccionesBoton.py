@@ -31,7 +31,6 @@ class AccionesBoton:
 
             for link in resultaddoIteracion:
                 self.insertlink(link)
-            # Utilidades.test(resultaddoIteracion)
 
             driver.close()
 
@@ -46,7 +45,6 @@ class AccionesBoton:
 
             for link in resultaddoIteracion:
                 self.insertlink(link)
-            # Utilidades.test(resultaddoIteracion)
 
             driver.close()
 
@@ -64,8 +62,6 @@ class AccionesBoton:
             
             for link in resultaddoIteracion:
                 self.insertPivote(link)
-
-            # Utilidades.test(resultaddoIteracion)
             
             driver.close()
 
@@ -73,8 +69,7 @@ class AccionesBoton:
         response = messagebox.askquestion(
             "Pregunta", "¿Estás seguro de que deseas continuar?, El proceso no se puede detener.")
         if response == "yes":
-            # Supongamos que recibio uno por uno los links de mis pivotes de la db
-            # Por cuestiones practicas usaremos el link de BASTO como prueba
+
             for pivote in self.recuperarPivotes():
                 driver = Utilidades.ingresoAPaginaConSesionIniciada()
 
@@ -86,17 +81,13 @@ class AccionesBoton:
                 for link in resultadoIteracion:
                     self.insertlink(link)
 
-                # Utilidades.test(resultadoIteracion)
-                # resultaddoIteracion - Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
             driver.close()
 
     def metodoPivotesUnico(self):
-            # "https://www.linkedin.com/in/luis-basto-diaz-41136396/"
             entradaURL = simpledialog.askstring(
                 "Entrada de texto", "Ingrese la URL del pivote que desea buscar:")
             if entradaURL:
-                # Supongamos que recibio uno por uno los links de mis pivotes de la db
-                # Por cuestiones practicas usaremos el link de BASTO como prueba
+
                 driver = Utilidades.ingresoAPaginaConSesionIniciada()
 
                 scraper = ScrapperPerfiles(driver)
@@ -107,19 +98,17 @@ class AccionesBoton:
                 for link in resultadoIteracion:
                     self.insertlink(link)
 
-                # Utilidades.test(resultadoIteracion)
-                # resultaddoIteracion - Regresa el arreglo, aqui iria la funcion que toma el arreglo y envia elemento por elemento a la base de datos
                 driver.close()
 
-    def extraccionDeExperiencia(self):
+
+
+    def extraccionDeExperienciaLIS(self):
             response = messagebox.askquestion(
                 "Pregunta", "¿Estás seguro de que deseas continuar?, El proceso no se puede detener.")
             if response == "yes":
 
                 matrizResultado = []
 
-                #aQUI VA EL ARREGLO DE 6 EN 6 QUE VIENE DE LA BASE DE DATOS
-                # cambiar parametros a la funcion de arreglo definitivo por "Universidad Autonoma de Yucatan" y "Ciencias de la Computacion"
                 arregloDefinitivo = self.recuperarEgresadoInfoEstudios("Universidad Autonoma de Yucatan", "Ingenieria de Software")
                 for egresadoLink in arregloDefinitivo:
                     linkEgresado = egresadoLink[0]
@@ -135,10 +124,37 @@ class AccionesBoton:
 
                     driver.close()
 
-                for experiencia in matrizResultado: #aQUI ES DONDE SE ENVIAN LOS DATOS A LA DB
-                    #Modificar la funcion de insertExperiencia con "Universidad Autonoma de Yucatan" y "Ciencias de la Computacion"
+                for experiencia in matrizResultado: 
                     self.insertExperiencia(experiencia[0], "Universidad Autonoma de Yucatan", "Ingenieria de Software", experiencia[1], experiencia[2], experiencia[6], experiencia[5], experiencia[3], experiencia[4])
                 sys.exit() # Se cierra por logica del negocio  
+                  
+    def extraccionDeExperienciaLCC(self):
+            response = messagebox.askquestion(
+                "Pregunta", "¿Estás seguro de que deseas continuar?, El proceso no se puede detener.")
+            if response == "yes":
+
+                matrizResultado = []
+
+                #aQUI VA EL ARREGLO DE 6 EN 6 QUE VIENE DE LA BASE DE DATOS
+                # cambiar parametros a la funcion de arreglo definitivo por "Universidad Autonoma de Yucatan" y "Ciencias de la Computacion"
+                arregloDefinitivo = self.recuperarEgresadoInfoEstudios("Universidad Autonoma de Yucatan", "Ciencias de la Computación")
+                for egresadoLink in arregloDefinitivo:
+                    linkEgresado = egresadoLink[0]
+
+                    driver, error = Utilidades.forzarIngresoAPaginaSinSesionIniciada(linkEgresado)
+                    if error is not False:
+                        continue
+
+                    scraper = ScraperDatos(driver)
+                    matrizCampoSimple = scraper.CampoSimple(linkEgresado)
+                    matrizCampoCompuesto = scraper.CampoCompuesto(linkEgresado)
+                    matrizResultado = matrizResultado + matrizCampoSimple + matrizCampoCompuesto
+
+                    driver.close()
+
+                for experiencia in matrizResultado: 
+                    self.insertExperiencia(experiencia[0], "Universidad Autonoma de Yucatan", "Ciencias de la Computación", experiencia[1], experiencia[2], experiencia[6], experiencia[5], experiencia[3], experiencia[4])
+                sys.exit() # Se cierra por logica del negocio 
 
     def filtrarLIS(self):
         response = messagebox.askquestion(
@@ -196,7 +212,7 @@ class AccionesBoton:
                 arregloNombreEgresado = driver.find_elements(By.TAG_NAME, 'h1')
                 nombreEgresado = arregloNombreEgresado[0].text
 
-                if scraper.verificarUniversidad_Carrera_Egresado("Universidad Autónoma de Yucatán", "UADY", "Ciencias de la Computacion", "Computer Science") and scraper.verificarExperiencia():
+                if scraper.verificarUniversidad_Carrera_Egresado("Universidad Autónoma de Yucatán", "UADY", "Ciencias de la Computación", "Computer Science") and scraper.verificarExperiencia():
                     matrizResultado.append([nombreEgresado, linkEgresado])
 
                 self.linkVisitado(linkEgresado)
@@ -204,15 +220,9 @@ class AccionesBoton:
                 driver.close()
                 
             for egresado in matrizResultado:
-                self.insertEgresadoInfo(egresado[1], egresado[0], "Universidad Autonoma de Yucatan", "Ciencias de la Computacion")
+                self.insertEgresadoInfo(egresado[1], egresado[0], "Universidad Autonoma de Yucatan", "Ciencias de la Computación")
                 
             sys.exit() # Se cierra por logica del negocio
-
-    def limpiezaA(self):
-        print("Se ejecuto la limpieza A")
-
-    def limpiezaB(self):
-        print("Se ejecuto la limpieza B")
 
     def probarConexiones(self):
         response = messagebox.askquestion(
@@ -222,6 +232,14 @@ class AccionesBoton:
                 tk.messagebox.showinfo("Información", "La conexion a internet es estable")
             else:
                 tk.messagebox.showerror("Error", "La conexion a internet es inestable")
+
+    def limpiezaA(self):
+        print("Se ejecuto la limpieza A")
+
+    def limpiezaB(self):
+        print("Se ejecuto la limpieza B")
+
+
 
     def recuperarPivotes(self):
         return self.querys.recuperarPivotes()    

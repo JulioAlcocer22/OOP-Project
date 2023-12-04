@@ -16,9 +16,11 @@ class Utilidades:
         pass
 
     @staticmethod
-    def test(arr):
+    def impresionTest(arr):
         for i, entrada in enumerate(arr, start=1):
             print(f"arr[{i}] = {entrada}")
+
+
 
     @staticmethod
     def estadandarizarCadenas(s):
@@ -44,6 +46,8 @@ class Utilidades:
                 arregloSinDuplicados.append(elemento)
 
         return arregloSinDuplicados
+
+
 
     @staticmethod
     def forzarIngresoAPaginaSinSesionIniciada(egresado):
@@ -93,6 +97,64 @@ class Utilidades:
 
         return driver
 
+
+
+    @staticmethod
+    def separarDuracion(fechas, posicion_insercion):
+
+        cadena = fechas
+        cadena = cadena.replace("actualidad", "actualidad -")
+        cadena = cadena[:posicion_insercion] + " - " + cadena[posicion_insercion:]
+        lineas = cadena.split('-')
+        
+        nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
+        fechaInicioFormateada = Utilidades.mesANumero(nuevoArreglo[0])
+
+        fechaFin = nuevoArreglo[1]
+        fechaFinFormateada = Utilidades.mesANumero(nuevoArreglo[1])
+        if fechaFin.__contains__("actualidad"):
+            fecha_actual = datetime.datetime.now()
+            año_actual = fecha_actual.year
+            mes_actual = fecha_actual.month
+
+            fechaFinFormateada = "01/" + str(mes_actual) + "/" + str(año_actual)
+
+        try:
+            duracion = nuevoArreglo[2]
+        except:
+            duracion = 0 #Error (Caso extraordinario)
+
+        try:
+            duracionMeses = Utilidades.transformarDuracionEnMeses(duracion)
+        except:
+            duracionMeses = 0 #Error (Caso extraordinario)
+        
+
+        return str(fechaInicioFormateada), str(fechaFinFormateada), str(duracionMeses)
+    
+    @staticmethod
+    def transformarDuracionEnMeses(duracion):
+        duracionMeses = 0
+        cadena = duracion
+        cadena = cadena.replace("años", "año")
+        cadena = cadena.replace("meses", "mes")
+        cadena = cadena.replace("mes", "")
+        cadena = cadena.replace("año", " - ")
+
+        if len(cadena) <= 2:
+            duracionMeses = int(cadena)
+        else:
+            lineas = cadena.split('-')
+            nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
+            numeroDeElementos = len(nuevoArreglo)
+            
+            if numeroDeElementos == 1:
+                duracionMeses = int(nuevoArreglo[0]) * 12
+            else:
+                duracionMeses = int(nuevoArreglo[0]) * 12 + int(nuevoArreglo[1])
+
+        return str(duracionMeses)
+
     @staticmethod
     def transformarNumeroEnMes(numeroMes):
         if numeroMes == 1:
@@ -141,59 +203,4 @@ class Utilidades:
         return cadena
 
 
-    @staticmethod
-    def separarDuracion(fechas, posicion_insercion):
 
-        cadena = fechas
-        cadena = cadena.replace("actualidad", "actualidad -")
-        cadena = cadena[:posicion_insercion] + " - " + cadena[posicion_insercion:]
-        lineas = cadena.split('-')
-        
-        nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
-        fechaInicioFormateada = Utilidades.mesANumero(nuevoArreglo[0])
-
-        fechaFin = nuevoArreglo[1]
-        fechaFinFormateada = Utilidades.mesANumero(nuevoArreglo[1])
-        if fechaFin.__contains__("actualidad"):
-            fecha_actual = datetime.datetime.now()
-            año_actual = fecha_actual.year
-            mes_actual = fecha_actual.month
-
-            fechaFinFormateada = "01/" + str(mes_actual) + "/" + str(año_actual)
-
-        try:
-            duracion = nuevoArreglo[2]
-        except:
-            duracion = 0 #Error (Caso extraordinario)
-
-        try:
-            duracionMeses = Utilidades.transformarDuracionEnMeses(duracion)
-        except:
-            duracionMeses = 0 #Error (Caso extraordinario)
-        
-
-        return str(fechaInicioFormateada), str(fechaFinFormateada), str(duracionMeses)
-    
-    
-    @staticmethod
-    def transformarDuracionEnMeses(duracion):
-        duracionMeses = 0
-        cadena = duracion
-        cadena = cadena.replace("años", "año")
-        cadena = cadena.replace("meses", "mes")
-        cadena = cadena.replace("mes", "")
-        cadena = cadena.replace("año", " - ")
-
-        if len(cadena) <= 2:
-            duracionMeses = int(cadena)
-        else:
-            lineas = cadena.split('-')
-            nuevoArreglo = [linea.strip() for linea in lineas if linea.strip()]
-            numeroDeElementos = len(nuevoArreglo)
-            
-            if numeroDeElementos == 1:
-                duracionMeses = int(nuevoArreglo[0]) * 12
-            else:
-                duracionMeses = int(nuevoArreglo[0]) * 12 + int(nuevoArreglo[1])
-
-        return str(duracionMeses)

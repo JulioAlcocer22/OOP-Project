@@ -22,9 +22,10 @@ class InterfazUsuario:
             accionesBoton = AccionesBoton(self.querys)
 
             # -----------------------------------------------------------
-            etiqueta1 = Label(window, font="Forte 17",
+            
+            etiquetaBusqueda = Label(window, font="Forte 17",
                               text="Busqueda", width=20)
-            etiqueta1.place(x=20, y=30)
+            etiquetaBusqueda.place(x=20, y=30)
 
             botonPorCadena = tk.Button(
                 window, text="Por cadena", font="Georgia 12 ", command=lambda: accionesBoton.metodoCadena(), width=22, height=1)
@@ -48,43 +49,50 @@ class InterfazUsuario:
 
             # -----------------------------------------------------------
 
-            etiqueta2 = Label(window, font="Forte 17",
+            etiquetaExtraccion = Label(window, font="Forte 17",
                               text="Extraccion", width=20)
-            etiqueta2.place(x=300, y=30)
+            etiquetaExtraccion.place(x=300, y=30)
 
-            botonExtraer = tk.Button(window, text="Extraer experiencia", font="Georgia 12 ",
-                                      command=lambda: accionesBoton.extraccionDeExperiencia(), width=22, height=1)
-            botonExtraer.place(x=300, y=90)
-
-            etiqueta3 = Label(window, font="Forte 17", text="Filtrar Links", width=20)
-            etiqueta3.place(x=300, y=160)
+            botonExtraerLIS = tk.Button(window, text="Extraer experiencia LIS", font="Georgia 12 ",
+                                      command=lambda: accionesBoton.extraccionDeExperienciaLIS(), width=22, height=1)
+            botonExtraerLIS.place(x=300, y=90)
             
-            botonTest = tk.Button(window, text="Filtrar LIS", font="Georgia 12 ",
+            botonExtraerLCC = tk.Button(window, text="Extraer experiencia LCC", font="Georgia 12 ",
+                                      command=lambda: accionesBoton.extraccionDeExperienciaLCC(), width=22, height=1)
+            botonExtraerLCC.place(x=300, y=120)
+            
+            # -----------------------------------------------------------
+
+            etiquetaFiltrarLinks = Label(window, font="Forte 17", text="Filtrar Links", width=20)
+            etiquetaFiltrarLinks.place(x=300, y=160)
+            
+            botonFiltrarLIS = tk.Button(window, text="Filtrar LIS", font="Georgia 12 ",
                                    command=lambda: accionesBoton.filtrarLIS(), width=22, height=1)
-            botonTest.place(x=300, y=230)
+            botonFiltrarLIS.place(x=300, y=230)
 
-            botonTest = tk.Button(window, text="Filtrar LCC", font="Georgia 12 ",
+            botonFiltrarLCC = tk.Button(window, text="Filtrar LCC", font="Georgia 12 ",
                                    command=lambda: accionesBoton.filtrarLCC(), width=22, height=1)
-            botonTest.place(x=300, y=300)
-            
-            botonTest = tk.Button(window, text="Probar Conexiones", font="Georgia 12 ",
-                                   command=lambda: accionesBoton.probarConexiones(), width=22, height=1)
-            botonTest.place(x=300, y=370)
+            botonFiltrarLCC.place(x=300, y=300)
 
             # -----------------------------------------------------------
 
-            etiqueta4 = Label(window, font="Forte 17", text="Limpiar DB", width=20)
-            etiqueta4.place(x=600, y=30)
+            etiquetaLimpiarDB = Label(window, font="Forte 17", text="Limpiar DB", width=20)
+            etiquetaLimpiarDB.place(x=600, y=30)
             
-            botonLimpiar = tk.Button(window, text="Borrar marca A", font="Georgia 12 ",
+            botonLimpiarA = tk.Button(window, text="Borrar marca A", font="Georgia 12 ",
                                    command=lambda: accionesBoton.limpiezaA(), width=22, height=1)
-            botonLimpiar.place(x=600, y=90)
+            botonLimpiarA.place(x=600, y=90)
             
-            botonLimpiar = tk.Button(window, text="Borrar marca B", font="Georgia 12 ",
+            botonLimpiarB = tk.Button(window, text="Borrar marca B", font="Georgia 12 ",
                                    command=lambda: accionesBoton.limpiezaB(), width=22, height=1)
-            botonLimpiar.place(x=600, y=160)
+            botonLimpiarB.place(x=600, y=160)
+            
+            botonTestConexiones = tk.Button(window, text="Probar Conexiones", font="Georgia 12 ",
+                                   command=lambda: accionesBoton.probarConexiones(), width=22, height=1)
+            botonTestConexiones.place(x=600, y=230)
 
             window.mainloop()
+            
         else:
             messagebox.showerror(
                 "Error", "El sistema operativo no se encuentra en español. La aplicación se cerrará.")
