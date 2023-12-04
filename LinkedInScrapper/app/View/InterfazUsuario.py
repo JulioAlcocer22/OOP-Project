@@ -1,6 +1,7 @@
 from tkinter import *
 import tkinter as tk
 from tkinter import messagebox
+from app.DataBase.Querys import Querys
 
 from app import *
 from app.Controller.Configuracion import Configuracion
@@ -8,8 +9,8 @@ from app.Controller.AccionesBoton import AccionesBoton
 
 class InterfazUsuario:
 
-    def __init__(self):
-        pass
+    def __init__(self, querys):
+        self.querys = querys
 
     def Mostrar(self):
         if Configuracion.lenguajeSOEsEspañol():
@@ -18,7 +19,7 @@ class InterfazUsuario:
             window.geometry("900x450")
             window.configure(bg="white")
             window.resizable(width=False, height=False)
-            accionesBoton = AccionesBoton()
+            accionesBoton = AccionesBoton(self.querys)
 
             # -----------------------------------------------------------
             etiqueta1 = Label(window, font="Forte 17",
