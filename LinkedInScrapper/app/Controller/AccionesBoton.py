@@ -122,6 +122,8 @@ class AccionesBoton:
                     matrizCampoCompuesto = scraper.CampoCompuesto(linkEgresado)
                     matrizResultado = matrizResultado + matrizCampoSimple + matrizCampoCompuesto
 
+                    self.egresadoVisitado(linkEgresado, "Universidad Autonoma de Yucatan", "Ingenieria de Software")
+
                     driver.close()
 
                 for experiencia in matrizResultado: 
@@ -137,7 +139,7 @@ class AccionesBoton:
 
                 #aQUI VA EL ARREGLO DE 6 EN 6 QUE VIENE DE LA BASE DE DATOS
                 # cambiar parametros a la funcion de arreglo definitivo por "Universidad Autonoma de Yucatan" y "Ciencias de la Computacion"
-                arregloDefinitivo = self.recuperarEgresadoInfoEstudios("Universidad Autonoma de Yucatan", "Ciencias de la Computación")
+                arregloDefinitivo = self.recuperarEgresadoInfoEstudios("Universidad Autonoma de Yucatan", "Ciencias de la Computacion")
                 for egresadoLink in arregloDefinitivo:
                     linkEgresado = egresadoLink[0]
 
@@ -150,10 +152,12 @@ class AccionesBoton:
                     matrizCampoCompuesto = scraper.CampoCompuesto(linkEgresado)
                     matrizResultado = matrizResultado + matrizCampoSimple + matrizCampoCompuesto
 
+                    self.egresadoVisitado(linkEgresado, "Universidad Autonoma de Yucatan", "Ciencias de la Computacion")
+
                     driver.close()
 
                 for experiencia in matrizResultado: 
-                    self.insertExperiencia(experiencia[0], "Universidad Autonoma de Yucatan", "Ciencias de la Computación", experiencia[1], experiencia[2], experiencia[6], experiencia[5], experiencia[3], experiencia[4])
+                    self.insertExperiencia(experiencia[0], "Universidad Autonoma de Yucatan", "Ciencias de la Computacion", experiencia[1], experiencia[2], experiencia[6], experiencia[5], experiencia[3], experiencia[4])
                 sys.exit() # Se cierra por logica del negocio 
 
     def filtrarLIS(self):
@@ -163,7 +167,7 @@ class AccionesBoton:
         
             matrizResultado = []
 
-            arregloDefinitivo = self.recuperarTodosLink(6) # Arreglo que viene de 6 en 6 de la base de datos
+            arregloDefinitivo = self.recuperarTodosLink() # Arreglo que viene de 6 en 6 de la base de datos
 
             for egresadoLink in arregloDefinitivo:
                 
@@ -197,7 +201,7 @@ class AccionesBoton:
 
             matrizResultado = []
 
-            arregloDefinitivo = self.recuperarTodosLink(6) # Arreglo que viene de 6 en 6 de la base de datos
+            arregloDefinitivo = self.recuperarTodosLink() # Arreglo que viene de 6 en 6 de la base de datos
 
             for egresadoLink in arregloDefinitivo:
                 
@@ -220,7 +224,7 @@ class AccionesBoton:
                 driver.close()
                 
             for egresado in matrizResultado:
-                self.insertEgresadoInfo(egresado[1], egresado[0], "Universidad Autonoma de Yucatan", "Ciencias de la Computación")
+                self.insertEgresadoInfo(egresado[1], egresado[0], "Universidad Autonoma de Yucatan", "Ciencias de la Computacion")
                 
             sys.exit() # Se cierra por logica del negocio
 
@@ -234,12 +238,10 @@ class AccionesBoton:
                 tk.messagebox.showerror("Error", "La conexion a internet es inestable")
 
     def limpiezaA(self):
-        print("Se ejecuto la limpieza A")
+        self.limpiezaLinks()
 
     def limpiezaB(self):
-        print("Se ejecuto la limpieza B")
-
-
+        self.limpiezaEgresados()
 
     def recuperarPivotes(self):
         return self.querys.recuperarPivotes()    
@@ -250,8 +252,8 @@ class AccionesBoton:
     def insertPivote(self, link):
         self.querys.insertLink(link, 1)
     
-    def recuperarTodosLink(self, limite):
-        return self.querys.recuperarTodosLink(limite)
+    def recuperarTodosLink(self):
+        return self.querys.recuperarTodosLink(6)
     
     def linkVisitado(self, link):
         self.querys.linkRevisado(link)
@@ -261,7 +263,11 @@ class AccionesBoton:
         self.querys.insertEgresadoInfo(idlink[0], nombre, universidad, carrera)
     
     def recuperarEgresadoInfoEstudios(self, universidad, carrera):
-        return self.querys.recuperarEgresadoInfoEstudios(universidad, carrera)
+        return self.querys.recuperarEgresadoInfoEstudios(universidad, carrera, 6)
+    
+    def egresadoVisitado(self, link, universidad, carrera):
+        egresado = self.querys.recuperarEgresadoInfo(link, universidad, carrera)
+        self.querys.egresadoRevisado(egresado[0])
     
     def insertExperiencia(self, link, universidad, carrera, empresa, puesto, descripcion, duracion, fechaInicio, fechaFin):
         idlink = self.querys.recuperarIdLink(link)
@@ -274,5 +280,10 @@ class AccionesBoton:
     def insertEgresados(self, idEgresado, idExperiencia, Rol):
         self.querys.insertEgresados(idEgresado, idExperiencia, Rol)
 
+    def limpiezaLinks(self):
+        self.querys.limpiezaLinks()
+        
+    def limpiezaEgresados(self):
+        self.querys.limpiezaEgresados()
 
    
