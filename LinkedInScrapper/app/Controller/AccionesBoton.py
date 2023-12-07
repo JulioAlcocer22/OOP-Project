@@ -12,6 +12,13 @@ from app.Model.ScrapperPerfiles import ScrapperPerfiles
 from app.Model.Utilidades import Utilidades
 from app.Model.ScraperDatos import ScraperDatos
 
+from app.Model.Datos import DatosRoles
+from app.Model.DivisorDatasets import DivisorDatasets
+from app.Model.Entrenador import Entrenador
+from app.Model.Vectorizador import VectorizadorDatos
+from app.Model.Predictor import Predictor
+from sklearn.naive_bayes import MultinomialNB
+
 
 class AccionesBoton:
 
@@ -242,6 +249,51 @@ class AccionesBoton:
 
     def limpiezaB(self):
         self.limpiezaEgresados()
+        
+    def limpiezaC(self):
+        self.querys.limpiezaExperiencia()
+        
+    def PNL(self):
+        dataset = []
+        etiquetas = []
+
+        for elemento in DatosRoles.datos_totales:
+            etiquetas.append(elemento["ID"])
+            dataset.append(elemento["Descripcion"])
+
+
+        #Separando datasets
+        divisor = DivisorDatasets(dataset, etiquetas)
+        descripciones_train, descripciones_test, parametro_train, parametro_test = divisor.dividir()
+
+        #vectorizando datasets
+        vectorizador = VectorizadorDatos()
+
+        descripciones_train_vectorizadas, descripciones_test_vectorizadas = vectorizador.vectorizar(descripciones_train, descripciones_test)
+        
+        #print(descripciones_train_vectorizadas.shape)
+        #print(descripciones_test_vectorizadas.shape)
+
+        clf= MultinomialNB() #objeto clasificador
+        entrenador = Entrenador(descripciones_train_vectorizadas, parametro_train, descripciones_test_vectorizadas, parametro_test)
+
+        #Se entrena al clasificador
+        entrenador.entrenar(clf)
+
+        experiencias = self.recuperarTodosExperiencia()
+        
+        for experiencia in experiencias:
+            descripcion = experiencia[3]
+            descripcion = [descripcion]
+            train, descripcion_vectorizada = vectorizador.vectorizar(descripciones_train, descripcion)
+            predicciones = clf.predict(descripcion_vectorizada)
+            self.insertEgresados(experiencia[0], experiencia[1], predicciones[0])
+            self.experienciaVisitada(experiencia[1])
+
+        predictor = Predictor(clf, descripciones_test_vectorizadas)
+
+        predicciones = predictor.predecir()
+
 
     def recuperarPivotes(self):
         return self.querys.recuperarPivotes()    
@@ -280,10 +332,15 @@ class AccionesBoton:
     def insertEgresados(self, idEgresado, idExperiencia, Rol):
         self.querys.insertEgresados(idEgresado, idExperiencia, Rol)
 
+    def experienciaVisitada(self, idExperiencia):
+        self.querys.experienciaRevisada(idExperiencia)
+
     def limpiezaLinks(self):
         self.querys.limpiezaLinks()
         
     def limpiezaEgresados(self):
         self.querys.limpiezaEgresados()
 
+    def limpiezaExperiencia(self):
+        self.querys.limpiezaExperiencia()
    
