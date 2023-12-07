@@ -252,25 +252,13 @@ class AccionesBoton:
         print("AccionALN1")
 
     def AccionALN2(self):
-        print("AccionALN2")
-
-    def limpiezaA(self):
-        self.limpiezaLinks()
-
-    def limpiezaB(self):
-        self.limpiezaEgresados()
-        
-    def limpiezaC(self):
-        self.querys.limpiezaExperiencia()
-        
-    def PNL(self):
         dataset = []
         etiquetas = []
-
+        roles = ["Desarrollo Web", "Desarrollo Mobil", "Inteligencia Aritificial", "Ciberseguridad", "Gestion de Proyectos", "Ciencias de Datos", "Docencia", "Otros"]
+        
         for elemento in DatosRoles.datos_totales:
             etiquetas.append(elemento["ID"])
             dataset.append(elemento["Descripcion"])
-
 
         #Separando datasets
         divisor = DivisorDatasets(dataset, etiquetas)
@@ -293,17 +281,28 @@ class AccionesBoton:
         experiencias = self.recuperarTodosExperiencia()
         
         for experiencia in experiencias:
-            descripcion = experiencia[3]
+            if experiencia.Descripcion == '':
+                descripcion = experiencia.Puesto
+            else:
+                descripcion = experiencia.Descripcion
             descripcion = [descripcion]
             train, descripcion_vectorizada = vectorizador.vectorizar(descripciones_train, descripcion)
-            predicciones = clf.predict(descripcion_vectorizada)
-            self.insertEgresados(experiencia[0], experiencia[1], predicciones[0])
-            self.experienciaVisitada(experiencia[1])
+            predictor = Predictor(clf, descripcion_vectorizada)
+            predicciones = predictor.predecir()
+            rol = roles[predicciones[0]]
+            self.insertEgresados(experiencia.idEgresado , experiencia.id, rol)
+            self.experienciaVisitada(experiencia.id)
+            
+        sys.exit() # Se cierra por logica del negocio
 
-        predictor = Predictor(clf, descripciones_test_vectorizadas)
+    def limpiezaA(self):
+        self.limpiezaLinks()
 
-        predicciones = predictor.predecir()
-
+    def limpiezaB(self):
+        self.limpiezaEgresados()
+        
+    def limpiezaC(self):
+        self.querys.limpiezaExperiencia()
 
     def recuperarPivotes(self):
         return self.querys.recuperarPivotes()    

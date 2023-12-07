@@ -13,7 +13,7 @@ class Experiencia(Base):
     Duracion = Column(Integer)
     FechaInicio = Column(Date)
     FechaFin = Column(Date)
-    Revision = Column(Boolean)
+    Revisado = Column(Boolean)
     
     idexp = relationship("Egresados", backref="Experiencia")
     

@@ -91,6 +91,10 @@ class Querys():
                 self.session.commit()
             except IntegrityError as e:
                 self.session.rollback()
+                datoexistente = self.session.query(EgresadoInfo).filter(EgresadoInfo.idLink == idLink, EgresadoInfo.universidad == universidad, EgresadoInfo.carrera == carrera).first()
+                if datoexistente:
+                    datoexistente.nombre = nombre
+                    self.session.commit()
             except SQLAlchemyError as e:
                 self.session.rollback()
                 print(e)
@@ -163,7 +167,14 @@ class Querys():
                 self.session.merge(experiencia)
                 self.session.commit()
             except IntegrityError as e:
-                self.session.rollback()    
+                self.session.rollback()
+                datoexistente = self.session.query(Experiencia).filter(Experiencia.idEgresado == idEgresado, Experiencia.Empresa == Empresa, Experiencia.Puesto == Puesto).first()
+                if datoexistente:
+                    datoexistente.Descripcion = Descripcion
+                    datoexistente.Duracion = Duracion
+                    datoexistente.FechaInicio = FechaInicio
+                    datoexistente.FechaFin = FechaFin
+                    self.session.commit()
             except SQLAlchemyError as e:
                 self.session.rollback()
                 print(e)
@@ -175,7 +186,7 @@ class Querys():
     def recuperarTodosExperiencia(self):
         if self.session != None:
             try:
-                experiencia = self.session.query(Experiencia).all()
+                experiencia = self.session.query(Experiencia).filter(Experiencia.Revisado == 0).all()
                 return experiencia
             except SQLAlchemyError as e:
                 print(e)
@@ -199,6 +210,20 @@ class Querys():
         else:
             print("Sin conexion a la base de datos")
             return []
+        
+    def experienciaRevisada(self, experienciaId):
+        if self.session != None:
+            try:
+                experiencia = self.session.query(Experiencia).filter(Experiencia.id == experienciaId).first()
+                experiencia.Revisado = 1
+                self.session.commit()
+            except SQLAlchemyError as e:
+                self.session.rollback()
+                print(e)
+            finally:
+                self.session.close()
+        else:
+            print("Sin conexion a la base de datos")
     
     def insertEgresados(self, idEgresado, idExperiencia, Rol):
         if self.session != None:
@@ -208,6 +233,10 @@ class Querys():
                 self.session.commit()
             except IntegrityError as e:
                 self.session.rollback()
+                datoexistente = self.session.query(Egresados).filter(Egresados.idEgresado == idEgresado, Egresados.idExperiencia == idExperiencia).first()
+                if datoexistente:
+                    datoexistente.Rol = Rol
+                    self.session.commit()
             except SQLAlchemyError as e:
                 self.session.rollback()
                 print(e)
@@ -270,4 +299,16 @@ class Querys():
                 self.session.close()
         else:
             print("Sin conexion a la base de datos")
-   
+            
+    def limpiezaExperiencia(self):
+        if self.session != None:
+            try:
+                stmt = update(Experiencia).values(revisado = 0)
+                self.session.execute(stmt)
+            except SQLAlchemyError as e:
+                self.session.rollback()
+                print(e)
+            finally:
+                self.session.close()
+        else:
+            print("Sin conexion a la base de datos")
