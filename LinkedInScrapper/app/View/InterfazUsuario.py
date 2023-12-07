@@ -91,6 +91,14 @@ class InterfazUsuario:
                                    command=lambda: accionesBoton.probarConexiones(), width=22, height=1)
             botonTestConexiones.place(x=600, y=230)
 
+            botonALN1 = tk.Button(window, text="Accion ALN 1", font="Georgia 12 ",
+                                   command=lambda: accionesBoton.AccionALN1(), width=22, height=1)
+            botonALN1.place(x=600, y=300)
+
+            botonALN2 = tk.Button(window, text="Accion ALN 2", font="Georgia 12 ",
+                                   command=lambda: accionesBoton.AccionALN2(), width=22, height=1)
+            botonALN2.place(x=600, y=370)
+
             window.mainloop()
             
         else:
