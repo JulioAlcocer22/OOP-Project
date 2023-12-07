@@ -122,6 +122,7 @@ class AccionesBoton:
 
                     driver, error = Utilidades.forzarIngresoAPaginaSinSesionIniciada(linkEgresado)
                     if error is not False:
+                        driver.close()
                         continue
 
                     scraper = ScraperDatos(driver)
@@ -152,6 +153,7 @@ class AccionesBoton:
 
                     driver, error = Utilidades.forzarIngresoAPaginaSinSesionIniciada(linkEgresado)
                     if error is not False:
+                        driver.close()
                         continue
 
                     scraper = ScraperDatos(driver)
@@ -182,6 +184,7 @@ class AccionesBoton:
                 
                 driver, error = Utilidades.forzarIngresoAPaginaSinSesionIniciada(linkEgresado)
                 if error is not False:
+                    driver.close()
                     continue
 
                 scraper = ScraperDatos(driver)
@@ -216,6 +219,7 @@ class AccionesBoton:
 
                 driver, error = Utilidades.forzarIngresoAPaginaSinSesionIniciada(linkEgresado)
                 if error is not False:
+                    driver.close()
                     continue
 
                 scraper = ScraperDatos(driver)
@@ -243,6 +247,12 @@ class AccionesBoton:
                 tk.messagebox.showinfo("Información", "La conexion a internet es estable")
             else:
                 tk.messagebox.showerror("Error", "La conexion a internet es inestable")
+
+    def AccionALN1(self):
+        print("AccionALN1")
+
+    def AccionALN2(self):
+        print("AccionALN2")
 
     def limpiezaA(self):
         self.limpiezaLinks()

@@ -56,7 +56,7 @@ class Utilidades:
         try:
             driver = webdriver.Edge(EdgeChromiumDriverManager().install())
         except:
-            driver = webdriver.Edge()
+            driver = webdriver.Edge(EdgeChromiumDriverManager().install())
 
         driver.delete_all_cookies 
 
@@ -64,9 +64,9 @@ class Utilidades:
         while not fin:
             driver.get(egresado)
 
-            if intentosDeEntrada >= 20:
+            if intentosDeEntrada >= 10:
                 honeyPoot = True
-                return None, honeyPoot
+                return driver, honeyPoot
             
             elementos_h2 = driver.find_elements(By.TAG_NAME, 'h2')
             for elemento in elementos_h2:
