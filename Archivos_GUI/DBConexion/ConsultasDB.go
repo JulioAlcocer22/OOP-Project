@@ -6,7 +6,9 @@ import (
 	"log"
 )
 
-func ObtenerLicenciaturas(universidad string) (opcionesLicenciatura []Model.Licenciatura) {
+type ObjetoConsulta struct{}
+
+func (consultas *ObjetoConsulta) ObtenerLicenciaturas(universidad string) (opcionesLicenciatura []Model.Licenciatura) {
 	db, err := ObtenerConexion()
 	defer db.Close()
 	if err != nil {
@@ -30,7 +32,7 @@ func ObtenerLicenciaturas(universidad string) (opcionesLicenciatura []Model.Lice
 	return
 }
 
-func ObtenerUniversidades() (opcionesUniversidad []Model.Universidad) {
+func (consultas *ObjetoConsulta) ObtenerUniversidades() (opcionesUniversidad []Model.Universidad) {
 	db, err := ObtenerConexion()
 	defer db.Close()
 	if err != nil {
@@ -54,7 +56,7 @@ func ObtenerUniversidades() (opcionesUniversidad []Model.Universidad) {
 	return
 }
 
-func obtenerEmpresas(universidad string, licenciatura string) (resultadosEmpresas []Model.Empresa) {
+func (consultas *ObjetoConsulta) obtenerEmpresas(universidad string, licenciatura string) (resultadosEmpresas []Model.Empresa) {
 	db, err := ObtenerConexion()
 	defer db.Close()
 	if err != nil {
@@ -79,7 +81,7 @@ func obtenerEmpresas(universidad string, licenciatura string) (resultadosEmpresa
 	return
 }
 
-func obtenerRoles(universidad string, licenciatura string) (resultadosRoles []Model.Rol) {
+func (consultas *ObjetoConsulta) obtenerRoles(universidad string, licenciatura string) (resultadosRoles []Model.Rol) {
 	db, err := ObtenerConexion()
 	defer db.Close()
 	if err != nil {
@@ -103,7 +105,7 @@ func obtenerRoles(universidad string, licenciatura string) (resultadosRoles []Mo
 	return
 }
 
-func obtenerDuracion(universidad string, licenciatura string) (resultadosDuracion []Model.Duracion) {
+func (consultas *ObjetoConsulta) obtenerDuracion(universidad string, licenciatura string) (resultadosDuracion []Model.Duracion) {
 	db, err := ObtenerConexion()
 	defer db.Close()
 	if err != nil {
@@ -129,8 +131,9 @@ func obtenerDuracion(universidad string, licenciatura string) (resultadosDuracio
 }
 
 func ObtenerResultados(universidad string, licenciatura string) (resultadosFinales Model.DatosFinales) {
-	resultadosFinales.Empresa = obtenerEmpresas(universidad, licenciatura)
-	resultadosFinales.Rol = obtenerRoles(universidad, licenciatura)
-	resultadosFinales.Duracion = obtenerDuracion(universidad, licenciatura)
+	consultas := ObjetoConsulta{}
+	resultadosFinales.Empresa = consultas.obtenerEmpresas(universidad, licenciatura)
+	resultadosFinales.Rol = consultas.obtenerRoles(universidad, licenciatura)
+	resultadosFinales.Duracion = consultas.obtenerDuracion(universidad, licenciatura)
 	return
 }

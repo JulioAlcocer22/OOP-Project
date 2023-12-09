@@ -14,6 +14,8 @@ type ControladorResultados struct{}
 
 func (c *ControladorVistaInicial) CargarVistaInicial(w http.ResponseWriter, r *http.Request) {
 
+	consultas := DBConexion.ObjetoConsulta{}
+
 	t, err := template.ParseFiles("View/login.html")
 	if err != nil {
 		log.Fatal(err)
@@ -21,7 +23,7 @@ func (c *ControladorVistaInicial) CargarVistaInicial(w http.ResponseWriter, r *h
 		return
 	}
 
-	universidadesDisponibles := DBConexion.ObtenerUniversidades()
+	universidadesDisponibles := consultas.ObtenerUniversidades()
 	err1 := t.Execute(w, universidadesDisponibles)
 	if err1 != nil {
 		log.Fatal(err1)
@@ -32,18 +34,21 @@ func (c *ControladorVistaInicial) CargarVistaInicial(w http.ResponseWriter, r *h
 
 func (c *ControladorVistaInicial) RecuperarLicenciaturas(w http.ResponseWriter, r *http.Request) {
 
+	consultas := DBConexion.ObjetoConsulta{}
+
 	var data Model.Universidad
 	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	licenciaturas := DBConexion.ObtenerLicenciaturas(data.UniversidadItem)
+	licenciaturas := consultas.ObtenerLicenciaturas(data.UniversidadItem)
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(licenciaturas)
 }
 
 func (c *ControladorResultados) CargarVistaResultados(w http.ResponseWriter, r *http.Request) {
+
 	//Cuando carges tu página web en el directorio View, cambia el nombre de la plantilla
 	t, err := template.ParseFiles("View/prueba.html")
 	if err != nil {
