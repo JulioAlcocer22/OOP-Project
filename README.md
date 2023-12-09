@@ -1,14 +1,18 @@
-# Evolución del Producto
+# Rubrica de entrega final
 
-En esta segunda entrega del proyecto se cuenta con una mejor definición de los requisitos del producto. Asimismo, se han modificado y eliminado algunos debidos al tiempo y recursos con los que se cuenta hasta la fecha final para la entrega del producto.
+## Producto
+### Evolcucion del Producto
 
-## Entre las principales diferencias de la primera entrega, con respecto a la segunda entrega, están:
-* Mejor definición de requisitos (Modificaciones)
-* Código del Módulo del Web Scrapping diseñado con un patrón de MVC (Todavía no funciona correctamente)
-* Creación de la base de datos en SQL Server y de las tablas.
-* Primeras vistas de la página web (Páginas de pruebas)
-* Definición de la estructura completa del proyecto con un diseño basado en MVC
+A lo largo de este proceso, nuestro proyecto, asi como los modulos que lo componen han evolucionado de manera paulatina hasta alcanzar la madurez necesaria hasta alcanzar el grado de 
+produccion, a continuacion se describiran de manera sintetizada esta evolucion.
 
-# Enlace al Video de la Entrega
-https://youtu.be/_F_AupioydU
+
+En el apartado de Web Scrapping durante la primera iterracion se enfoco en el diseño y la organizacion del roducto en general, asi como el analisis de limitaciones internas 
+( Reglas de negocio que impedian o dificultaban el proceso ), una vez entrada en la segunda Iteracion nos dedicamos a materializar este producto ( con una organizacion no tan satisfactoria ), sin embargo llegado el final del ciclo se logro ordenar de manera mas profesional. La ultima iterracion se uso principalmente para integrar el codigo con la base de datos, asi como la implementacion de algunas reparaciones menores para mejorar la eficiencia del producto, asi como otra reorganizacion para llegar hasta su forma final.
+
+En el apartado de la pagina web, durante la primera Iterracion se dedicaron a comprender la tecnologia que iban a emplear ( Ya que desconocian del tema ). Ya en la segunda Iteraccion 
+procedieron con las primeras versiones de la pagina web con algunas funcionalidades para finalmente en la tercera Iteraccion integrar con la base de datos para asi proyectar los datos correspondientes.
+
+En el apartado de Analisis del Lenguaje Natural, durante la primera Iterracion se dedicaron a comprender la tecnologia que iban a emplear ( Ya que desconocian del tema ). Entrada la segunda Iterracion se pudo concretar algunas piezas de codigo ( pero con nula funcionalidad ). Sin embargo entrada la ultima entrega se resolvieron muchos problemas vitales que permitieron 
+concretar el producto deseado.
 
