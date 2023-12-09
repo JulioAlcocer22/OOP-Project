@@ -1,4 +1,3 @@
-# Documentacion del modulo Extraccion de datos
 
 Esta seccion, es la unificacion de Web Scrapping, Analisis del Lenguaje Natural, asi como la logica de la base de Datos.
 
@@ -6,7 +5,7 @@ A continuacion se explicara de forma breve, completa y consisa el como esta estr
 
 Cabe destacar que esta seccion unicamente "extrae" informacion, mas no la visualiza al publico en general, dicho ya es trabajo de la GUI.
 
-## Organizacion basica.
+# Organizacion basica.
 Todo la seccion se encuentra alojada en la carpeta LinkedInScrapper que analogamente cuenta con multiples elementos, lo cuales seran descritos a 
 continuacion:
 
@@ -18,10 +17,10 @@ continuacion:
 - **requirements.txt**: Con el fin de tener un correcto manejo de referencias se creo el archivo para poder instalar todas las referencias al mismo tiempo, el comando necesario es: pip install -r requierements.txt
 -  **run.py**: Es el encargado de arrancar todas las partes necesarias para la ejecucion del proyecto, es el archivo maestro que se compila.
 
-## Organizacion de la carpeta app.
+# Organizacion de la carpeta app.
 La carpeta app cuenta con 4 carpetas, las que corresponden a la estructura MVC. Las cuales son Controller, Database, Model y View. A continuacion se describiran las carpetas asi como los archivos y clases que la componen.
 
-### Controller
+## Controller
 Sin duda una de las carpetas mas importantes ya que contiene toda lo logica del programa.Esta carpeta cuenta con 3 archivos, los cuales son:
 
 - AccionesBoton.py
@@ -30,10 +29,10 @@ Sin duda una de las carpetas mas importantes ya que contiene toda lo logica del 
 
 Ahora empezaremos describiendo los metodos y clases asociadas a cada archivo.
 
-#### AccionesBoton
+### AccionesBoton
 Este archivo tiene como responsabilidad que, sea presionado un boton de la View realice una accion determinada. Seran explicados ahora los metodos que componen la clase.
 
-##### metodoCadena
+#### metodoCadena
 La funcion de este metodo es iniciar sesion en LinkedIn, ingresar una cadena albitraria a la barra de busqueda, obtenener todos los links asociados a la busqueda de la pagina actual, e iterar hasta llegar a la ultima pagina. Cuando ya se hayan agotado los resultados, se precede a enviar el arreglo resultante a la base de datos. Hasta el momento todos los perfiles que se envian no necesariamente son egresados, simplemente son perfiles que por alguna razon cubrieron cierto criterio de busqueda.
 
 
