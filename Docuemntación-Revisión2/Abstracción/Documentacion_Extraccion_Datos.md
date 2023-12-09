@@ -17,3 +17,25 @@ continuacion:
 - **estructura_env.txt**: Debido a que no es posible subir archivos .env al repositorio, se agrego este archivo para mostrar la estructura necesaria para que el programa pueda ser ejecutado, esto da libertad para que pueda ser cambiada la base de datos asi como el perfil de LinkedIn a utilizar.
 - **requirements.txt**: Con el fin de tener un correcto manejo de referencias se creo el archivo para poder instalar todas las referencias al mismo tiempo, el comando necesario es: pip install -r requierements.txt
 -  **run.py**: Es el encargado de arrancar todas las partes necesarias para la ejecucion del proyecto, es el archivo maestro que se compila.
+
+## Organizacion de la carpeta app.
+La carpeta app cuenta con 4 carpetas, las que corresponden a la estructura MVC. Las cuales son Controller, Database, Model y View. A continuacion se describiran las carpetas asi como los archivos y clases que la componen.
+
+### Controller
+Sin duda una de las carpetas mas importantes ya que contiene toda lo logica del programa.Esta carpeta cuenta con 3 archivos, los cuales son:
+
+- AccionesBoton.py
+- Configuracion.py
+- MainPrueba.py
+
+Ahora empezaremos describiendo los metodos y clases asociadas a cada archivo.
+
+#### AccionesBoton
+Este archivo tiene como responsabilidad que, sea presionado un boton de la View realice una accion determinada. Seran explicados ahora los metodos que componen la clase.
+
+##### metodoCadena
+La funcion de este metodo es iniciar sesion en LinkedIn, ingresar una cadena albitraria a la barra de busqueda, obtenener todos los links asociados a la busqueda de la pagina actual, e iterar hasta llegar a la ultima pagina. Cuando ya se hayan agotado los resultados, se precede a enviar el arreglo resultante a la base de datos. Hasta el momento todos los perfiles que se envian no necesariamente son egresados, simplemente son perfiles que por alguna razon cubrieron cierto criterio de busqueda.
+
+
+
+
