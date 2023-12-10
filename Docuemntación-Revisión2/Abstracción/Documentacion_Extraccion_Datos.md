@@ -5,6 +5,12 @@ A continuacion se explicara de forma breve, completa y consisa el como esta estr
 
 Cabe destacar que esta seccion unicamente "extrae" informacion, mas no la visualiza al publico en general, dicho ya es trabajo de la GUI.
 
+# Consideraciones Generales
+- Este segmento se encuentra completamente escrito en python.
+- La base de datos utilizada es SQL Server
+- La bibioteca utilizada para el Web Scraping fue selenium, debido a que con Scrapy al intentar realizar una conexion devolvia un error HTTP.
+- Para el Analisis de Lenguaje Natural fue utilizada la bibioteca ????
+
 # Organizacion basica.
 Todo la seccion se encuentra alojada en la carpeta LinkedInScrapper que analogamente cuenta con multiples elementos, lo cuales seran descritos a 
 continuacion:
@@ -224,11 +230,70 @@ Este archivo es el encargado de traer de la base de datos la experiencia de los 
 [ Ingresar descripcion ]
 
 ### ScraperDatos
-El archivo de scraper datos es un poco mas complejo que los anteriores, este archivo engloba todos lso metodos necesario para poder obtener los datos necesarios, a continuacion se explicaran brevemente los metodos.
+El archivo de scraper datos es un poco mas complejo que los anteriores, este archivo engloba todos los metodos necesario para poder obtener los datos necesarios, a continuacion se explicaran brevemente los metodos.
 
-#### c
+- CampoSimple: Dadas las siguientes estructuras presentes en los perfiles de linkedin, obtiene el apartado relacionado a Empresa, Puesto ,fecha y descripcion.
 
+- CampoCompuesto: Dadas las siguientes estructuras presentes en los perfiles de linkedin los convierte a la forma de campo simple y obtiene los datos relacionados a empresa, puesto , fecha y  descripcion.
 
+- unicamenteDescripciones: Obtiene las descripciones de trabajo del perfil presente independientemente de si es campo simple o compuesto. ( No usada )
 
+- verificarExperiencia: Verifica si el perfil cuenta con el apartado de experiencia.
+
+- verificarUniversidad_Carrera_Egresado: Verifica si el perfil estudio en cierta universidad y carrera, asimismo verifica si ya egreso teniendo en cuenta la fecha actual.
+
+### ScrapearPerfiles
+
+El archivo ScraperPeriles.py contiene únicamente la clase “ScrapperPerfiles” la cual contiene 3 clases anidadas denominadas como
+
+- **BusquedaDeURLs**
+
+- **IteradorDeURLs**
+
+- **ScrappearLinks**
+
+La clase anidada **BusquedaDeURLs** contiene los siguientes métodos:
+
+- BusquedaDeURLs: dada una cadena de entrada tal como “lis uady”, lo transforma en una URL valida la cual puede entender LinkedIn.
+
+- porPivote: Dado el URL de un pivote, lo modifica de tal manera que permite mostrar los contactos del pivote (Se hará más flexible en próximas entregas)
+
+La clase anidada **IteradorDeURLs** contiene los siguientes métodos:
+
+- iniciarIteracion: Dada una URL itera entre todos sus resultados, análogamente obtiene todas los URL de usuarios de la presente página.
+
+- es_ultima_pagina: Verifica si se ha alcanzado la ultima página de resultados valida.
+
+La clase anidada **ScrappearLinks** contiene los siguientes métodos:
+
+- obtener_links: Obtiene todos los links de la presente página.
+
+### Utilidades
+
+La clase utilidades contiene una amplia variedad de metodos estaticos que permiten manipular, limpiar y transformar los datos obtenidos.
+
+- Test: Imprime un arreglo dado. (No usada)
+
+- estadandarizarCadenas: Convierte una cadena estándar en una cadena sin acentos y toda en mayúsculas.
+
+- duplicadosArreglo: Dado un arreglo elimina los elementos duplicados.
+
+- forzarIngresoAPaginaSinSesionIniciada: Dada una Url de LinkedIn fuerza al web driver a acceder a dicha página. (LinkedIn por lo general pide un inicio de sesión, esta función anula esta restricción). Si despues de varios intentos es imposible entrar, se marca el perfil como honeypoot ( Perfil trampa, ya que cicla el programa )
+
+- ingresoAPaginaConSesionIniciada: Inicia la sesión en LinkedIn de manera segura.
+
+- transformarNumeroEnMes: convierte un mes (forma numérica), en formato de letras (ENE. , FEB.) por ejemplo.
+
+- separarDuracion: Se encarga que dada una fecha obtenida del web scraping, separa el inicio, final y duración (en meses)
+
+- transformarDuracionEnMeses: Parte de la cadena de separarDuracion la utiliza para obtener la duración en meses, la cual se devuelve posteriormente.
+
+- transformarNumeroEnMes: Tranforma un numero dado en la cadena del mes equivalente.
+
+- mesANumero: Dado una cadena que represente un mes transforma la cadena en un formato de fecha entendible por SQL Server.
+
+## View 
+
+Esta carpeta unicamente contiene el archivo denominado InterfazUsuario la cual es la que arranca la interfaz grafica, dicha interfza unicamente contiene botones los cuales segun su etiqueta ejecutan cierta accion definida en el controller.
    
 
