@@ -168,7 +168,9 @@ El archivo “Configuracion.py” contiene únicamente la clase “Configuració
 
 - iniciarSesion: Realiza el inicio de sesión correspondiente para la plataforma de LinkedIn.
 
-- cerrarSesion: Procede a borrar las cookies del navegador, lo que funciona como cierre de sesión.
+- cerrarSesion: Procede a borrar las cookies del navegador, lo que funciona como cierre de sesión.(No usada)
+  
+- saltarModal: Cierra el modal que aparece cuando accedes a un perfil de LinkedIn sin iniciar sesion.
 
 - sitioWebDisponible: verifica si el sitio web se encuentra actualmente en línea.
 
@@ -178,11 +180,55 @@ El archivo “Configuracion.py” contiene únicamente la clase “Configuració
 
 - comprobarPing: Comprueba el ping de ciertas páginas web.
 
+- lenguajeNavegadorEsEspañol: verifica que el navegador web se encuentre en español.(No usada)
+
+- lenguajeSOEsEspañol: Verifica que el sistema operativo se encuentre en español.(No usada)
+
 - testConexiones: Agrupa todos los métodos anteriormente mencionados, para garantizar que la conexiona a internet sea estable.
 
-- lenguajeNavegadorEsEspañol: verifica que el navegador web se encuentre en español.
+## Database
+Esta carpeta cuenta unicamente con un archivo llamado Querys el cual agrupa todos los querys manejados por el ORM denominado SQLAlchemy,
+todos los metodos que componen esta clase ya han sido abordados previamente en Controller por lo que no tiene caso volver a mencionarlo, eso si contar que los metodos aqui manejados son extremadamente atomicos.
 
-- lenguajeSOEsEspañol: Verifica que el sistema operativo se encuentre en español.
+## Modelo
+Esta carpeta abarca todos los modelos necesarios para llevar a cabo nuestros procedimientos. A continuacion se abordaran uno por uno los archivos utilizados asi como sus respectivos metodos.
+
+### Base
+[ Ingresar descripcion ]
+
+### Datos 
+Contiene los datasets necesarios para el procesamiento del lenguaje natural este archivo unicamente contiene multiples arreglos de datos.
+
+### DivisorDatasets
+[ Ingresar descripcion ]
+
+### EgresadosInfo
+Este archivo es el encargado de traer de la base de datos la informacion de los egresados para posteriormente convertirla en un objeto manipulable
+
+### Egresados
+Este archivo es el encargado de traer de la base de datos los egresados para posteriormente convertirla en un objeto manipulable
+
+### Entrenador
+[ Pikachu yo te elijo? ]
+
+### Experiencia
+Este archivo es el encargado de traer de la base de datos la experiencia de los egresados para posteriormente convertirla en un objeto manipulable
+
+### LinkEgresados
+[ Ingresar descripcion ]
+
+### Predictor
+[ Ingresar descripcion ]
+
+### Vectorizador
+[ Ingresar descripcion ]
+
+### ScraperDatos
+El archivo de scraper datos es un poco mas complejo que los anteriores, este archivo engloba todos lso metodos necesario para poder obtener los datos necesarios, a continuacion se explicaran brevemente los metodos.
+
+#### c
 
 
+
+   
 
