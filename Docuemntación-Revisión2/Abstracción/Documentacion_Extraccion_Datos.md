@@ -83,7 +83,77 @@ Es exactamente el mismo procedimiento anteriormente mencionado solo que con las 
 
 #### extraccionDeExperienciaLIS
 
+Finalmente llegamos al momento cuspide de nuestra labor obtener a experiencia de los egresados de la Licenciatura en Ingenieria de Software, tomamos nuevamente de 6 en 6 los egresados de la base de datos y procedemos a scrapear su experiencia.
 
+Este procedimiento se realiza en 2 pasos, la experiencia simple y la compuesta. La experiencia simple es cuando solo tienes asociado un puesto a una empresa, mientras que la experiencia compuesta es cuando has tenido varios puestos en una misma empresa. Al final del dia la experiencia compuesta se manipula de tal manera que se convierte en experiencia simple la cual es mandada a la base de datos para su procesamiento en el front-end. No antes sin que se marque al egresado como visitado.
 
+#### extraccionDeExperienciaLCC
 
+Es el mismo procedimiento que extraccionDeExperienciaLIS, pero con la diferencia de que va orientado a los egresados de la Licenciatura en Ciencias de la Computacion.
+
+#### probarConexiones
+
+Este metodo tiene la finalidad de probar si la conexion es estable y adecuada por medio de multiples metodos los cuales se desglozaran mas adelante.
+
+#### AccionALN1
+
+Este metodo se ha dejado vacio por el momento, sirve de placeholder para futuran implementaciones relacionadas con el Analisis del Lenguaje Natural.
+
+#### AccionALN2
+Es el metodo maestro para el Analisis del Lenguaje Natural, cabe aclarar que unicamente funciona con los Licenciados en Ingenieria de Software. 
+
+**AGREGAR DESCRIPCION**
+
+#### limpiezaA
+Limpia las marcas de "visitado" a todos los links que se encuentren en la base de datos.
+
+#### limpiezaB
+Limpia las marcas de "egresado" a todos los links que se encuentren en la base de datos.
+
+#### limpiezaC
+Limpia la experiencia de la base de datos.
+
+### recuperarPivotes
+Recupera los pivotes de la base de datos.
+
+### insertlink
+Inserta un link de un perfil en la base de datos.
+
+### insertPivote
+Inserta un link de un pivote en la base de datos.
+
+### recuperarTodosLink
+Recupera 6 links no "visitados" de la base de datos.
+
+### linkVisitado
+Marca como visitado un link de la base de datos.
+
+### insertEgresadoInfo
+Inserta en la base de datos un registro con el link, el nombre, la universidad y la carrera del egresado.
+
+### recuperarEgresadoInfoEstudios
+[ AGREGAR INFO ]
+
+### egresadoVisitado
+[ AGREGAR INFO ]
+
+### insertExperiencia
+Inserta en la base de datos un registro que representa la experiencia de un usuario, el cual contiene los campos: idEgresado, empresa, puesto, descripcion, duracion, fechaInicio y fechaFin.
+
+### recuperarTodosExperiencia
+[ AGREGAR INFO ]
+
+### insertEgresados
+
+### experienciaVisitada
+Marca en la base de datos que un perfil ya ha sido obtenida toda su experiencia asociada.
+
+### limpiezaLinks
+Limpia las marcas de los links de la base de datos.
+
+### limpiezaEgresados
+Limpia las marcas de los egresados de la base de datos.
+
+### limpiezaExperiencia
+Limpia las marcas de la experiencia de la base de datos.
 
