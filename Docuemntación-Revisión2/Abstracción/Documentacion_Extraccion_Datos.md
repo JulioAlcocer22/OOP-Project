@@ -113,47 +113,76 @@ Limpia las marcas de "egresado" a todos los links que se encuentren en la base d
 #### limpiezaC
 Limpia la experiencia de la base de datos.
 
-### recuperarPivotes
+#### recuperarPivotes
 Recupera los pivotes de la base de datos.
 
-### insertlink
+#### insertlink
 Inserta un link de un perfil en la base de datos.
 
-### insertPivote
+#### insertPivote
 Inserta un link de un pivote en la base de datos.
 
-### recuperarTodosLink
+#### recuperarTodosLink
 Recupera 6 links no "visitados" de la base de datos.
 
-### linkVisitado
+#### linkVisitado
 Marca como visitado un link de la base de datos.
 
-### insertEgresadoInfo
+#### insertEgresadoInfo
 Inserta en la base de datos un registro con el link, el nombre, la universidad y la carrera del egresado.
 
-### recuperarEgresadoInfoEstudios
+#### recuperarEgresadoInfoEstudios
 [ AGREGAR INFO ]
 
-### egresadoVisitado
+#### egresadoVisitado
 [ AGREGAR INFO ]
 
-### insertExperiencia
+#### insertExperiencia
 Inserta en la base de datos un registro que representa la experiencia de un usuario, el cual contiene los campos: idEgresado, empresa, puesto, descripcion, duracion, fechaInicio y fechaFin.
 
-### recuperarTodosExperiencia
+#### recuperarTodosExperiencia
 [ AGREGAR INFO ]
 
-### insertEgresados
+#### insertEgresados
+[ AGREGAR INFO ]
 
-### experienciaVisitada
+#### experienciaVisitada
 Marca en la base de datos que un perfil ya ha sido obtenida toda su experiencia asociada.
 
-### limpiezaLinks
+#### limpiezaLinks
 Limpia las marcas de los links de la base de datos.
 
-### limpiezaEgresados
+#### limpiezaEgresados
 Limpia las marcas de los egresados de la base de datos.
 
-### limpiezaExperiencia
+#### limpiezaExperiencia
 Limpia las marcas de la experiencia de la base de datos.
+
+### MainPrueba
+[ AGREGAR INFO ]
+
+### Configuracion 
+La finalidad del archivo Configuracion es la de proveer metodos de alto nivel de acciones mas orientadas al navegador y no a la funcionalidad, a continuacion se enlistaran las funciones que la componen.
+
+El archivo “Configuracion.py” contiene únicamente la clase “Configuración” la cual contiene los siguientes métodos.
+
+- iniciarSesion: Realiza el inicio de sesión correspondiente para la plataforma de LinkedIn.
+
+- cerrarSesion: Procede a borrar las cookies del navegador, lo que funciona como cierre de sesión.
+
+- sitioWebDisponible: verifica si el sitio web se encuentra actualmente en línea.
+
+- comprobarSubida: Comprueba la velocidad de subida del internet al cual esta conectado el presente programa.
+
+- comprobarBajada: Comprueba la velocidad de bajada del internet al cual esta conectado el presente programa
+
+- comprobarPing: Comprueba el ping de ciertas páginas web.
+
+- testConexiones: Agrupa todos los métodos anteriormente mencionados, para garantizar que la conexiona a internet sea estable.
+
+- lenguajeNavegadorEsEspañol: verifica que el navegador web se encuentre en español.
+
+- lenguajeSOEsEspañol: Verifica que el sistema operativo se encuentre en español.
+
+
 
