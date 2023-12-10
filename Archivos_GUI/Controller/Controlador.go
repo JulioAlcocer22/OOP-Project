@@ -50,7 +50,7 @@ func (c *ControladorVistaInicial) RecuperarLicenciaturas(w http.ResponseWriter, 
 func (c *ControladorResultados) CargarVistaResultados(w http.ResponseWriter, r *http.Request) {
 
 	//Cuando carges tu página web en el directorio View, cambia el nombre de la plantilla
-	t, err := template.ParseFiles("View/prueba.html")
+	t, err := template.ParseFiles("View/results.html")
 	if err != nil {
 		log.Fatal(err)
 		http.Error(w, "Error al cargar la plantilla", http.StatusInternalServerError)
