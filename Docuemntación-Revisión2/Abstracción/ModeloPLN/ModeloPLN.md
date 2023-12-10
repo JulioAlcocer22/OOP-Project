@@ -10,61 +10,74 @@ Se optó por utilizar un modelo pre entrenado del modelo BERT (Bidirectional Enc
  - Resumen Automático
  - Entre otras
 
-## Etapas en el proceso de reentrenamiento de un modelo basado en BERT
-1. **Preparación de datos**
-    - En esta parte se recolecta, limpia y preprocesan los datos (descripciones de trabajo) para que estén en el formato adecuado para su uso posterior.
-2. **Reentrenamiento del modelo**
-    - Se cargará un modelo, en este caso de la libreria Hugging Face, y se ajustará para que sea afín al objetivo del proyecto.
-    - Se definen los parámetros para el entrenamiento, al igual que realiza dicho proceso.
-3. **Validacion y optimización**
-    - Una vez entrenado, hay que verificar que cumple con la tarea que debe, de no ser así se vuelve a la etapa anterior a hacer los ajustes pertinentes.
-4. **Aplicacion y uso del modelo**
-    - Implemetación del modelo para que realice la tarea específica para la que fue reentrenado. 
+
+
+Sin embargo, no se pudo llevar acabo, en su lugar se utilizó un un modelo NAIVE BAYES.
+Entre las ventajas podemos destacar:
+- Naive Bayes es uno de los algoritmos de Machine Learning más rápidos y sencillos para predecir una clase de conjuntos de datos.
+- Se utiliza para clasificaciones binarias y de clases múltiples.
+- Funciona mejor que otros algoritmos cuando hablamos de predicciones multiclase. 
+- Es la opción más popular para problemas de clasificación de texto.
+
+
+  La desventaja principal, por su parte, es que Naive Bayes asume que todas las características son independientes entre sí, de modo que nunca podrá aprender la relación existente entre ellas.
+
+#### Tipos de modelo Naive Bayes:
+
+- Gaussiano: según este modelo, las características siguen una distribución normal. De modo que, en caso de que los predictores tomen valores continuos en lugar de discretos, el modelo asume que estos valores se muestrean a partir de la distribución gaussiana.
+- Multinomial: este modelo se usa cuando los datos cuentan con una distribución multinomial y se utilizan, principalmente, para resolver problemas de clasificación de documentos.
+- Bernoulli: el tipo Bernoulli tiene un funcionamiento parecido al multinomial, pero las variables predictoras son las variables booleanas independientes.
+
+En este caso se ultilizó el **Multinomial**
+
+
+## Proceso de entranamiento
+
+- Separación del dataset y de los parámetros para el entrenamiento y para la prueba
+- Vectorización de las descripciones
+- Entrenamiento del modelo
+- Evaluación del modelo (se observa como predice las descripciones del dataset de prueba por medio de ciertas  métricas)
+
 
 ## Clases y su descripción
 
+### DatosRoles
 
-**DatosEgresado**  
-Atrubutos: 
-- nombre: obtenido de la base de datos.
-- empresa: obtenido de la base de datos.
-- rol: este dato es el que se quiere conseguir con el modelo.
-- descripcion: obtenido de la base de datos.
+Atributos: 
+- desarrolladores_web: diccionario que contiene descripciones en inglés y español de roles desempeñados en el area, junto con su respectiva etiqueta.
+- desarrolladores_mobil: diccionario que contiene descripciones en inglés y español de roles desempeñados en el area, junto con su respectiva etiqueta.
+- inteligencia_artificial: diccionario que contiene descripciones en inglés y español de roles desempeñados en el area, junto con su respectiva etiqueta.
+- ciberseguridad: diccionario que contiene descripciones en inglés y español de roles desempeñados en el area, junto con su respectiva etiqueta.
+- gestion: contiene diccionario que descripciones en inglés y español de roles desempeñados en el area (gestión de proyectos), junto con su respectiva etiqueta.
+- ciencias_de_datos: diccionario que contiene descripciones en inglés y español de roles desempeñados en el area, junto con su respectiva etiqueta.
+- educación: diccionario que contiene descripciones en inglés y español de roles desempeñados en el area, junto con su respectiva etiqueta.
+- otros: diccionario que contiene descripciones en inglés y español de roles desempeñados en cualquier area menos de desarrollo de software, junto con su respectiva etiqueta.
+- datos_totales: diccionario que junta todos los anteriores.
 
-**SQL_ROL**  
-Metodos:
-- obtenerDatos(): se encarga de obtener los datos necesarios para hacer la predicción.
-- subirDatos(): se encarga de subir al servidor los datos completos (incluyendo el rol) en formato de tabla.
+Métodos
+
+-imprimirInformación: imprime la cantidad de descricpiones que contiene cada atributo.
+
+### DivisorDataset
+
+Métodos
+- dividir: divide los datasets en datos de entrenamiento y de prueba.
+
+### Entrenador
+
+Métodos
+- entrenar: entrena el modelo.
+- visualizarPrecision: evalúa la precision del modelo  comparando los valores de la predicción hecha de los datos de prueba con sus parametros corrspondientes.
 
 
-**DatosReentreno**  
-Atributos:
-- descripcion: contiene la descripcion de trabajos previamente catalogados.
-- categoria: se asigna dependiendo el rol que indica el dataset.  
 
-Metodos:
-- cargarDatos(): obtiene los datos de una libreria de Kaggle.
+### Predictor
 
-**DataCleaner**  
-Atributos:
-- rowData: de datos empleado tomamos unicamente la descripcion de los roles.
-- etiquetasRow: valores de las etiquetas de cada descripción de acuerdo con el rol.
+Métodos
 
-Métodos:
-- eliminarCaracteresEspeciales():deja unicamente letras, puntos y comas.
-- dividirOraciones(): se encarga de dividir las descripciones en oraciones individuales
-- crearDatasetsNuevos: se encarga de crear los datasets con las oraciones separadas y con las etiquetas correspondientes para cada oracion.
+- predecir: predice el área de la descripción dada.
 
-**Tokenizador**  
-Métodos:
-- tokenizarTexto(): convierte cara palabra en un token con el que el modelo BERT asocia cada palabra.
+### VectorizarDatos
 
-**ReentrenadorModelo**  
-Métodos:
-- cargarModelo(): se encarga de importar el modelo desde la libreria Hugging Face
-- configurarModelo(): se encarga de hacer los ajustes necesarios para la problemática a trabajar.
-- entrenarModelo().
-
-**ImplementadorModelo**  
-Métodos: 
-+ clasificarDatos(): utiliza el modelo entrenado ingresando los datos (descripciones de los roles) que queremos clasificar.
+Métodos
+- vectorizar: vectoriza las descricpiones dadas.

@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0563308-0e20-4e9e-bdb2-153eb0059ae6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docuemntación-Revisión2/Abstracción/Documentacion_Extraccion_Datos.md" beforeDir="false" afterPath="$PROJECT_DIR$/Docuemntación-Revisión2/Abstracción/Documentacion_Extraccion_Datos.md" afterDir="false" />
-    </list>
+    <list default="true" id="d0563308-0e20-4e9e-bdb2-153eb0059ae6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,7 +93,7 @@
       <workItem from="1700453198030" duration="1408000" />
       <workItem from="1702241313799" duration="313000" />
       <workItem from="1702242624543" duration="32000" />
-      <workItem from="1702243662444" duration="28000" />
+      <workItem from="1702243662444" duration="628000" />
     </task>
     <servers />
   </component>
