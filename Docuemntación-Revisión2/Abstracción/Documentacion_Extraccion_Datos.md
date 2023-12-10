@@ -206,7 +206,7 @@ Esta carpeta abarca todos los modelos necesarios para llevar a cabo nuestros pro
 Contiene los datasets necesarios para el procesamiento del lenguaje natural este archivo unicamente contiene multiples arreglos de datos.
 
 ### DivisorDatasets
-[ Ingresar descripcion ]
+Se encarga de separar el dataset y los parámetros para el entrenamiento y prueba, siendo un 80% del total de los datos para entrenamiento y un 20% de estos para la prueba.
 
 ### EgresadosInfo
 Este archivo es el encargado de traer de la base de datos la informacion de los egresados para posteriormente convertirla en un objeto manipulable
@@ -215,7 +215,7 @@ Este archivo es el encargado de traer de la base de datos la informacion de los 
 Este archivo es el encargado de traer de la base de datos los egresados para posteriormente convertirla en un objeto manipulable
 
 ### Entrenador
-[ Pikachu yo te elijo? ]
+Se encarga de entrenar al objeto clasificador tomando como referencia los datos de entrenamientos vectorizados y los parámetros de los mismos.
 
 ### Experiencia
 Este archivo es el encargado de traer de la base de datos la experiencia de los egresados para posteriormente convertirla en un objeto manipulable
@@ -224,10 +224,10 @@ Este archivo es el encargado de traer de la base de datos la experiencia de los 
 [ Ingresar descripcion ]
 
 ### Predictor
-[ Ingresar descripcion ]
+Funcion que se encarga de, dada una descripción vectorizada, retornar el area correspondiente.
 
 ### Vectorizador
-[ Ingresar descripcion ]
+Se encarga de vectorizar las descripciones de los trabajos (dar el formato adecuado) para poder realizar las predicciones.
 
 ### ScraperDatos
 El archivo de scraper datos es un poco mas complejo que los anteriores, este archivo engloba todos los metodos necesario para poder obtener los datos necesarios, a continuacion se explicaran brevemente los metodos.
