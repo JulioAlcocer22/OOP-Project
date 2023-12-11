@@ -119,6 +119,7 @@ class AccionesBoton:
                 arregloDefinitivo = self.recuperarEgresadoInfoEstudios("Universidad Autonoma de Yucatan", "Ingenieria de Software")
                 for egresadoLink in arregloDefinitivo:
                     linkEgresado = egresadoLink[0]
+                    id = egresadoLink[1]
 
                     driver, error = Utilidades.forzarIngresoAPaginaSinSesionIniciada(linkEgresado)
                     if error is not False:
@@ -130,7 +131,7 @@ class AccionesBoton:
                     matrizCampoCompuesto = scraper.CampoCompuesto(linkEgresado)
                     matrizResultado = matrizResultado + matrizCampoSimple + matrizCampoCompuesto
 
-                    self.egresadoVisitado(linkEgresado, "Universidad Autonoma de Yucatan", "Ingenieria de Software")
+                    self.egresadoVisitado(id)
 
                     driver.close()
 
@@ -150,6 +151,7 @@ class AccionesBoton:
                 arregloDefinitivo = self.recuperarEgresadoInfoEstudios("Universidad Autonoma de Yucatan", "Ciencias de la Computacion")
                 for egresadoLink in arregloDefinitivo:
                     linkEgresado = egresadoLink[0]
+                    id = egresadoLink[1]
 
                     driver, error = Utilidades.forzarIngresoAPaginaSinSesionIniciada(linkEgresado)
                     if error is not False:
@@ -161,7 +163,7 @@ class AccionesBoton:
                     matrizCampoCompuesto = scraper.CampoCompuesto(linkEgresado)
                     matrizResultado = matrizResultado + matrizCampoSimple + matrizCampoCompuesto
 
-                    self.egresadoVisitado(linkEgresado, "Universidad Autonoma de Yucatan", "Ciencias de la Computacion")
+                    self.egresadoVisitado(id)
 
                     driver.close()
 
@@ -248,10 +250,7 @@ class AccionesBoton:
             else:
                 tk.messagebox.showerror("Error", "La conexion a internet es inestable")
 
-    def AccionALN1(self):
-        print("AccionALN1")
-
-    def AccionALN2(self):
+    def asignarRol(self):
         dataset = []
         etiquetas = []
         roles = ["Desarrollo Web", "Desarrollo Mobil", "Inteligencia Aritificial", "Ciberseguridad", "Gestion de Proyectos", "Ciencias de Datos", "Docencia", "Otros"]
@@ -295,13 +294,13 @@ class AccionesBoton:
             
         sys.exit() # Se cierra por logica del negocio
 
-    def limpiezaA(self):
+    def limpiezaLinks(self):
         self.limpiezaLinks()
 
-    def limpiezaB(self):
+    def limpiezaEgresados(self):
         self.limpiezaEgresados()
         
-    def limpiezaC(self):
+    def limpiezaExperiencia(self):
         self.querys.limpiezaExperiencia()
 
     def recuperarPivotes(self):
@@ -326,9 +325,8 @@ class AccionesBoton:
     def recuperarEgresadoInfoEstudios(self, universidad, carrera):
         return self.querys.recuperarEgresadoInfoEstudios(universidad, carrera, 6)
     
-    def egresadoVisitado(self, link, universidad, carrera):
-        egresado = self.querys.recuperarEgresadoInfo(link, universidad, carrera)
-        self.querys.egresadoRevisado(egresado[0])
+    def egresadoVisitado(self, id):
+        self.querys.egresadoRevisado(id)
     
     def insertExperiencia(self, link, universidad, carrera, empresa, puesto, descripcion, duracion, fechaInicio, fechaFin):
         idlink = self.querys.recuperarIdLink(link)

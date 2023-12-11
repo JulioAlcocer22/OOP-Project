@@ -134,7 +134,7 @@ class Querys():
     def recuperarEgresadoInfoEstudios(self, universidad, carrera, limite):
         if self.session != None:
             try:
-                stmt = select(LinkEgresados.link).filter(EgresadoInfo.revisado == 0).where(and_(EgresadoInfo.universidad == universidad, EgresadoInfo.carrera == carrera)).join(EgresadoInfo).limit(limite)
+                stmt = select(LinkEgresados.link, LinkEgresados.id).filter(EgresadoInfo.revisado == 0).where(and_(EgresadoInfo.universidad == universidad, EgresadoInfo.carrera == carrera)).join(EgresadoInfo).limit(limite)
                 egresadoInfo = self.session.execute(stmt).fetchall()
                 return egresadoInfo
             except SQLAlchemyError as e:
