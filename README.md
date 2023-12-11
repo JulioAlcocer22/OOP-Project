@@ -8,25 +8,25 @@ https://youtu.be/wXdVG4aibMo
     * [Evolución del Producto](#evolución-del-producto)
     * [Evolución de Requisitos](#evolución-de-requisitos)
 
-* [Requisitos](/Docuemntación-Revisión2/Requisitos)
-    * [Lista de Requerimientos](/Docuemntación-Revisión2/Requisitos/Requerimientos.md)
-    * [Refinamiento de Artefactos](/Docuemntación-Revisión2/Requisitos/Artefactos/HistoriasDeUsuario.md)
-    * [Correspondencia con los RF/RNF](/Docuemntación-Revisión2/Requisitos/Requerimientos.md#correspondencia-con-los-rfrnf)
+* [Requisitos](/Documentación/Requisitos)
+    * [Lista de Requerimientos](/Documentación/Requisitos/Requerimientos.md)
+    * [Refinamiento de Artefactos](/Documentación/Requisitos/Artefactos/HistoriasDeUsuario.md)
+    * [Correspondencia con los RF/RNF](/Documentación/Requisitos/Requerimientos.md#correspondencia-con-los-rfrnf)
 
-* [Diseño](/Docuemntación-Revisión2/)
-    * [Proceso de Abstracción](/Docuemntación-Revisión2/Abstracción/Abstracción.md)
-    * [Usos del MVC en la Extracción de Datos](/Docuemntación-Revisión2/Abstracción/ExtracciónDatos/Documentacion_Extraccion_Datos.md)
-    * [Usos del MVC en la Interfaz Gráfica (Backend)](/Docuemntación-Revisión2/Abstracción/GUI/Documentacion_GUI.md)
+* [Diseño](/Documentación/)
+    * [Proceso de Abstracción](/Documentación/Abstracción/Abstracción.md)
+    * [Usos del MVC en la Extracción de Datos](/Documentación/Abstracción/ExtracciónDatos/Documentacion_Extraccion_Datos.md)
+    * [Usos del MVC en la Interfaz Gráfica (Backend)](/Documentación/Abstracción/GUI/Documentacion_GUI.md)
 
-* [Proceso](/Docuemntación-Revisión2/Proceso/)
-    * [Descripción del Proceso](/Docuemntación-Revisión2/Proceso/Descripcion.md)
-    * [Gestión del Proceso](/Docuemntación-Revisión2/Proceso/Gestión.md)
-    * [Tabla de Contribución](/Docuemntación-Revisión2/Proceso/Participación.md)
+* [Proceso](/Documentación/Proceso/)
+    * [Descripción del Proceso](/Documentación/Proceso/Descripcion.md)
+    * [Gestión del Proceso](/Documentación/Proceso/Gestión.md)
+    * [Tabla de Contribución](/Documentación/Proceso/Participación.md)
 
-* [Competencias](/Docuemntación-Revisión2/Competencias/Competencias.md)
-    * [Competencias Genéricas](/Docuemntación-Revisión2/Competencias/Competencias.md#competencias-genéricas)
-    * [Competencias Específicas](/Docuemntación-Revisión2/Competencias/Competencias.md#competencias-específicas)
-    * [Áreas de Mejora](/Docuemntación-Revisión2/Competencias/Competencias.md#áreas-de-mejora)
+* [Competencias](/Documentación/Competencias/Competencias.md)
+    * [Competencias Genéricas](/Documentación/Competencias/Competencias.md#competencias-genéricas)
+    * [Competencias Específicas](/Documentación/Competencias/Competencias.md#competencias-específicas)
+    * [Áreas de Mejora](/Documentación/Competencias/Competencias.md#áreas-de-mejora)
     
 
 

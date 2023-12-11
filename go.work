@@ -1,8 +1,8 @@
 go 1.21.3
 
 use (
-	./Archivos_GUI/Controller
-	./Archivos_GUI/DBConexion
-	./Archivos_GUI/Model
-	./Archivos_GUI/Server
+	./LinkedInScrapper_GUI/Controller
+	./LinkedInScrapper/DBConexion
+	./LinkedInScrapper/Model
+	./LinkedInScrapper/Server
 )
