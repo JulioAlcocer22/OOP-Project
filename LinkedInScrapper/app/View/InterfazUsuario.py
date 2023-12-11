@@ -79,11 +79,11 @@ class InterfazUsuario:
             etiquetaLimpiarDB = Label(window, font="Forte 17", text="Limpiar DB", width=20)
             etiquetaLimpiarDB.place(x=600, y=30)
             
-            botonLimpiarA = tk.Button(window, text="Borrar marca A", font="Georgia 12 ",
+            botonLimpiarA = tk.Button(window, text="Limpiar Links", font="Georgia 12 ",
                                    command=lambda: accionesBoton.limpiezaA(), width=22, height=1)
             botonLimpiarA.place(x=600, y=90)
             
-            botonLimpiarB = tk.Button(window, text="Borrar marca B", font="Georgia 12 ",
+            botonLimpiarB = tk.Button(window, text="Limpiar egresados", font="Georgia 12 ",
                                    command=lambda: accionesBoton.limpiezaB(), width=22, height=1)
             botonLimpiarB.place(x=600, y=160)
             
@@ -91,11 +91,11 @@ class InterfazUsuario:
                                    command=lambda: accionesBoton.probarConexiones(), width=22, height=1)
             botonTestConexiones.place(x=600, y=230)
 
-            botonALN1 = tk.Button(window, text="Accion ALN 1", font="Georgia 12 ",
+            botonALN1 = tk.Button(window, text="Limpiar experiencia", font="Georgia 12 ",
                                    command=lambda: accionesBoton.AccionALN1(), width=22, height=1)
             botonALN1.place(x=600, y=300)
 
-            botonALN2 = tk.Button(window, text="Accion ALN 2", font="Georgia 12 ",
+            botonALN2 = tk.Button(window, text="Asignar Rol", font="Georgia 12 ",
                                    command=lambda: accionesBoton.AccionALN2(), width=22, height=1)
             botonALN2.place(x=600, y=370)
 
