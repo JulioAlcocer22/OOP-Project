@@ -1,0 +1,12 @@
+body{
+    background-color: rgb(221, 221, 221);
+}
+
+form{
+    margin-top: 60px;
+}
+
+.img-fluid{
+    width: 400px;
+    height: 200px;
+}  
