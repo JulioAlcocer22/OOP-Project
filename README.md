@@ -18,6 +18,7 @@ https://youtu.be/wXdVG4aibMo
     * [Usos del MVC en la Extracción de Datos](/Documentación/Abstracción/ExtracciónDatos/Documentacion_Extraccion_Datos.md)
     * [Usos del MVC en la Interfaz Gráfica (Backend)](/Documentación/Abstracción/GUI/Documentacion_GUI.md)
     * [Abstracción de la Base de Datos](/Documentación/Abstracción/DataBase/BaseDeDatos.md)
+    * [Diagramas de Clase](/Documentación/Diagramas/)
 
 * [Proceso](/Documentación/Proceso/)
     * [Descripción del Proceso](/Documentación/Proceso/Descripcion.md)

@@ -2,7 +2,7 @@ go 1.21.3
 
 use (
 	./LinkedInScrapper_GUI/Controller
-	./LinkedInScrapper/DBConexion
-	./LinkedInScrapper/Model
-	./LinkedInScrapper/Server
+	./LinkedInScrapper_GUI/DBConexion
+	./LinkedInScrapper_GUI/Model
+	./LinkedInScrapper_GUI/Server
 )
