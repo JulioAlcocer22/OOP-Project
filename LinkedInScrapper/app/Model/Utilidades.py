@@ -56,7 +56,7 @@ class Utilidades:
         try:
             driver = webdriver.Edge(EdgeChromiumDriverManager().install())
         except:
-            driver = webdriver.Edge(EdgeChromiumDriverManager().install())
+            driver = webdriver.Edge()
 
         driver.delete_all_cookies 
 
