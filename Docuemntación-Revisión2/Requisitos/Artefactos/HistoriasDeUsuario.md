@@ -1,3 +1,8 @@
+# Tabla de Contenido
+* [Historia 1](#historia-1)
+* [Historia 2](#historia-2)
+* [Historia 3](#historia-3)
+
 # **Historias De Usuario**
 A continuación, se mencionan las historias de usuario que corresponden al proyecto. Se encuentran ordenadas en orden descendente en cuanto a importancia.
 
