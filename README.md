@@ -4,12 +4,16 @@
 * [Producto](README.md)
     * [Evolución del Producto](#evolución-del-producto)
     * [Evolución de Requisitos](#evolución-de-requisitos)
+
 * [Requisitos](/Docuemntación-Revisión2/Requisitos)
     * [Lista de Requerimientos](/Docuemntación-Revisión2/Requisitos/Requerimientos.md)
     * [Refinamiento de Artefactos](/Docuemntación-Revisión2/Requisitos/Artefactos/HistoriasDeUsuario.md)
     * [Correspondencia con los RF/RNF](/Docuemntación-Revisión2/Requisitos/Requerimientos.md#correspondencia-con-los-rfrnf)
 
 * [Diseño](/Docuemntación-Revisión2/)
+    * [Proceso de Abstracción](/Docuemntación-Revisión2/Abstracción/Abstracción.md)
+    * [Usos del MVC en la Extracción de Datos](/Docuemntación-Revisión2/Abstracción/ExtracciónDatos/Documentacion_Extraccion_Datos.md)
+    * [Usos del MVC en la Interfaz Gráfica (Backend)](/Docuemntación-Revisión2/Abstracción/GUI/DocumentacionGUI.md)
 
 * [Proceso](/Docuemntación-Revisión2/Proceso/)
     * [Descripción del Proceso](/Docuemntación-Revisión2/Proceso/Descripcion.md)
