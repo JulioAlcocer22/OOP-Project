@@ -1,26 +1,39 @@
 # Índice
 
 1. [Consideraciones Generales](#consideraciones-generales)
-   - [Organización Básica](#organización-básica)
-2. [Organización de la Carpeta `app`](#organización-de-la-carpeta-app)
+   - [Organización Básica](#organizacion-basica)
+2. [Organización de la Carpeta `app`](#organizacion-de-la-carpeta-app)
 3. [Controller](#controller)
    - [AccionesBoton](#accionesboton)
-     - [metodoCadena](#metodocadena)
-     - [metodoUrl](#metodourl)
-     - [actualizarPivotes](#actualizarpivotes)
-     - [metodoPivotes](#metodopivotes)
-     - [metodoPivotesUnico](#metodopivotesunico)
-     - [filtrarLIS](#filtrarlis)
-     - [filtrarLCC](#filtrarlcc)
-     - [extraccionDeExperienciaLIS](#extracciondeexperiencialis)
-     - [extraccionDeExperienciaLCC](#extracciondeexperiencialcc)
-     - [probarConexiones](#probarconexiones)
-     - [AccionALN1](#accionaln1)
-     - [AccionALN2](#accionaln2)
-     - [limpiezaA](#limpiezaa)
-     - [limpiezaB](#limpiezab)
-     - [limpiezaC](#limpiezac)
-   - [MainPrueba](#mainprueba)
+      - [metodoCadena](#metodocadena)
+      - [metodoUrl](#metodourl)
+      - [actualizarPivotes](#actualizarpivotes)
+      - [metodoPivotes](#metodopivotes)
+      - [metodoPivotesUnico](#metodopivotesunico)
+      - [filtrarLIS](#filtrarlis)
+      - [filtrarLCC](#filtrarlcc)
+      - [extraccionDeExperienciaLIS](#extracciondeexperiencialis)
+      - [extraccionDeExperienciaLCC](#extracciondeexperiencialcc)
+      - [probarConexiones](#probarconexiones)
+      - [asignarRol](#asignarrol)
+      - [limpiarLinks](#limpiarlinks)
+      - [limpiarEgresados](#limpiaregresados)
+      - [limpiarExperiencia](#limpiarexperiencia)
+      - [recuperarPivotes](#recuperarpivotes)
+      - [insertlink](#insertlink)
+      - [insertPivote](#insertpivote)
+      - [recuperarTodosLink](#recuperartodoslink)
+      - [linkVisitado](#linkvisitado)
+      - [insertEgresadoInfo](#insertegresadoinfo)
+      - [recuperarEgresadoInfoEstudios](#recuperaregresadoinfoestudios)
+      - [egresadoVisitado](#egresadovisitado)
+      - [insertExperiencia](#insertexperiencia)
+      - [recuperarTodosExperiencia](#recuperartodosexperiencia)
+      - [insertEgresados](#insertegresados)
+      - [experienciaVisitada](#experienciavisitada)
+      - [limpiezaLinks](#limpiezalinks)
+      - [limpiezaEgresados](#limpiezaegresados)
+      - [limpiezaExperiencia](#limpiezaexperiencia)
    - [Configuracion](#configuracion)
 3. [Database](#database)
    - [Querys](#querys)
@@ -43,7 +56,7 @@
 
 
 
-Esta seccion, es la unificacion de Web Scrapping, Analisis del Lenguaje Natural, asi como la logica de la base de Datos.
+Esta seccion, es la unificacion de Web Scrapping, Procesamiento del Lenguaje Natural, asi como la logica de la base de Datos.
 
 A continuacion se explicara de forma breve, completa y consisa el como esta estructurado el modulo, asi como sus funcionalidades.
 
@@ -51,9 +64,9 @@ Cabe destacar que esta seccion unicamente "extrae" informacion, mas no la visual
 
 # Consideraciones Generales
 - Este segmento se encuentra completamente escrito en python.
-- La base de datos utilizada es SQL Server
+- La base de datos utilizada es SQL Server en el cual se encuentra alojado en un servidor de Azure y se accede por medio de un ORM llamado SQLAlchemy.
 - La bibioteca utilizada para el Web Scraping fue selenium, debido a que con Scrapy al intentar realizar una conexion devolvia un error HTTP.
-- Para el Analisis de Lenguaje Natural fue utilizada la bibioteca ????
+- Para el Procesamiento de Lenguaje Natural fue utilizada la bibioteca Sklearn
 
 # Organizacion basica.
 Todo la seccion se encuentra alojada en la carpeta LinkedInScrapper que analogamente cuenta con multiples elementos, lo cuales seran descritos a 
@@ -71,11 +84,10 @@ continuacion:
 La carpeta app cuenta con 4 carpetas, las que corresponden a la estructura MVC. Las cuales son Controller, Database, Model y View. A continuacion se describiran las carpetas asi como los archivos y clases que la componen.
 
 ## Controller
-Sin duda una de las carpetas mas importantes ya que contiene toda lo logica del programa.Esta carpeta cuenta con 3 archivos, los cuales son:
+Sin duda una de las carpetas mas importantes ya que contiene toda lo logica del programa. Esta carpeta cuenta con 2 archivos, los cuales son:
 
 - AccionesBoton.py
 - Configuracion.py
-- MainPrueba.py
 
 Ahora empezaremos describiendo los metodos y clases asociadas a cada archivo.
 
@@ -145,23 +157,17 @@ Es el mismo procedimiento que extraccionDeExperienciaLIS, pero con la diferencia
 
 Este metodo tiene la finalidad de probar si la conexion es estable y adecuada por medio de multiples metodos los cuales se desglozaran mas adelante.
 
-#### AccionALN1
+#### asignarRol
+Este metodo se encargar de procesar la descrición del trabajo del egresado o en caso que no haya descripción se agarra el nombre del puesto para mediante un modelo entrenado pueda determinar que rol corresponde entre los 8 que tenemos establecidos lo cuales son: Desarrollo Web, Desarrollo Mobil, Inteligencia Aritificial, Ciberseguridad, Gestion de Proyectos, Ciencias de Datos, Docencia y Otros. 
 
-Este metodo se ha dejado vacio por el momento, sirve de placeholder para futuran implementaciones relacionadas con el Analisis del Lenguaje Natural.
+#### limpiarLinks
+Limpia las marcas de "Revisado" a todos los links que se encuentren en la base de datos.
 
-#### AccionALN2
-Es el metodo maestro para el Analisis del Lenguaje Natural, cabe aclarar que unicamente funciona con los Licenciados en Ingenieria de Software. 
+#### limpiarEgresados
+Limpia las marcas de "Revisado" a todos los egresados que se encuentren en la base de datos.
 
-**AGREGAR DESCRIPCION**
-
-#### limpiezaA
-Limpia las marcas de "visitado" a todos los links que se encuentren en la base de datos.
-
-#### limpiezaB
-Limpia las marcas de "egresado" a todos los links que se encuentren en la base de datos.
-
-#### limpiezaC
-Limpia la experiencia de la base de datos.
+#### limpiarExperiencia
+Limpia las marcas de "Revisado" de todas las experiencias que se encuentren en la base de datos.
 
 #### recuperarPivotes
 Recupera los pivotes de la base de datos.
@@ -182,19 +188,19 @@ Marca como visitado un link de la base de datos.
 Inserta en la base de datos un registro con el link, el nombre, la universidad y la carrera del egresado.
 
 #### recuperarEgresadoInfoEstudios
-[ AGREGAR INFO ]
+Recupera los egresados de la base de datos filtrandolos por su universidad y carrera.
 
 #### egresadoVisitado
-[ AGREGAR INFO ]
+Marca en la base de datos que un perfil ya ha sido obtenido toda su información personal.
 
 #### insertExperiencia
 Inserta en la base de datos un registro que representa la experiencia de un usuario, el cual contiene los campos: idEgresado, empresa, puesto, descripcion, duracion, fechaInicio y fechaFin.
 
 #### recuperarTodosExperiencia
-[ AGREGAR INFO ]
+Recupera todas las experiencias de la base de datos.
 
 #### insertEgresados
-[ AGREGAR INFO ]
+Inserta en la base de datos un registro que representa a un egresado, el cual contiene los campos: idEgresado, idExperiencia y Rol.
 
 #### experienciaVisitada
 Marca en la base de datos que un perfil ya ha sido obtenida toda su experiencia asociada.
@@ -207,9 +213,6 @@ Limpia las marcas de los egresados de la base de datos.
 
 #### limpiezaExperiencia
 Limpia las marcas de la experiencia de la base de datos.
-
-### MainPrueba
-[ AGREGAR INFO ]
 
 ### Configuracion 
 La finalidad del archivo Configuracion es la de proveer metodos de alto nivel de acciones mas orientadas al navegador y no a la funcionalidad, a continuacion se enlistaran las funciones que la componen.
@@ -244,7 +247,7 @@ todos los metodos que componen esta clase ya han sido abordados previamente en C
 Esta carpeta abarca todos los modelos necesarios para llevar a cabo nuestros procedimientos. A continuacion se abordaran uno por uno los archivos utilizados asi como sus respectivos metodos.
 
 ### Base
-[ Ingresar descripcion ]
+Clase de la cual heredan todos los mapeos de la base de datos de SQLALchemy para poder ser manipulados por el ORM.
 
 ### Datos 
 Contiene los datasets necesarios para el procesamiento del lenguaje natural este archivo unicamente contiene multiples arreglos de datos.
@@ -253,19 +256,19 @@ Contiene los datasets necesarios para el procesamiento del lenguaje natural este
 Se encarga de separar el dataset y los parámetros para el entrenamiento y prueba, siendo un 80% del total de los datos para entrenamiento y un 20% de estos para la prueba.
 
 ### EgresadosInfo
-Este archivo es el encargado de traer de la base de datos la informacion de los egresados para posteriormente convertirla en un objeto manipulable
+Clase que mapea la tabla EgresadosInfo de la base de datos, la cual contiene los campos: idEgresado, link, nombre, universidad, carrera y revisado.
 
 ### Egresados
-Este archivo es el encargado de traer de la base de datos los egresados para posteriormente convertirla en un objeto manipulable
+Clase que mapea la tabla Egresados de la base de datos, la cual contiene los campos: idEgresado, idExperiencia y Rol.
 
 ### Entrenador
 Se encarga de entrenar al objeto clasificador tomando como referencia los datos de entrenamientos vectorizados y los parámetros de los mismos.
 
 ### Experiencia
-Este archivo es el encargado de traer de la base de datos la experiencia de los egresados para posteriormente convertirla en un objeto manipulable
+Clase que mapea la tabla Experiencia de la base de datos, la cual contiene los campos: idEgresado, empresa, puesto, descripcion, duracion, fechaInicio, fechaFin y revisado.
 
 ### LinkEgresados
-[ Ingresar descripcion ]
+Clase que mapea la tabla LinkEgresados de la base de datos, la cual contiene los campos: idLink, link y revisado.
 
 ### Predictor
 Funcion que se encarga de, dada una descripción vectorizada, retornar el area correspondiente.
