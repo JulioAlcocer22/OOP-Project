@@ -1,5 +1,8 @@
 # Bienvenido a LinkedInScrapper
 
+## Enlace al Video en YouTube
+https://youtu.be/wXdVG4aibMo
+
 ## Tabla de Contenido en la Rama "Revision3"
 * [Producto](README.md)
     * [Evolución del Producto](#evolución-del-producto)
@@ -13,7 +16,7 @@
 * [Diseño](/Docuemntación-Revisión2/)
     * [Proceso de Abstracción](/Docuemntación-Revisión2/Abstracción/Abstracción.md)
     * [Usos del MVC en la Extracción de Datos](/Docuemntación-Revisión2/Abstracción/ExtracciónDatos/Documentacion_Extraccion_Datos.md)
-    * [Usos del MVC en la Interfaz Gráfica (Backend)](/Docuemntación-Revisión2/Abstracción/GUI/DocumentacionGUI.md)
+    * [Usos del MVC en la Interfaz Gráfica (Backend)](/Docuemntación-Revisión2/Abstracción/GUI/Documentacion_GUI.md)
 
 * [Proceso](/Docuemntación-Revisión2/Proceso/)
     * [Descripción del Proceso](/Docuemntación-Revisión2/Proceso/Descripcion.md)
